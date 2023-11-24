@@ -2,6 +2,16 @@
 -- See `:help vim.o`
 vim.o.encoding = "utf-8"
 
+-- neovide configuration
+if vim.g.neovide then
+  vim.o.guifont = "JetBrains Mono"
+  vim.g.neovide_scale_factor = 0.9
+  vim.g.neovide_fullscreen = true
+  vim.g.neovide_input_macos_alt_is_meta = true
+  vim.g.neovide_cursor_animation_length = 0.08
+  vim.g.neovide_cursor_trail_size = 0.4
+end
+
 -- Set highlight on search
 vim.o.hlsearch = false
 vim.o.incsearch = true
@@ -92,6 +102,7 @@ vim.o.foldenable = false
 
 -- Override highlight groups
 vim.api.nvim_set_hl(0, 'Comment', { ctermfg = 60, fg = "#545c8c", italic = true })
+vim.api.nvim_set_hl(0, '@string.documentation', { fg = "#545c8c", italic = true })
 -- tweaks for dogrun
 -- vim.api.nvim_set_hl(0, 'lualine_a_normal', { bg = "#929be5", fg = "#252738", bold = true })
 -- vim.api.nvim_set_hl(0, 'lualine_b_normal', { bg = "#252738", fg = "#929be5" })
