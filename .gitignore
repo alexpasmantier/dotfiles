@@ -1,7 +1,8 @@
 dot_config/kitty/dot_git
 dot_config/nvim/dot_git
 dot_config/nvim/dot_gitignore
-dot_config/nvim/plugin/packer_compiled.lua
+dot_config/nvim/plugin/
 dot_config/nvim/lua/dot_luarc.json
-dot_config/nvim
+dot_config/nvim/session/
 dot_config/starship/dot_git
+dot_config/nvim/lua/.luarc.json
