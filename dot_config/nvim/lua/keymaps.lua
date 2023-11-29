@@ -256,6 +256,9 @@ vim.keymap.set("n", "<leader>oo", "<cmd>Octo search review-requested:@me is:pr i
   { desc = "PRs waiting for my review", opts.args })
 
 
+-- AERIAL
+vim.keymap.set("n", "<leader>lo", "<cmd>AerialToggle!<CR>", { desc = "Toggle symbols outline", opts.args })
+
 -- WHICH-KEY MAPPINGS
 wk.register({
   ["<leader>"] = {

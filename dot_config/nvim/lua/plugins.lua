@@ -145,6 +145,9 @@ return require('packer').startup(function(use)
   -- Goto definition preview
   use 'rmagatti/goto-preview'
 
+  -- LSP outline
+  use "stevearc/aerial.nvim"
+
   -- signature help
   -- use "ray-x/lsp_signature.nvim"
 

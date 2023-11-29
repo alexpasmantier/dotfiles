@@ -736,6 +736,10 @@ require('goto-preview').setup {
 }
 
 
+-- lsp outline (aerial)
+require('aerial').setup()
+
+
 -- persistence (session management)
 require("persistence").setup {
   dir = vim.fn.expand(vim.fn.stdpath "config" .. "/session/"),
@@ -764,7 +768,7 @@ require("toggleterm").setup {
     end
   end,
   open_mapping = [[<C-\>]],
-  direction = 'vertical',
+  direction = 'float',
   border = 'double',
 }
 
