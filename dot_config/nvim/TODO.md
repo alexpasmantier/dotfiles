@@ -1,6 +1,12 @@
 ## IN PROGRESS
 
 ## TODO
+
+### top priorities
+- PRIO: add treesitter text objects (class, function) + movements -> [video](https://www.youtube.com/watch?v=CEMPq_r8UYQ)
+- PRIO: setup [conform.nvim](https://github.com/stevearc/conform.nvim) and [nvim-lint](https://github.com/mfussenegger/nvim-lint) (supports ruff)
+
+### other stuff
 - flash.nvim looks nice, investigate
 - check out Harpoon
 - check out (and use?) telescope file browser
