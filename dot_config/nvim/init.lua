@@ -1,16 +1,24 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-require "plugins"
+if vim.g.vscode then
+	-- ordinary Neovim
+	require "options"
 
-require "plugins_configuration"
+	require "keymaps"
+else
+	-- VSCode
+	require "plugins"
 
-require "options"
+	require "plugins_configuration"
 
-require "keymaps"
+	require "options"
 
-require "autocmds"
+	require "keymaps"
 
-require "commands"
+	require "autocmds"
 
-require "lsp"
+	require "commands"
+
+	require "lsp"
+end

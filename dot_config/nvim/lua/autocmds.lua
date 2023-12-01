@@ -97,3 +97,12 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set("n", "<leader>p", "<cmd>G push<CR>", { buffer = true, silent = true, noremap = true })
   end
 })
+
+
+-- [[ Lint on Bufwrite ]]
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  pattern = { "*.py" },
+  callback = function()
+    require("lint").try_lint()
+  end,
+})

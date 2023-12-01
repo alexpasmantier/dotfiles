@@ -1,4 +1,7 @@
 -- [[ Setting options ]]
+
+
+
 -- See `:help vim.o`
 vim.o.encoding = "utf-8"
 
@@ -102,6 +105,9 @@ vim.o.foldenable = false
 
 -- Override highlight groups
 vim.api.nvim_set_hl(0, 'Comment', { ctermfg = 60, fg = "#545c8c", italic = true })
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#fab388" })
+vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#f9e2b0" })
+vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#f9e2b0" })
 vim.api.nvim_set_hl(0, '@string.documentation', { fg = "#545c8c", italic = true })
 -- tweaks for dogrun
 -- vim.api.nvim_set_hl(0, 'lualine_a_normal', { bg = "#929be5", fg = "#252738", bold = true })

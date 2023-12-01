@@ -653,7 +653,6 @@ lsp.format_on_save({
   },
   servers = {
     -- use black for python
-    ['null-ls'] = { 'python' },
     ['lua_ls'] = { 'lua' },
   }
 })
@@ -661,19 +660,29 @@ lsp.format_on_save({
 lsp.setup()
 
 
--- null-ls
-local null_ls = require('null-ls')
-null_ls.setup({
-  sources = {
-    -- python
-    null_ls.builtins.diagnostics.pylama,
-    null_ls.builtins.formatting.black,
-    -- terraform
-    null_ls.builtins.diagnostics.terraform_validate,
-    -- lua
-    null_ls.builtins.formatting.stylua,
-  }
-})
+-- linting
+require('lint').linters_by_ft = {
+  markdown = { 'vale', },
+  python = { 'ruff', },
+}
+
+-- formatting
+require('conform').setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    -- Conform will run multiple formatters sequentially
+    python = { "ruff_fix", "ruff_format" },
+    -- Use a sub-list to run only the first available formatter
+    javascript = { { "prettierd", "prettier" } },
+    terraform = { "terraform_fmt" }
+  },
+  format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+}
+)
 
 
 -- autocompletion

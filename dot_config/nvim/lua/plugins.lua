@@ -139,8 +139,12 @@ return require('packer').startup(function(use)
     }
   }
 
-  -- Null LS
-  use { 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+
+  -- Linting
+  use 'mfussenegger/nvim-lint'
+
+  -- Formatting
+  use 'stevearc/conform.nvim'
 
   -- Goto definition preview
   use 'rmagatti/goto-preview'
