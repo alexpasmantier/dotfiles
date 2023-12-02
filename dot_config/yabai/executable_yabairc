@@ -37,7 +37,7 @@ yabai -m config mouse_action2 resize
 yabai -m mouse_drop_action swap
 
 # set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
-yabai -m config focus_follows_mouse autoraise
+yabai -m config focus_follows_mouse off
 
 # set mouse follows focus mode (default: off)
 yabai -m config mouse_follows_focus on
