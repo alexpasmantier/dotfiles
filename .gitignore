@@ -2,3 +2,4 @@ dot_config/**/dot_git
 dot_config/nvim/plugin/
 dot_config/nvim/lua/dot_luarc.json
 dot_config/nvim/session/
+dot_config/nvim/lua/.luarc.json

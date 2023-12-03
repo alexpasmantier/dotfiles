@@ -14,6 +14,9 @@ shift + alt - l : yabai -m window --focus east
 shift + alt - space : yabai -m space --rotate 270
 # toggle window float
 shift + alt - y : yabai -m window --toggle float --grid 4:4:1:1:2:2
+# toggle padding on the current space
+shift + alt - p : yabai -m space --toggle padding & yabai -m space --toggle gap
+
 
 # MODIFYING WINDOW SIZE
 # maximize a window
