@@ -168,6 +168,9 @@ return require('packer').startup(function(use)
   -- toggleterm (terminal)
   use { "akinsho/toggleterm.nvim", tag = '*' }
 
+  -- tmux
+  use "christoomey/vim-tmux-navigator"
+
   -- firenvim
   -- use {
   --   'glacambre/firenvim',
