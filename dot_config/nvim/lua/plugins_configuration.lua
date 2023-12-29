@@ -674,7 +674,8 @@ require('conform').setup({
     python = { "ruff_fix", "ruff_format" },
     -- Use a sub-list to run only the first available formatter
     javascript = { { "prettierd", "prettier" } },
-    terraform = { "terraform_fmt" }
+    terraform = { "terraform_fmt" },
+    rust = { "rustfmt" }
   },
   format_on_save = {
     -- These options will be passed to conform.format()
