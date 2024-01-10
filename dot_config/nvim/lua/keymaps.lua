@@ -198,9 +198,7 @@ vim.keymap.set("n", "<leader>gp", ":G pull --rebase<CR>",
 -- TODO: remap treesitter context selection to C-M
 vim.keymap.set("n", "<C-p>", plugins_config.project_files, { desc = "Telescope git files", opts.args })
 vim.keymap.set("n", "<leader>st", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
-vim.keymap.set("n", "<C-p>", plugins_config.project_files, { desc = "Telescope git files", opts.args })
-vim.keymap.set("n", "<leader>st", "<cmd>Telescope live_grep<cr>", { desc = "Telescope live grep", opts.args })
-vim.keymap.set("n", "<leader>sb", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
+vim.keymap.set("n", "<C-Space>", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
 vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
 vim.keymap.set("n", "<leader>tC", "<cmd>Telescope git_bcommits<cr>",
   { desc = "Telescope current buffer git commits", opts.args })
@@ -219,7 +217,8 @@ vim.keymap.set("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implem
 vim.keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
 
 -- PERSISTENCE (SESSION MGMT)
-vim.keymap.set("n", "<leader>ss", "<cmd>lua require('persistence').load({ last = true })<cr>", {desc = "load last session"})
+vim.keymap.set("n", "<leader>ss", "<cmd>lua require('persistence').load({ last = true })<cr>",
+  { desc = "load last session" })
 
 
 -- FLASH

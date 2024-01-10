@@ -634,7 +634,6 @@ lsp.on_attach(function(client, bufnr)
   -- see :help lsp-zero-keybindings
   -- to learn the available actions
   lsp.default_keymaps({ buffer = bufnr })
-  lsp.buffer_autoformat()
 end)
 
 require('lspconfig').pyright.setup({
@@ -643,17 +642,6 @@ require('lspconfig').pyright.setup({
       reportMissingImports = true,
       typeCheckingMode = 'off',
     }
-  }
-})
-
-lsp.format_on_save({
-  format_opts = {
-    async = false,
-    timeout_ms = 10000,
-  },
-  servers = {
-    -- use black for python
-    ['lua_ls'] = { 'lua' },
   }
 })
 
@@ -672,8 +660,8 @@ require('conform').setup({
   formatters_by_ft = {
     lua = { "stylua" },
     -- Conform will run multiple formatters sequentially
-    -- python = { "ruff_fix", "ruff_format" },
-    python = { "black", "isort" },
+    python = { "ruff_fix", "ruff_format" },
+    -- python = { "isort", "black" },
     -- Use a sub-list to run only the first available formatter
     javascript = { { "prettierd", "prettier" } },
     terraform = { "terraform_fmt" },
@@ -682,7 +670,7 @@ require('conform').setup({
   },
   format_on_save = {
     -- These options will be passed to conform.format()
-    timeout_ms = 1000,
+    timeout_ms = 500,
     lsp_fallback = true,
   },
 }
