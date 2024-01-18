@@ -1,7 +1,7 @@
 -- [[ Basic Keymaps ]]
 local opts = { noremap = true, silent = true }
 local wk = require("which-key")
-local plugins_config = require("plugins_configuration")
+-- local plugins_config = require("plugins_configuration")
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -24,7 +24,7 @@ vim.keymap.set("n", "<leader>;", function()
     -- cd to config and open a telescope prompt in a new tab
     vim.cmd("tabnew")
     vim.api.nvim_set_current_dir(configuration_directory_path)
-    plugins_config.project_files()
+    -- plugins_config.project_files()
   elseif #vim.api.nvim_list_tabpages() > 1 then
     -- close tab and revert to last working directory if there is one
     vim.cmd("tabclose")
@@ -81,7 +81,6 @@ vim.keymap.set("n", "<leader>C", "<CMD>:bp<CR><CMD>:bd!#<CR>", { desc = "Close b
 -- vim.keymap.set("n", "<leader>qq", ":cc<CR>zz", { desc = "Quicklist show current", opts.args })
 -- vim.keymap.set("n", "<leader>qN", ":cfirst<CR>", { desc = "Quicklist first", opts.args })
 -- vim.keymap.set("n", "<leader>qP", ":clast<CR>", { desc = "Quicklist last", opts.args })
-
 
 -- MISCELLANEOUS
 -- ----------------------------------------------------------------------------------------
@@ -158,8 +157,6 @@ vim.keymap.set("v", "p", '"_dP', { desc = "Paste", opts.args })
 -- local topts = { silent = true }
 -- vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { desc = "Escape", topts.args })
 
-
-
 -----------------------
 -- -- DIAGNOSTICS -- --
 -----------------------
@@ -168,7 +165,6 @@ vim.keymap.set("n", "<space>k", vim.diagnostic.open_float, { desc = "Open diagno
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 -- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-
 
 -----------------------------------------------
 -----------------------------------------------
@@ -181,33 +177,38 @@ vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo
 vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree (float)", opts.args })
 
 -- SPECTRE
-vim.keymap.set("n", "<leader>S", function() require("spectre").open() end,
-  { desc = "Replace in files (Spectre)", opts.args })
+vim.keymap.set("n", "<leader>S", function()
+  require("spectre").open()
+end, { desc = "Replace in files (Spectre)", opts.args })
 
 -- FUGITIVE
-vim.keymap.set("n", "<leader>gg", "<cmd>vertical rightbelow G<CR>",
-  { desc = "open fugitive status panel", opts.args })
-vim.keymap.set("n", "<leader>gl", "<cmd>vertical rightbelow G log<CR>",
-  { desc = "open fugitive logs", opts.args })
-vim.keymap.set("n", "<leader>gc", ":G checkout -b ",
-  { desc = "checkout", opts.args })
-vim.keymap.set("n", "<leader>gp", ":G pull --rebase<CR>",
-  { desc = "pull", opts.args })
+vim.keymap.set("n", "<leader>gg", "<cmd>vertical rightbelow G<CR>", { desc = "open fugitive status panel", opts.args })
+vim.keymap.set("n", "<leader>gl", "<cmd>vertical rightbelow G log<CR>", { desc = "open fugitive logs", opts.args })
+vim.keymap.set("n", "<leader>gc", ":G checkout -b ", { desc = "checkout", opts.args })
+vim.keymap.set("n", "<leader>gp", ":G pull --rebase<CR>", { desc = "pull", opts.args })
 
 -- TELESCOPE
 -- TODO: remap treesitter context selection to C-M
-vim.keymap.set("n", "<C-p>", plugins_config.project_files, { desc = "Telescope git files", opts.args })
+-- vim.keymap.set("n", "<C-p>", plugins_config.project_files, { desc = "Telescope git files", opts.args })
 vim.keymap.set("n", "<leader>st", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
 vim.keymap.set("n", "<C-Space>", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
 vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
-vim.keymap.set("n", "<leader>tC", "<cmd>Telescope git_bcommits<cr>",
-  { desc = "Telescope current buffer git commits", opts.args })
+vim.keymap.set(
+  "n",
+  "<leader>tC",
+  "<cmd>Telescope git_bcommits<cr>",
+  { desc = "Telescope current buffer git commits", opts.args }
+)
 vim.keymap.set("n", "<leader>tb", "<cmd>Telescope git_branches<cr>", { desc = "Telescope git branches", opts.args })
 vim.keymap.set("n", "<leader>ts", "<cmd>Telescope git_status<cr>", { desc = "Telescope git status", opts.args })
 vim.keymap.set("n", "<leader>tS", "<cmd>Telescope git_stash<cr>", { desc = "Telescope git stash", opts.args })
-vim.keymap.set("n", "<leader>P", plugins_config.open_projects, { desc = "Telescope open projects", opts.args })
-vim.keymap.set("n", "<leader>tp", plugins_config.colorschemes_with_preview,
-  { desc = "Telescope colorschemes", opts.args })
+-- vim.keymap.set("n", "<leader>P", plugins_config.open_projects, { desc = "Telescope open projects", opts.args })
+-- vim.keymap.set(
+--   "n",
+--   "<leader>tp",
+-- plugins_config.colorschemes_with_preview,
+--   { desc = "Telescope colorschemes", opts.args }
+-- )
 -- vim.keymap.set()
 
 -- GOTO PREVIEW
@@ -217,46 +218,59 @@ vim.keymap.set("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implem
 vim.keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
 
 -- PERSISTENCE (SESSION MGMT)
-vim.keymap.set("n", "<leader>ss", "<cmd>lua require('persistence').load({ last = true })<cr>",
-  { desc = "load last session" })
-
+vim.keymap.set(
+  "n",
+  "<leader>ss",
+  "<cmd>lua require('persistence').load({ last = true })<cr>",
+  { desc = "load last session" }
+)
 
 -- FLASH
-vim.keymap.set({ "n", "o", "x" }, "s", function() require("flash").jump() end, { desc = "flash", opts.args })
-vim.keymap.set({ "n", "o", "x" }, "S", function() require("flash").treesitter() end,
-  { desc = "flash treesitter", opts.args })
-vim.keymap.set("o", "r", function() require("flash").remote() end, { desc = "remote flash", opts.args })
-vim.keymap.set({ "o", "x" }, "R", function() require("flash").treesitter_search() end,
-  { desc = "treesitter search", opts.args })
-vim.keymap.set("c", "<C-s>", function() require("flash").toggle() end,
-  { desc = "toggle flash search", opts.args })
-
+vim.keymap.set({ "n", "o", "x" }, "s", function()
+  require("flash").jump()
+end, { desc = "flash", opts.args })
+vim.keymap.set({ "n", "o", "x" }, "S", function()
+  require("flash").treesitter()
+end, { desc = "flash treesitter", opts.args })
+vim.keymap.set("o", "r", function()
+  require("flash").remote()
+end, { desc = "remote flash", opts.args })
+vim.keymap.set({ "o", "x" }, "R", function()
+  require("flash").treesitter_search()
+end, { desc = "treesitter search", opts.args })
+vim.keymap.set("c", "<C-s>", function()
+  require("flash").toggle()
+end, { desc = "toggle flash search", opts.args })
 
 -- ZEN MODE
 vim.keymap.set("n", "<leader>zz", function()
   require("zen-mode").toggle({
     window = {
       backdrop = 0.95,
-      width = .65 -- width will be 85% of the editor width
+      width = 0.65, -- width will be 85% of the editor width
     },
     plugins = {
       twilight = { enabled = false }, -- enable to start Twilight when zen mode opens
-
-    }
+    },
   })
 end, { desc = "Zen mode" })
 
-
 -- NEORG
 vim.keymap.set("n", "<leader>ni", "<cmd>Neorg index<cr>", { desc = "go to index", opts.args })
-vim.keymap.set("n", "<leader>ne", ":Neorg export to-file .md<Left><Left><Left>",
-  { desc = "export to markdown", opts.args })
-
+vim.keymap.set(
+  "n",
+  "<leader>ne",
+  ":Neorg export to-file .md<Left><Left><Left>",
+  { desc = "export to markdown", opts.args }
+)
 
 -- OCTO
-vim.keymap.set("n", "<leader>oo", "<cmd>Octo search review-requested:@me is:pr is:open<cr>",
-  { desc = "PRs waiting for my review", opts.args })
-
+vim.keymap.set(
+  "n",
+  "<leader>oo",
+  "<cmd>Octo search review-requested:@me is:pr is:open<cr>",
+  { desc = "PRs waiting for my review", opts.args }
+)
 
 -- AERIAL
 vim.keymap.set("n", "<leader>lo", "<cmd>AerialToggle!<CR>", { desc = "Toggle symbols outline", opts.args })
@@ -287,7 +301,7 @@ wk.register({
       name = "Telescope",
     },
     o = {
-      name = "Octo"
-    }
+      name = "Octo",
+    },
   },
 })

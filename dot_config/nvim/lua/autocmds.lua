@@ -1,44 +1,13 @@
--- automatically run packer compile when plugins.lua is updated
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
-
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
-    vim.highlight.on_yank { timeout = 200 }
+    vim.highlight.on_yank({ timeout = 200 })
   end,
   group = highlight_group,
-  pattern = '*',
+  pattern = "*",
 })
-
--- [[ Terminal: automatically switch to insert mode when open ]]
--- vim.api.nvim_create_autocmd({ "TermOpen" }, {
---   command = "startinsert",
--- })
-
--- [[ Terminal: classic window navigation while in terminal window ]]
--- NOTE: term://*toggleterm#* instead to only remap those for toggleterm terminals
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
-  pattern = 'term://*',
-  callback = function()
-    local opts = { buffer = 0 }
-    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-    vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-    vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-    vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-    vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
-  end
-})
-
 
 -- [[ LSP: map keys when server attaches to buffer]]
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -72,32 +41,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-
 -- [[ remap q to close buffers of certain filetypes ]]
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'fugitive*', 'help', 'qf', 'git', 'lspinfo', 'vim', 'spectre_panel' },
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "fugitive*", "help", "qf", "git", "lspinfo", "vim", "spectre_panel" },
   callback = function()
     vim.keymap.set("n", "q", ":close<CR>", { buffer = true, silent = true, noremap = true })
-  end
+  end,
 })
 -- same thing but based on file names instead of filetypes
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = { "*.git/", "fugitive:/*" },
   callback = function()
     vim.keymap.set("n", "q", ":close<CR>", { buffer = true, silent = true, noremap = true })
-  end
+  end,
 })
-
-
 
 -- [[ more remaps for fugitive buffers ]]
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'fugitive' },
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "fugitive" },
   callback = function()
     vim.keymap.set("n", "<leader>p", "<cmd>G push<CR>", { buffer = true, silent = true, noremap = true })
-  end
+  end,
 })
-
 
 -- [[ Lint on Bufwrite ]]
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {

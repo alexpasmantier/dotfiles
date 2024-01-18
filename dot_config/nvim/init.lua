@@ -2,23 +2,35 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 if vim.g.vscode then
-	-- ordinary Neovim
-	require "options"
+  -- VSCode
+  require("options")
 
-	require "keymaps"
+  require("keymaps")
 else
-	-- VSCode
-	require "plugins"
+  -- ordinary Neovim
+  -- bootstrap lazy.nvim
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable", -- latest stable release
+      lazypath,
+    })
+  end
+  vim.opt.rtp:prepend(lazypath)
 
-	require "plugins_configuration"
+  require("lazy").setup("plugins")
 
-	require "options"
+  require("options")
 
-	require "keymaps"
+  require("keymaps")
 
-	require "autocmds"
+  require("autocmds")
 
-	require "commands"
+  require("commands")
 
-	require "lsp"
+  require("lsp")
 end
