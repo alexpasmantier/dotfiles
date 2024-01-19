@@ -1,6 +1,7 @@
 -- [[ Basic Keymaps ]]
 local opts = { noremap = true, silent = true }
 local wk = require("which-key")
+local custom_functions = require("custom_functions")
 -- local plugins_config = require("plugins_configuration")
 
 -- Keymaps for better default experience
@@ -188,8 +189,7 @@ vim.keymap.set("n", "<leader>gc", ":G checkout -b ", { desc = "checkout", opts.a
 vim.keymap.set("n", "<leader>gp", ":G pull --rebase<CR>", { desc = "pull", opts.args })
 
 -- TELESCOPE
--- TODO: remap treesitter context selection to C-M
--- vim.keymap.set("n", "<C-p>", plugins_config.project_files, { desc = "Telescope git files", opts.args })
+vim.keymap.set("n", "<C-p>", custom_functions.project_files, { desc = "Telescope git files", opts.args })
 vim.keymap.set("n", "<leader>st", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
 vim.keymap.set("n", "<C-Space>", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
 vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
@@ -202,14 +202,13 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>tb", "<cmd>Telescope git_branches<cr>", { desc = "Telescope git branches", opts.args })
 vim.keymap.set("n", "<leader>ts", "<cmd>Telescope git_status<cr>", { desc = "Telescope git status", opts.args })
 vim.keymap.set("n", "<leader>tS", "<cmd>Telescope git_stash<cr>", { desc = "Telescope git stash", opts.args })
--- vim.keymap.set("n", "<leader>P", plugins_config.open_projects, { desc = "Telescope open projects", opts.args })
--- vim.keymap.set(
---   "n",
---   "<leader>tp",
--- plugins_config.colorschemes_with_preview,
---   { desc = "Telescope colorschemes", opts.args }
--- )
--- vim.keymap.set()
+vim.keymap.set("n", "<leader>P", custom_functions.open_projects, { desc = "Telescope open projects", opts.args })
+vim.keymap.set(
+  "n",
+  "<leader>tp",
+  custom_functions.colorschemes_with_preview,
+  { desc = "Telescope colorschemes", opts.args }
+)
 
 -- GOTO PREVIEW
 vim.keymap.set("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")

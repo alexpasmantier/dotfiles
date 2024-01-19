@@ -2,6 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    event = { "BufEnter", "VeryLazy" },
     config = function()
       local opts = {
         highlight = { enable = true },

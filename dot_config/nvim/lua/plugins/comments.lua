@@ -1,4 +1,4 @@
 return {
-  "numToStr/Comment.nvim",
-  "folke/todo-comments.nvim",
+  { "folke/todo-comments.nvim", config = true, lazy = false },
+  { "numToStr/Comment.nvim",    config = true, lazy = false },
 }

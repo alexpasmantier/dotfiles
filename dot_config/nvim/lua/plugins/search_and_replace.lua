@@ -1,8 +1,11 @@
 return {
 
-  { "nvim-pack/nvim-spectre", opts = {
-    open_cmd = "noswapfile vnew",
-  } },
+  {
+    "nvim-pack/nvim-spectre",
+    opts = {
+      open_cmd = "noswapfile vnew",
+    }
+  },
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -16,25 +19,7 @@ return {
           prompt_position = "top",
         },
       }
-      local function project_files()
-        local telescope_options = {} -- define here if you want to define something
-        vim.fn.system("git rev-parse --is-inside-work-tree")
-        if vim.v.shell_error == 0 then
-          require("telescope.builtin").git_files(telescope_options)
-        else
-          require("telescope.builtin").find_files(telescope_options)
-        end
-      end
-
-      local function colorschemes_with_preview()
-        local telescope_options = { enable_preview = true }
-        require("telescope.builtin").colorscheme(telescope_options)
-      end
-
-      local function open_projects()
-        require("telescope").extensions.project.project({ display_type = "full" })
-      end
-
+      local custom_functions = require("custom_functions")
       require("telescope").setup({
         defaults = {
           mappings = {
@@ -126,10 +111,10 @@ return {
         },
         extensions = {
           fzf = {
-            fuzzy = true, -- false will only do exact matching
+            fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
             -- the default case_mode is "smart_case"
           },
           project = {
@@ -145,7 +130,7 @@ return {
             on_project_selected = function(prompt_bufnr)
               -- Do anything you want in here. For example:
               project_actions.change_working_directory(prompt_bufnr, false)
-              project_files()
+              custom_functions.project_files()
               -- require("harpoon.ui").nav_file(1)
             end,
           },
