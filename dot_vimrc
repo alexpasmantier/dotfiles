@@ -31,16 +31,24 @@ set clipboard=unnamed
 " Key mappings
 let mapleader=" "
 
+" Split navigation
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" Buffer navigation
 nnoremap <S-l> :bnext<CR>
 nnoremap <S-h> :bprev<CR>
 
+" Saving and quitting
 nnoremap <leader>w :w<CR>
 nnoremap <leader><BS> :x<CR>
+
+" File navigation (fzf)
 nnoremap <C-p> :Files<CR>
+
+" Fugitive
+nnoremap <leader>gg :G<CR>
 
 
