@@ -1,0 +1,46 @@
+set term=screen-256color
+set guifont=JetBrainsMono\ Nerd\ Font:h14
+
+call plug#begin()
+"NOTE: path: '~/.vim/plugged'
+
+Plug 'wadackel/vim-dogrun'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
+colorscheme dogrun
+set bg=dark
+set relativenumber
+set number
+set ruler
+set scrolloff=10
+syntax on
+
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+set ignorecase
+set incsearch
+
+" use system clipboard by default
+set clipboard=unnamed
+
+" Key mappings
+let mapleader=" "
+
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+nnoremap <S-l> :bnext<CR>
+nnoremap <S-h> :bprev<CR>
+
+nnoremap <leader>w :w<CR>
+nnoremap <leader><BS> :x<CR>
+nnoremap <C-p> :Files<CR>
+
+
