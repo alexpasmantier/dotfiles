@@ -6,6 +6,9 @@ yabai -m config layout bsp
 # New window spawns to the right if vertical split, or bottom if horizontal split
 yabai -m config window_placement second_child
 
+# external bar
+yabai -m config external_bar all:38:0
+
 # Set all padding and gaps to 20pt (default: 0)
 yabai -m config top_padding    10
 yabai -m config bottom_padding 10

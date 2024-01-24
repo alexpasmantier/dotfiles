@@ -3,9 +3,11 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lsp-signature-help",
+      "lukas-reineke/cmp-rg",
       "saadparwaiz1/cmp_luasnip",
     },
     config = function()
@@ -41,13 +43,15 @@ return {
           }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp_signature_help", priority = 10 },
-          { name = "nvim_lsp", priority = 10 },
-          { name = "luasnip", priority = 8 },
-          { name = "buffer", priority = 6, keyword_length = 3 },
-          { name = "path", priority = 4, keyword_length = 3 },
+          { name = "nvim_lsp_signature_help", priority = 100 },
+          { name = "nvim_lsp",                priority = 100 },
+          { name = "luasnip",                 priority = 8 },
+          { name = "hrsh7th/cmp-nvim-lua",    priority = 7 },
+          { name = "buffer",                  priority = 6,  keyword_length = 3 },
+          { name = "path",                    priority = 4,  keyword_length = 3 },
+          { name = "rg",                      priority = 2 },
         }),
-        sorting = defaults.sorting,
+        -- sorting = defaults.sorting,
       })
     end,
   },

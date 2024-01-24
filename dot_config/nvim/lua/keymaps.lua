@@ -65,8 +65,8 @@ vim.keymap.set("n", "<leader>w", "<cmd>w!<CR>", { desc = "Save changes in curren
 -- vim.keymap.set("n", "<leader>c", "<CMD>:bp<CR><CMD>:bd#<CR>", { desc = "Close buffer", opts.args })
 vim.keymap.set("n", "<leader>c", "<cmd>BufferKill<CR>", { desc = "Close buffer", opts.args })
 vim.keymap.set("n", "<leader>C", "<CMD>:bp<CR><CMD>:bd!#<CR>", { desc = "Close buffer (force)", opts.args })
--- TODO: is this really useful?
--- vim.keymap.set("n", "<leader><leader>", "<CMD>b#<CR>", { desc = "Last buffer", opts.args })
+-- yank current buffer file path
+vim.keymap.set("n", "<leader>y", '<cmd>let @+ = expand("%")<cr>', { desc = "Yank current file path", opts.args })
 
 -- QUICKLIST NAVIGATION
 -- ----------------------------------------------------------------------------------------

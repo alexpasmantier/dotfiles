@@ -13,11 +13,13 @@ return {
           winbar = { "toggleterm", "neo-tree" },
         },
       },
-      extensions = { "neo-tree", "fugitive", "toggleterm" },
+      extensions = { "fugitive" },
       sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch" },
+        lualine_a = {},
+        lualine_b = {},
         lualine_c = {
+          "mode",
+          "branch",
           {
             "diff",
             symbols = {
@@ -28,7 +30,6 @@ return {
           },
           "vim.fn.getcwd()",
         },
-        lualine_c = { "vim.fn.getcwd()" },
         lualine_x = {
           {
             "diagnostics",
