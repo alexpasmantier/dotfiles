@@ -6,7 +6,7 @@ return {
         theme = "auto",
         -- theme = dogrun,
         component_separators = "|",
-        section_separators = { left = '', right = '' },
+        section_separators = { left = "", right = "" },
         globalstatus = true,
         disabled_filetypes = {
           statusline = {},
@@ -28,7 +28,7 @@ return {
               removed = " ",
             },
           },
-          "vim.fn.getcwd()",
+          "filename",
         },
         lualine_x = {
           {
@@ -45,8 +45,8 @@ return {
           "filetype",
           {
             function()
-              local msg = 'LSP-Off'
-              local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+              local msg = "LSP-Off"
+              local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
               local clients = vim.lsp.get_active_clients()
               if next(clients) == nil then
                 return msg
@@ -63,38 +63,17 @@ return {
             -- color = { fg = '#ffffff', gui = 'bold' },
           },
           "progress",
-          "location"
+          "location",
         },
         lualine_y = {},
         lualine_z = {},
       },
       winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {
-          { "filename", path = 1, separator = "" },
-          { "diff" },
-        },
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
+        lualine_c = { { "filename", path = 1, separator = "" } },
       },
 
       inactive_winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {
-          { "filename", path = 1, separator = "" },
-          -- {
-          --   "filetype",
-          --   icon_only = true,
-          --   separator = "",
-          --   padding = { left = 1, right = 0 },
-          -- },
-        },
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
+        lualine_c = { { "filename", path = 1, separator = "" } },
       },
     },
   },
