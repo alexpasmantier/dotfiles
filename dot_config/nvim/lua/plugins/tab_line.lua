@@ -47,8 +47,8 @@ return {
           separator_style = "thin", -- "slant" | "slope" | "thick" | "thin" | { "any", "any" },
           enforce_regular_tabs = false, -- | true,
           always_show_bufferline = true, -- | false,
-          sort_by = "insert_after_current",
-          -- | "insert_at_end"
+          sort_by = "insert_at_end",
+          -- | "insert_after_current"
           -- | "id"
           -- | "extension"
           -- | "relative_directory"
