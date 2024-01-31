@@ -1,6 +1,5 @@
 -- [[ Basic Keymaps ]]
 local opts = { noremap = true, silent = true }
-local wk = require("which-key")
 local custom_functions = require("custom_functions")
 -- local plugins_config = require("plugins_configuration")
 
@@ -71,8 +70,9 @@ vim.keymap.set("n", "<leader>y", '<cmd>let @+ = expand("%")<cr>', { desc = "Yank
 -- QUICKLIST NAVIGATION
 -- ----------------------------------------------------------------------------------------
 -- NOTE: this needs to be remapped since it conflicts with <leader>q
--- vim.keymap.set("n", "<C-n>", ":cn<CR>zz", { desc = "Quicklist next", opts.args })
--- vim.keymap.set("n", "<C-p>", ":cp<CR>zz", { desc = "Quicklist prev", opts.args })
+vim.keymap.set("n", "<leader>mo", ":copen 25<CR>", { desc = "quicklist open", opts.args })
+vim.keymap.set("n", "<leader>m]", ":cn<CR>", { desc = "quicklist next", opts.args })
+vim.keymap.set("n", "<leader>m[", ":cp<CR>", { desc = "quicklist prev", opts.args })
 -- vim.keymap.set("n", "<leader>qn", ":cn<CR>zz", { desc = "Quicklist next", opts.args })
 -- vim.keymap.set("n", "<leader>qp", ":cp<CR>zz", { desc = "Quicklist prev", opts.args })
 -- vim.keymap.set("n", "<leader>qo", ":copen 15<CR>", { desc = "Quicklist open", opts.args })
@@ -274,12 +274,30 @@ vim.keymap.set(
 -- AERIAL
 vim.keymap.set("n", "<leader>lo", "<cmd>AerialToggle!<CR>", { desc = "Toggle symbols outline", opts.args })
 
+
+-- DAP
+vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end,
+  { desc = "Toggle breakpoint", opts.args })
+vim.keymap.set("n", "<leader>dc", function() require("dap").continue() end,
+  { desc = "Continue", opts.args })
+vim.keymap.set("n", "<leader>ds", function() require("dap").step_into() end,
+  { desc = "Step into", opts.args })
+vim.keymap.set("n", "<leader>dr", function() require("dap").repl.open() end,
+  { desc = "Open repl", opts.args })
+
 -- WHICH-KEY MAPPINGS
+local wk = require("which-key")
 wk.register({
   ["<leader>"] = {
+    m = {
+      name = "Quickfix",
+    },
     n = {
       name = "Neorg",
       n = { "<cmd>Neorg index<cr>", "index" },
+    },
+    d = {
+      name = "DAP",
     },
     g = {
       name = "Git",

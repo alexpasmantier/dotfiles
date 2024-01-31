@@ -14,8 +14,13 @@ return {
   },
   "wadackel/vim-dogrun",
   "catppuccin/nvim",
-  { "rebelot/kanagawa.nvim", opts = {
-    colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
-  } },
+  {
+    "rebelot/kanagawa.nvim",
+    opts = {
+      colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
+    }
+  },
   "shaunsingh/nord.nvim",
+  "Mofiqul/dracula.nvim",
+  "shaunsingh/solarized.nvim",
 }
