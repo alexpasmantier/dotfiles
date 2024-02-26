@@ -7,6 +7,7 @@ return {
       "MunifTanjim/nui.nvim",
       "s1n7ax/nvim-window-picker",
     },
+    enabled = not vim.g.started_by_firenvim,
     config = function()
       vim.g.nvim_tree_disable_netrw = 0
       require("neo-tree").setup({

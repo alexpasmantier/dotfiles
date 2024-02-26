@@ -8,6 +8,7 @@ return {
       "TmuxNavigateRight",
       "TmuxNavigatePrevious",
     },
+    enabled = not vim.g.started_by_firenvim,
     keys = {
       { "<C-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
       { "<C-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },

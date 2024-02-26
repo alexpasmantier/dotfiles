@@ -75,9 +75,11 @@ vim.o.splitright = true
 vim.o.termguicolors = true
 -- vim.cmd([[colorscheme dogrun]])
 -- vim.cmd([[colorscheme nord]])
-vim.cmd([[colorscheme catppuccin-mocha]])
+-- vim.cmd([[colorscheme catppuccin-mocha]])
 -- vim.cmd([[colorscheme kanagawa]])
 -- vim.cmd([[colorscheme dayfox]])
+vim.o.background = "dark"
+vim.cmd([[colorscheme solarized8_flat]])
 
 -- Don't wrap please
 vim.o.wrap = false
@@ -107,11 +109,38 @@ vim.o.foldenable = false
 
 
 -- Override highlight groups
-vim.api.nvim_set_hl(0, 'Comment', { ctermfg = 60, fg = "#545c8c", italic = true })
-vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#fab388" })
-vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#f9e2b0" })
-vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#f9e2b0" })
-vim.api.nvim_set_hl(0, '@string.documentation', { fg = "#545c8c", italic = true })
+-- vim.api.nvim_set_hl(0, 'Comment', { ctermfg = 60, fg = "#545c8c", italic = true })
+-- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#fab388" })
+-- vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#f9e2b0" })
+-- vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#f9e2b0" })
+-- vim.api.nvim_set_hl(0, '@string.documentation', { fg = "#545c8c", italic = true })
 -- tweaks for dogrun
 -- vim.api.nvim_set_hl(0, 'lualine_a_normal', { bg = "#929be5", fg = "#252738", bold = true })
 -- vim.api.nvim_set_hl(0, 'lualine_b_normal', { bg = "#252738", fg = "#929be5" })
+
+if vim.g.started_by_firenvim == true then
+  vim.g.expanded_modes = {
+    ["n"] = "NORMAL",
+    ["no"] = "NORMAL",
+    ["v"] = "VISUAL",
+    ["V"] = "VISUAL LINE",
+    [""] = "VISUAL BLOCK",
+    ["s"] = "SELECT",
+    ["S"] = "SELECT LINE",
+    [""] = "SELECT BLOCK",
+    ["i"] = "INSERT",
+    ["ic"] = "INSERT",
+    ["R"] = "REPLACE",
+    ["Rv"] = "VISUAL REPLACE",
+    ["c"] = "COMMAND",
+    ["cv"] = "VIM EX",
+    ["ce"] = "EX",
+    ["r"] = "PROMPT",
+    ["rm"] = "MOAR",
+    ["r?"] = "CONFIRM",
+    ["!"] = "SHELL",
+    ["t"] = "TERMINAL",
+  }
+  vim.o.statusline = "%{expanded_modes[mode()]} %m%r%=%y  %-14.(%l,%c%V%) %P"
+  vim.g.firenvim_config.localSettings['.*'] = { cmdline = 'firenvim', takeover = 'never' }
+end

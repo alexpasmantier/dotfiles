@@ -2,9 +2,10 @@ return {
   {
     "nvim-neorg/neorg",
     run = ":Neorg sync-parsers", -- This is the important bit!
+    enabled = not vim.g.started_by_firenvim,
     opts = {
       load = {
-        ["core.defaults"] = {}, -- default behaviour
+        ["core.defaults"] = {},  -- default behaviour
         ["core.concealer"] = {}, -- pretty icons while typing
         ["core.dirman"] = {
           config = {

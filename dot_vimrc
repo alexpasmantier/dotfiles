@@ -1,23 +1,25 @@
-set term=screen-256color
+"set term=screen-256color
+set t_Co=16
 set guifont=JetBrainsMono\ Nerd\ Font:h14
 
 call plug#begin()
 "NOTE: path: '~/.vim/plugged'
 
 Plug 'wadackel/vim-dogrun'
+Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
-colorscheme dogrun
 set bg=dark
 set relativenumber
 set number
 set ruler
 set scrolloff=10
 syntax on
+colorscheme solarized8_flat
 
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"

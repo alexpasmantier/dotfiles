@@ -14,9 +14,9 @@ return {
       local project_actions = require("telescope._extensions.project.actions")
       local telescope_layout_opts = {
         bottom_pane = {
-          height = 70,
+          height = 40,
           preview_cutoff = 120,
-          prompt_position = "top",
+          prompt_position = "bottom",
         },
       }
       local custom_functions = require("custom_functions")

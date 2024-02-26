@@ -22,5 +22,12 @@ return {
   },
   "shaunsingh/nord.nvim",
   "Mofiqul/dracula.nvim",
-  "shaunsingh/solarized.nvim",
+  -- "altercation/vim-colors-solarized",
+  { "lifepillar/vim-solarized8", branch = 'neovim' },
+  -- {
+  --   "shaunsingh/solarized.nvim",
+  --   config = function()
+  --     require("solarized").set()
+  --   end
+  -- },
 }
