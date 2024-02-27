@@ -26,7 +26,7 @@ vim.wo.number = true
 vim.o.scrolloff = 8
 
 -- check spelling
-vim.o.spell = true
+vim.o.spell = false
 
 -- Enable mouse mode
 vim.o.mouse = "a"
@@ -78,7 +78,7 @@ vim.o.termguicolors = true
 -- vim.cmd([[colorscheme catppuccin-mocha]])
 -- vim.cmd([[colorscheme kanagawa]])
 -- vim.cmd([[colorscheme dayfox]])
-vim.o.background = "dark"
+vim.o.background = "light"
 vim.cmd([[colorscheme solarized8_flat]])
 
 -- Don't wrap please
@@ -142,5 +142,6 @@ if vim.g.started_by_firenvim == true then
     ["t"] = "TERMINAL",
   }
   vim.o.statusline = "%{expanded_modes[mode()]} %m%r%=%y  %-14.(%l,%c%V%) %P"
-  vim.g.firenvim_config.localSettings['.*'] = { cmdline = 'firenvim', takeover = 'never' }
+  vim.cmd([[let g:firenvim_config = { 'localSettings': { '.*': { 'takeover': 'never' } } }]])
+  vim.o.wrap = true
 end
