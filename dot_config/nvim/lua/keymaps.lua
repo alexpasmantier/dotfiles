@@ -41,10 +41,11 @@ end, { desc = "Toggle config files", opts.args })
 -- WINDOWS
 -- ----------------------------------------------------------------------------------------
 -- Navigating between open windows
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to window on the right", opts.args })
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to window on the left", opts.args })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to window below", opts.args })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to window above", opts.args })
+-- NOTE: this seems to be overwritten by tmux-navigator
+-- vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to window on the right", opts.args })
+-- vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to window on the left", opts.args })
+-- vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to window below", opts.args })
+-- vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to window above", opts.args })
 -- Quit window, except if it is the last one (ie does not quit vim)!
 vim.keymap.set("n", "<leader>q", ":close<CR>", { desc = "Quit window", opts.args })
 vim.keymap.set("n", "<C-w>o", "<CMD>only<CR>", { desc = "Quit other windows", opts.args })
@@ -175,7 +176,10 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 
 -- NEO TREE
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo-tree", opts.args })
-vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree (float)", opts.args })
+vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree float", opts.args })
+
+-- OIL
+vim.keymap.set("n", "<leader>o", "<cmd>Oil %:h<cr>", { desc = "Open Oil buffer", opts.args })
 
 -- SPECTRE
 vim.keymap.set("n", "<leader>S", function()
@@ -185,8 +189,10 @@ end, { desc = "Replace in files (Spectre)", opts.args })
 -- FUGITIVE
 vim.keymap.set("n", "<leader>gg", "<cmd>vertical rightbelow G<CR>", { desc = "open fugitive status panel", opts.args })
 vim.keymap.set("n", "<leader>gl", "<cmd>vertical rightbelow G log<CR>", { desc = "open fugitive logs", opts.args })
-vim.keymap.set("n", "<leader>gc", ":G checkout -b ", { desc = "checkout", opts.args })
-vim.keymap.set("n", "<leader>gp", ":G pull --rebase<CR>", { desc = "pull", opts.args })
+vim.keymap.set("n", "<leader>gc", ":G checkout ", { desc = "checkout", opts.args })
+vim.keymap.set("n", "<leader>grr", ":G pull --rebase<CR>", { desc = "rebase on origin self", opts.args })
+vim.keymap.set("n", "<leader>grm", ":G pull --rebase origin master<CR>", { desc = "rebase on origin master", opts.args })
+vim.keymap.set("n", "<leader>gmc", ":Gvdiffsplit!<CR>", { desc = "resolve merge conflict", opts.args })
 
 -- TELESCOPE
 vim.keymap.set("n", "<C-p>", custom_functions.project_files, { desc = "Telescope git files", opts.args })
@@ -264,12 +270,12 @@ vim.keymap.set(
 )
 
 -- OCTO
-vim.keymap.set(
-  "n",
-  "<leader>oo",
-  "<cmd>Octo search review-requested:@me is:pr is:open<cr>",
-  { desc = "PRs waiting for my review", opts.args }
-)
+-- vim.keymap.set(
+--   "n",
+--   "<leader>oo",
+--   "<cmd>Octo search review-requested:@me is:pr is:open<cr>",
+--   { desc = "PRs waiting for my review", opts.args }
+-- )
 
 -- AERIAL
 vim.keymap.set("n", "<leader>lo", "<cmd>AerialToggle!<CR>", { desc = "Toggle symbols outline", opts.args })
@@ -316,9 +322,6 @@ wk.register({
     },
     t = {
       name = "Telescope",
-    },
-    o = {
-      name = "Octo",
     },
   },
 })

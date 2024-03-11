@@ -16,10 +16,11 @@ return {
     config = function()
       require("conform").setup({
         formatters_by_ft = {
+          c = { "clang-format" },
           lua = { "stylua" },
           -- Conform will run multiple formatters sequentially
-          -- python = { "ruff_fix", "ruff_format" },
-          python = { "isort", "black" },
+          python = { "ruff_fix", "ruff_format" },
+          -- python = { "isort", "black" },
           -- Use a sub-list to run only the first available formatter
           javascript = { { "prettierd", "prettier" } },
           terraform = { "terraform_fmt" },
