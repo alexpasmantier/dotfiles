@@ -1,7 +1,3 @@
-"set term=screen-256color
-set t_Co=16
-set guifont=JetBrainsMono\ Nerd\ Font:h14
-
 call plug#begin()
 "NOTE: path: '~/.vim/plugged'
 
@@ -13,13 +9,14 @@ Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
-set bg=light
+set termguicolors
+set bg=dark
 set relativenumber
 set number
 set ruler
 set scrolloff=10
 syntax on
-colorscheme solarized8_flat
+colorscheme solarized8
 
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"

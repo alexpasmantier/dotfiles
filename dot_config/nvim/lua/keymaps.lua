@@ -234,18 +234,6 @@ vim.keymap.set(
 vim.keymap.set({ "n", "o", "x" }, "s", function()
   require("flash").jump()
 end, { desc = "flash", opts.args })
-vim.keymap.set({ "n", "o", "x" }, "S", function()
-  require("flash").treesitter()
-end, { desc = "flash treesitter", opts.args })
-vim.keymap.set("o", "r", function()
-  require("flash").remote()
-end, { desc = "remote flash", opts.args })
-vim.keymap.set({ "o", "x" }, "R", function()
-  require("flash").treesitter_search()
-end, { desc = "treesitter search", opts.args })
-vim.keymap.set("c", "<C-s>", function()
-  require("flash").toggle()
-end, { desc = "toggle flash search", opts.args })
 
 -- ZEN MODE
 vim.keymap.set("n", "<leader>zz", function()

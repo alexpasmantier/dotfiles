@@ -80,7 +80,7 @@ vim.o.background = "dark"
 -- vim.cmd([[colorscheme kanagawa]])
 -- vim.cmd([[colorscheme dayfox]])
 -- vim.cmd([[colorscheme solarized8_flat]])
-vim.cmd([[colorscheme rose-pine]])
+vim.cmd([[colorscheme solarized8]])
 
 -- Don't wrap please
 vim.o.wrap = false
