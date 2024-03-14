@@ -73,14 +73,14 @@ vim.o.splitright = true
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.o.background = "dark"
+vim.o.background = "light"
 -- vim.cmd([[colorscheme dogrun]])
 -- vim.cmd([[colorscheme nord]])
 -- vim.cmd([[colorscheme catppuccin-mocha]])
 -- vim.cmd([[colorscheme kanagawa]])
--- vim.cmd([[colorscheme dayfox]])
--- vim.cmd([[colorscheme solarized8_flat]])
-vim.cmd([[colorscheme solarized8]])
+-- vim.cmd([[colorscheme carbonfox]])
+vim.cmd([[colorscheme solarized8_flat]])
+-- vim.cmd([[colorscheme solarized8]])
 
 -- Don't wrap please
 vim.o.wrap = false
