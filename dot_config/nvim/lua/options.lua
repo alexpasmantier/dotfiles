@@ -1,7 +1,5 @@
 -- [[ Setting options ]]
 
-
-
 -- See `:help vim.o`
 vim.o.encoding = "utf-8"
 
@@ -58,7 +56,7 @@ vim.o.smartindent = true
 vim.wo.signcolumn = "yes"
 vim.o.showbreak = "> "
 vim.o.linebreak = true -- so that wrapping does not occur in middle of word
-vim.o.nolist = true    -- same as above
+vim.o.nolist = true -- same as above
 
 -- Modify jumplist behavior -> much better
 vim.cmd([[
@@ -73,13 +71,14 @@ vim.o.splitright = true
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.o.background = "light"
+vim.o.background = "dark"
 -- vim.cmd([[colorscheme dogrun]])
 -- vim.cmd([[colorscheme nord]])
--- vim.cmd([[colorscheme catppuccin-mocha]])
+-- vim.cmd([[colorscheme catppuccin-macchiato]])
+vim.cmd([[colorscheme catppuccin-mocha]])
 -- vim.cmd([[colorscheme kanagawa]])
 -- vim.cmd([[colorscheme carbonfox]])
-vim.cmd([[colorscheme solarized8_flat]])
+-- vim.cmd([[colorscheme solarized8_flat]])
 -- vim.cmd([[colorscheme solarized8]])
 
 -- Don't wrap please
@@ -107,7 +106,6 @@ vim.o.conceallevel = 1
 vim.o.foldmethod = "indent"
 -- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldenable = false
-
 
 -- Override highlight groups
 -- vim.api.nvim_set_hl(0, 'Comment', { ctermfg = 60, fg = "#545c8c", italic = true })

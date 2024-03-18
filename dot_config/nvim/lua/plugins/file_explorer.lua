@@ -16,8 +16,8 @@ return {
         enable_git_status = true,
         enable_diagnostics = true,
         open_files_do_not_replace_types = { "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
-        sort_case_insensitive = false,                         -- used when sorting files and directories in the tree
-        sort_function = nil,                                   -- use a custom function for sorting files and directories in the tree
+        sort_case_insensitive = false, -- used when sorting files and directories in the tree
+        sort_function = nil, -- use a custom function for sorting files and directories in the tree
         -- sort_function = function (a,b)
         --       if a.type == b.type then
         --           return a.path > b.path
@@ -46,7 +46,7 @@ return {
           icon = {
             folder_closed = "",
             folder_open = "",
-            folder_empty = "ﰊ",
+            folder_empty = "",
             -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
             -- then these will never be used.
             default = "*",
@@ -174,8 +174,8 @@ return {
           },
           follow_current_file = { enabled = true }, -- This will find and focus the file in the active buffer every
           -- time the current file is changed while the tree is open.
-          group_empty_dirs = false,                 -- when true, empty folders will be grouped together
-          hijack_netrw_behavior = "open_current",   -- netrw disabled, opening a directory opens neo-tree
+          group_empty_dirs = false, -- when true, empty folders will be grouped together
+          hijack_netrw_behavior = "open_current", -- netrw disabled, opening a directory opens neo-tree
           -- in whatever position is specified in window.position
           -- "open_current",  -- netrw disabled, opening a directory opens within the
           -- window like netrw would, regardless of window.position
@@ -207,7 +207,7 @@ return {
         buffers = {
           follow_current_file = { enabled = true }, -- This will find and focus the file in the active buffer every
           -- time the current file is changed while the tree is open.
-          group_empty_dirs = true,                  -- when true, empty folders will be grouped together
+          group_empty_dirs = true, -- when true, empty folders will be grouped together
           show_unloaded = true,
           window = {
             mappings = {
@@ -235,7 +235,7 @@ return {
     end,
   },
   {
-    'stevearc/oil.nvim',
+    "stevearc/oil.nvim",
     opts = {
       -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
       -- Set to false if you still want to use netrw.
@@ -277,7 +277,8 @@ return {
       cleanup_delay_ms = 2000,
       -- Set to true to autosave buffers that are updated with LSP willRenameFiles
       -- Set to "unmodified" to only save unmodified buffers
-      lsp_rename_autosave = false,
+      -- FIXME: this needs to go to `lsp_file_methods.something` (check documentation)
+      -- lsp_rename_autosave = false,
       -- Constrain the cursor to the editable parts of the oil buffer
       -- Set to `false` to disable, or "name" to keep it on the file names
       constrain_cursor = "name",
@@ -395,9 +396,8 @@ return {
       ssh = {
         border = "rounded",
       },
-
     },
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
-  }
+  },
 }

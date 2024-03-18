@@ -1,4 +1,4 @@
-import = ["~/.config/alacritty/themes/themes/solarized_light.toml"]
+import = ["~/.config/alacritty/themes/themes/catppuccin.toml"]
 
 live_config_reload = true
 
@@ -6,30 +6,28 @@ live_config_reload = true
 blinking = "Off"
 shape = "Block"
 
+[cursor.vi_mode_style]
+blinking = "Off"
+shape = "Beam"
+
 [env]
 TERM = "xterm-256color"
 
 [font]
 size = 13.0
 
+[font.normal]
+family = "BerkeleyMono Nerd Font"
+style = "Regular"
+
 [font.bold]
-family = "JetBrainsMono Nerd Font"
 style = "Bold"
 
 [font.bold_italic]
-family = "JetBrainsMono Nerd Font"
 style = "Bold Italic"
 
 [font.italic]
-family = "JetBrainsMono Nerd Font"
 style = "Italic"
-
-[font.normal]
-family = "JetBrainsMono Nerd Font"
-style = "Regular"
-
-[selection]
-save_to_clipboard = false
 
 [window]
 decorations = "buttonless"

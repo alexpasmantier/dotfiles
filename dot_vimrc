@@ -3,20 +3,21 @@ call plug#begin()
 
 Plug 'wadackel/vim-dogrun'
 Plug 'lifepillar/vim-solarized8'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
-set termguicolors
 set bg=dark
 set relativenumber
 set number
 set ruler
 set scrolloff=10
 syntax on
-colorscheme solarized8
+set termguicolors
+colorscheme catppuccin_mocha
 
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
