@@ -186,6 +186,15 @@ vim.keymap.set("n", "<leader>S", function()
   require("spectre").open()
 end, { desc = "Replace in files (Spectre)", opts.args })
 
+-- FUGITIVE / NEOGIT
+local neogit = require("neogit")
+vim.keymap.set("n", "<leader>gg", function()
+  neogit.open({ kind = "auto" })
+end, { desc = "open fugitive status panel", opts.args })
+vim.keymap.set("n", "<leader>gl", "<cmd>vertical rightbelow G log<CR>", { desc = "open fugitive logs", opts.args })
+vim.keymap.set("n", "<leader>gc", ":G checkout ", { desc = "checkout", opts.args })
+vim.keymap.set("n", "<leader>grr", ":G pull --rebase<CR>", { desc = "rebase on origin self", opts.args })
+vim.keymap.set(
 -- FUGITIVE
 vim.keymap.set("n", "<leader>gg", "<cmd>vertical rightbelow G<CR>", { desc = "open fugitive status panel", opts.args })
 vim.keymap.set("n", "<leader>gl", "<cmd>vertical rightbelow G log<CR>", { desc = "open fugitive logs", opts.args })
@@ -197,7 +206,7 @@ vim.keymap.set("n", "<leader>gmc", ":Gvdiffsplit!<CR>", { desc = "resolve merge 
 -- TELESCOPE
 vim.keymap.set("n", "<C-p>", custom_functions.project_files, { desc = "Telescope git files", opts.args })
 vim.keymap.set("n", "<leader>st", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
-vim.keymap.set("n", "<C-Space>", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
+vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
 vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
 vim.keymap.set(
   "n",
@@ -268,16 +277,19 @@ vim.keymap.set(
 -- AERIAL
 vim.keymap.set("n", "<leader>lo", "<cmd>AerialToggle!<CR>", { desc = "Toggle symbols outline", opts.args })
 
-
 -- DAP
-vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end,
-  { desc = "Toggle breakpoint", opts.args })
-vim.keymap.set("n", "<leader>dc", function() require("dap").continue() end,
-  { desc = "Continue", opts.args })
-vim.keymap.set("n", "<leader>ds", function() require("dap").step_into() end,
-  { desc = "Step into", opts.args })
-vim.keymap.set("n", "<leader>dr", function() require("dap").repl.open() end,
-  { desc = "Open repl", opts.args })
+vim.keymap.set("n", "<leader>db", function()
+  require("dap").toggle_breakpoint()
+end, { desc = "Toggle breakpoint", opts.args })
+vim.keymap.set("n", "<leader>dc", function()
+  require("dap").continue()
+end, { desc = "Continue", opts.args })
+vim.keymap.set("n", "<leader>ds", function()
+  require("dap").step_into()
+end, { desc = "Step into", opts.args })
+vim.keymap.set("n", "<leader>dr", function()
+  require("dap").repl.open()
+end, { desc = "Open repl", opts.args })
 
 -- WHICH-KEY MAPPINGS
 local wk = require("which-key")

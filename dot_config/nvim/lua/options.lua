@@ -3,25 +3,21 @@
 -- See `:help vim.o`
 vim.o.encoding = "utf-8"
 
--- neovide configuration
-if vim.g.neovide then
-  vim.o.guifont = "JetBrains Mono"
-  vim.g.neovide_scale_factor = 0.9
-  vim.g.neovide_fullscreen = true
-  vim.g.neovide_input_macos_alt_is_meta = true
-  vim.g.neovide_cursor_animation_length = 0.08
-  vim.g.neovide_cursor_trail_size = 0.4
-end
+vim.g.have_nerd_font = true
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
+-- clear hl when hitting esc
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.o.incsearch = true
+vim.o.inccommand = "split"
 
 -- Make line numbers default
-vim.wo.number = true
+vim.o.number = true
+vim.o.relativenumber = true
 
 -- The cursor always has room above and below
-vim.o.scrolloff = 8
+vim.o.scrolloff = 10
 
 -- check spelling
 vim.o.spell = false
@@ -49,8 +45,8 @@ vim.o.showmode = false
 vim.o.cursorline = true
 
 -- Decrease update time
-vim.o.updatetime = 500
-vim.o.timeoutlen = 500
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
 
 vim.o.smartindent = true
 vim.wo.signcolumn = "yes"
@@ -58,7 +54,7 @@ vim.o.showbreak = "> "
 vim.o.linebreak = true -- so that wrapping does not occur in middle of word
 vim.o.nolist = true -- same as above
 
--- Modify jumplist behavior -> much better
+-- Modify jumplist behavior
 vim.cmd([[
   autocmd InsertLeave * normal! m'
   autocmd TextYankPost * normal! m'
@@ -66,26 +62,28 @@ vim.cmd([[
 ]])
 vim.o.jumpoptions = ""
 
+-- Configure how new splits should open
 vim.o.splitbelow = true
 vim.o.splitright = true
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.o.background = "dark"
 -- vim.cmd([[colorscheme dogrun]])
 -- vim.cmd([[colorscheme nord]])
--- vim.cmd([[colorscheme catppuccin-macchiato]])
-vim.cmd([[colorscheme catppuccin-mocha]])
+vim.cmd([[colorscheme catppuccin-macchiato]])
+-- vim.cmd([[colorscheme catppuccin-mocha]])
 -- vim.cmd([[colorscheme kanagawa]])
 -- vim.cmd([[colorscheme carbonfox]])
 -- vim.cmd([[colorscheme solarized8_flat]])
--- vim.cmd([[colorscheme solarized8]])
+-- vim.cmd([[colorscheme solarized8_flat]])
 
 -- Don't wrap please
 vim.o.wrap = false
-
--- Relative line numbers
-vim.o.relativenumber = true
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menu,menuone,noselect"
@@ -107,15 +105,16 @@ vim.o.foldmethod = "indent"
 -- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldenable = false
 
--- Override highlight groups
--- vim.api.nvim_set_hl(0, 'Comment', { ctermfg = 60, fg = "#545c8c", italic = true })
--- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#fab388" })
--- vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#f9e2b0" })
--- vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#f9e2b0" })
--- vim.api.nvim_set_hl(0, '@string.documentation', { fg = "#545c8c", italic = true })
--- tweaks for dogrun
--- vim.api.nvim_set_hl(0, 'lualine_a_normal', { bg = "#929be5", fg = "#252738", bold = true })
--- vim.api.nvim_set_hl(0, 'lualine_b_normal', { bg = "#252738", fg = "#929be5" })
+-- [[NEOVIDE]]
+-- ------------------------------------------------------------------------------------------------
+if vim.g.neovide then
+  vim.o.guifont = "BerkeleyMono Nerd Font"
+  vim.g.neovide_scale_factor = 0.9
+  vim.g.neovide_fullscreen = true
+  vim.g.neovide_input_macos_alt_is_meta = true
+  vim.g.neovide_cursor_animation_length = 0.08
+  vim.g.neovide_cursor_trail_size = 0.4
+end
 
 if vim.g.started_by_firenvim == true then
   vim.g.expanded_modes = {
