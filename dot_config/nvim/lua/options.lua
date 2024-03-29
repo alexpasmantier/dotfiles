@@ -116,6 +116,8 @@ if vim.g.neovide then
   vim.g.neovide_cursor_trail_size = 0.4
 end
 
+-- [[FIRENVIM]]
+-- ------------------------------------------------------------------------------------------------
 if vim.g.started_by_firenvim == true then
   vim.g.expanded_modes = {
     ["n"] = "NORMAL",

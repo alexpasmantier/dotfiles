@@ -195,12 +195,11 @@ vim.keymap.set("n", "<leader>gl", "<cmd>vertical rightbelow G log<CR>", { desc =
 vim.keymap.set("n", "<leader>gc", ":G checkout ", { desc = "checkout", opts.args })
 vim.keymap.set("n", "<leader>grr", ":G pull --rebase<CR>", { desc = "rebase on origin self", opts.args })
 vim.keymap.set(
--- FUGITIVE
-vim.keymap.set("n", "<leader>gg", "<cmd>vertical rightbelow G<CR>", { desc = "open fugitive status panel", opts.args })
-vim.keymap.set("n", "<leader>gl", "<cmd>vertical rightbelow G log<CR>", { desc = "open fugitive logs", opts.args })
-vim.keymap.set("n", "<leader>gc", ":G checkout ", { desc = "checkout", opts.args })
-vim.keymap.set("n", "<leader>grr", ":G pull --rebase<CR>", { desc = "rebase on origin self", opts.args })
-vim.keymap.set("n", "<leader>grm", ":G pull --rebase origin master<CR>", { desc = "rebase on origin master", opts.args })
+  "n",
+  "<leader>grm",
+  ":G pull --rebase origin master<CR>",
+  { desc = "rebase on origin master", opts.args }
+)
 vim.keymap.set("n", "<leader>gmc", ":Gvdiffsplit!<CR>", { desc = "resolve merge conflict", opts.args })
 
 -- TELESCOPE
@@ -325,3 +324,25 @@ wk.register({
     },
   },
 })
+
+-- LSP-specific
+vim.keymap.set("n", "<leader>lpd", function()
+  require("lspconfig").pyright.setup({
+    settings = {
+      pyright = {
+        reportMissingImports = true,
+        typeCheckingMode = "off",
+      },
+    },
+  })
+end, { desc = "disable type checking", opts.args })
+vim.keymap.set("n", "<leader>lpe", function()
+  require("lspconfig").pyright.setup({
+    settings = {
+      pyright = {
+        reportMissingImports = true,
+        typeCheckingMode = "standard",
+      },
+    },
+  })
+end, { desc = "enable type checking", opts.args })

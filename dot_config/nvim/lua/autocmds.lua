@@ -20,9 +20,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "gI", require("telescope.builtin").lsp_implementations, opts)
     -- NOTE: this conflicts with window navigation
     -- vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
     -- NOTE: I don't use these at the moment. Keep them just in case...
@@ -31,10 +31,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- vim.keymap.set("n", "<space>wl", function()
     --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     -- end, opts)
-    vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition, { opts.args, desc = "Go to type definition" })
+    vim.keymap.set(
+      "n",
+      "<leader>lt",
+      require("telescope.builtin").lsp_type_definitions,
+      { opts.args, desc = "Go to type definition" }
+    )
     vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { opts.args, desc = "Lsp rename" })
     vim.keymap.set({ "n", "v" }, "<leader>lc", vim.lsp.buf.code_action, { opts.args, desc = "Lsp code action" })
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, opts)
     vim.keymap.set("n", "<leader>lf", function()
       vim.lsp.buf.format({ async = true })
     end, { opts.args, desc = "Lsp format file" })

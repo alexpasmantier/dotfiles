@@ -10,7 +10,7 @@ return {
     },
     config = true,
   },
-  -- { "tpope/vim-fugitive" },
+  { "tpope/vim-fugitive" },
   { "tpope/vim-rhubarb" },
   {
     "lewis6991/gitsigns.nvim",
