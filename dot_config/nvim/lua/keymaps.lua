@@ -239,9 +239,9 @@ vim.keymap.set(
 )
 
 -- FLASH
-vim.keymap.set({ "n", "o", "x" }, "s", function()
-  require("flash").jump()
-end, { desc = "flash", opts.args })
+-- vim.keymap.set({ "n", "o", "x" }, "s", function()
+--   require("flash").jump()
+-- end, { desc = "flash", opts.args })
 
 -- ZEN MODE
 vim.keymap.set("n", "<leader>zz", function()
@@ -346,3 +346,15 @@ vim.keymap.set("n", "<leader>lpe", function()
     },
   })
 end, { desc = "enable type checking", opts.args })
+
+-- COPILOT
+-- set <c-e> for accepting copilot suggestions (and <c-d> to dismiss) and unmap tab
+vim.keymap.set("i", "<C-e>", 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false,
+})
+vim.keymap.set("i", "<C-d>", 'copilot#Dismiss("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false,
+})
+vim.g.copilot_no_tab_map = true

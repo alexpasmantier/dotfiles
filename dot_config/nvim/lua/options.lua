@@ -28,6 +28,15 @@ vim.o.mouse = "a"
 -- Enable break indent
 vim.o.breakindent = true
 
+-- Do not continue comments on new line
+-- (the autocmd is a workaround to the fact that this gets overriden by default ftplugins)
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove("o")
+  end,
+})
+
 -- Save undo history
 vim.o.undofile = true
 
@@ -74,13 +83,20 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.o.termguicolors = true
 vim.o.background = "dark"
 -- vim.cmd([[colorscheme dogrun]])
--- vim.cmd([[colorscheme nord]])
-vim.cmd([[colorscheme catppuccin-macchiato]])
+-- vim.cmd([[colorscheme oxocarbon]])
+-- vim.cmd([[colorscheme catppuccin-macchiato]])
 -- vim.cmd([[colorscheme catppuccin-mocha]])
 -- vim.cmd([[colorscheme kanagawa]])
 -- vim.cmd([[colorscheme carbonfox]])
--- vim.cmd([[colorscheme solarized8_flat]])
--- vim.cmd([[colorscheme solarized8_flat]])
+-- vim.cmd([[colorscheme solarized8_high]])
+vim.cmd([[colorscheme torte]])
+
+-- tweaks for some colorschemes
+-- always have comments in italic style
+vim.cmd([[highlight Comment cterm=italic gui=italic]])
+-- change hover float window background and border color
+vim.cmd([[highlight NormalFloat guibg=#222222]])
+vim.cmd([[highlight FloatBorder guifg=#9e2222]])
 
 -- Don't wrap please
 vim.o.wrap = false
