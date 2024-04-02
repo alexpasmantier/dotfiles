@@ -61,7 +61,7 @@ vim.o.smartindent = true
 vim.wo.signcolumn = "yes"
 vim.o.showbreak = "> "
 vim.o.linebreak = true -- so that wrapping does not occur in middle of word
-vim.o.nolist = true -- same as above
+vim.o.nolist = true    -- same as above
 
 -- Modify jumplist behavior
 vim.cmd([[
@@ -84,19 +84,14 @@ vim.o.termguicolors = true
 vim.o.background = "dark"
 -- vim.cmd([[colorscheme dogrun]])
 -- vim.cmd([[colorscheme oxocarbon]])
--- vim.cmd([[colorscheme catppuccin-macchiato]])
+vim.cmd([[colorscheme catppuccin-macchiato]])
 -- vim.cmd([[colorscheme catppuccin-mocha]])
 -- vim.cmd([[colorscheme kanagawa]])
 -- vim.cmd([[colorscheme carbonfox]])
 -- vim.cmd([[colorscheme solarized8_high]])
-vim.cmd([[colorscheme torte]])
 
--- tweaks for some colorschemes
--- always have comments in italic style
-vim.cmd([[highlight Comment cterm=italic gui=italic]])
--- change hover float window background and border color
-vim.cmd([[highlight NormalFloat guibg=#222222]])
-vim.cmd([[highlight FloatBorder guifg=#9e2222]])
+-- tweaks for torte (how did I even get here?)
+-- vim.cmd('source $HOME/.config/nvim/lua/theme_overwrites.vim')
 
 -- Don't wrap please
 vim.o.wrap = false
