@@ -37,6 +37,7 @@ dynamic_title = true
 opacity = 1
 option_as_alt = "OnlyLeft"
 title = "Alacritty"
+startup_mode = "Maximized"
 
 [window.padding]
 x = 5
