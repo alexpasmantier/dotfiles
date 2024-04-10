@@ -179,7 +179,7 @@ vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo
 vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree float", opts.args })
 
 -- OIL
-vim.keymap.set("n", "<leader>o", "<cmd>Oil %:h<cr>", { desc = "Open Oil buffer", opts.args })
+vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "Open Oil buffer", opts.args })
 
 -- SPECTRE
 vim.keymap.set("n", "<leader>S", function()

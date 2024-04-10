@@ -23,6 +23,7 @@ return {
           -- python = { "isort", "black" },
           -- Use a sub-list to run only the first available formatter
           javascript = { { "prettierd", "prettier" } },
+          typescript = { { "prettierd", "prettier" } },
           terraform = { "terraform_fmt" },
           rust = { "rustfmt" },
           cpp = { "clang-format" },
