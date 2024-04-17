@@ -61,7 +61,7 @@ vim.o.smartindent = true
 vim.wo.signcolumn = "yes"
 vim.o.showbreak = "> "
 vim.o.linebreak = true -- so that wrapping does not occur in middle of word
-vim.o.nolist = true    -- same as above
+vim.o.nolist = true -- same as above
 
 -- Modify jumplist behavior
 vim.cmd([[
@@ -82,16 +82,23 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.o.background = "dark"
--- vim.cmd([[colorscheme dogrun]])
--- vim.cmd([[colorscheme oxocarbon]])
 vim.cmd([[colorscheme catppuccin-macchiato]])
--- vim.cmd([[colorscheme catppuccin-mocha]])
--- vim.cmd([[colorscheme kanagawa]])
--- vim.cmd([[colorscheme carbonfox]])
--- vim.cmd([[colorscheme solarized8_high]])
 
 -- tweaks for torte (how did I even get here?)
 -- vim.cmd('source $HOME/.config/nvim/lua/theme_overwrites.vim')
+
+-- tweaks for diff highlights which aren't visible enough
+vim.cmd([[
+  hi DiffAdd    term=bold ctermbg=4 guifg=#1E1E2E guibg=#A6E3A1 
+  hi DiffChange term=bold ctermbg=5 guifg=#1E1E2E guibg=#F9E2AF 
+  hi DiffDelete term=bold ctermfg=12 ctermbg=6 guifg=#1E1E2E guibg=#F38BA8
+  hi DiffText   term=reverse ctermbg=9 guifg=#1E1E2E guibg=#89B4FA
+]])
+
+-- DiffAdd        xxx term=bold ctermbg=4 guifg=#1E1E2E guibg=#A6E3A1
+-- DiffChange     xxx term=bold ctermbg=5 guifg=#1E1E2E guibg=#F9E2AF
+-- DiffDelete     xxx term=bold ctermfg=12 ctermbg=6 guifg=#1E1E2E guibg=#F38BA8
+-- DiffText       xxx term=reverse ctermbg=9 guifg=#1E1E2E guibg=#89B4FA)
 
 -- Don't wrap please
 vim.o.wrap = false

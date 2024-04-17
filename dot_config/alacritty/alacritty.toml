@@ -1,6 +1,6 @@
-import = ["~/.config/alacritty/themes/themes/tomorrow_night_bright.toml"]
+# import = ["~/.config/alacritty/themes/themes/tomorrow_night_bright.toml"]
 # import = ["~/.config/alacritty/themes/themes/solarized_light.toml"]
-# import = ["~/.config/alacritty/themes/themes/catppuccin.toml"]
+import = ["~/.config/alacritty/themes/themes/catppuccin.toml"]
 
 live_config_reload = true
 
@@ -16,7 +16,7 @@ shape = "Beam"
 TERM = "xterm-256color"
 
 [font]
-size = 13.0
+size = 15.0
 
 [font.normal]
 family = "BerkeleyMono Nerd Font"

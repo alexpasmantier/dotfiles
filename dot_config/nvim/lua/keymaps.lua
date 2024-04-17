@@ -185,6 +185,12 @@ vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "Open Oil buffer", opt
 vim.keymap.set("n", "<leader>S", function()
   require("spectre").open()
 end, { desc = "Replace in files (Spectre)", opts.args })
+vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+  desc = "Search current word",
+})
+vim.keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+  desc = "Search current word",
+})
 
 -- FUGITIVE / NEOGIT
 local neogit = require("neogit")
@@ -203,6 +209,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>gmc", ":Gvdiffsplit!<CR>", { desc = "resolve merge conflict", opts.args })
 
 -- TELESCOPE
+local telescope_builtins = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", custom_functions.project_files, { desc = "Telescope git files", opts.args })
 vim.keymap.set("n", "<leader>st", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
 vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
@@ -223,6 +230,9 @@ vim.keymap.set(
   custom_functions.colorschemes_with_preview,
   { desc = "Telescope colorschemes", opts.args }
 )
+vim.keymap.set("n", "<leader>tn", custom_functions.search_notes, { desc = "Telescope note", opts.args })
+vim.keymap.set("n", "<leader>t.", custom_functions.search_dotfiles, { desc = "Telescope dotfiles", opts.args })
+vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope dotfiles", opts.args })
 
 -- GOTO PREVIEW
 vim.keymap.set("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
@@ -230,18 +240,18 @@ vim.keymap.set("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implem
 -- TODO: autocmmand to map escape to `close_all_win` when in goto preview buffer
 vim.keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
 
--- PERSISTENCE (SESSION MGMT)
-vim.keymap.set(
-  "n",
-  "<leader>ss",
-  "<cmd>lua require('persistence').load({ last = true })<cr>",
-  { desc = "load last session" }
-)
-
--- FLASH
--- vim.keymap.set({ "n", "o", "x" }, "s", function()
---   require("flash").jump()
--- end, { desc = "flash", opts.args })
+-- ZEN MODE
+vim.keymap.set("n", "<leader>zz", function()
+  require("zen-mode").toggle({
+    window = {
+      backdrop = 0.95,
+      width = 0.65, -- width will be 85% of the editor width
+    },
+    plugins = {
+      twilight = { enabled = false }, -- enable to start Twilight when zen mode opens
+    },
+  })
+end, { desc = "Zen mode" })
 
 -- ZEN MODE
 vim.keymap.set("n", "<leader>zz", function()
@@ -264,14 +274,6 @@ vim.keymap.set(
   ":Neorg export to-file .md<Left><Left><Left>",
   { desc = "export to markdown", opts.args }
 )
-
--- OCTO
--- vim.keymap.set(
---   "n",
---   "<leader>oo",
---   "<cmd>Octo search review-requested:@me is:pr is:open<cr>",
---   { desc = "PRs waiting for my review", opts.args }
--- )
 
 -- AERIAL
 vim.keymap.set("n", "<leader>lo", "<cmd>AerialToggle!<CR>", { desc = "Toggle symbols outline", opts.args })
@@ -327,9 +329,9 @@ wk.register({
 
 -- LSP-specific
 vim.keymap.set("n", "<leader>lpd", function()
-  require("lspconfig").pyright.setup({
+  require("lspconfig").basedpyright.setup({
     settings = {
-      pyright = {
+      basedpyright = {
         reportMissingImports = true,
         typeCheckingMode = "off",
       },
@@ -337,9 +339,9 @@ vim.keymap.set("n", "<leader>lpd", function()
   })
 end, { desc = "disable type checking", opts.args })
 vim.keymap.set("n", "<leader>lpe", function()
-  require("lspconfig").pyright.setup({
+  require("lspconfig").basedpyright.setup({
     settings = {
-      pyright = {
+      basedpyright = {
         reportMissingImports = true,
         typeCheckingMode = "standard",
       },

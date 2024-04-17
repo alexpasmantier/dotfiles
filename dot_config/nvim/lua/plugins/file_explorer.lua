@@ -6,11 +6,29 @@ return {
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
       "s1n7ax/nvim-window-picker",
+      "nvim-pack/nvim-spectre",
     },
     enabled = not vim.g.started_by_firenvim,
     config = function()
+      local custom_functions = require("custom_functions")
       vim.g.nvim_tree_disable_netrw = 0
       require("neo-tree").setup({
+        event_handlers = {
+          {
+            event = "file_renamed",
+            -- arg: {source, destination}
+            handler = function(arg)
+              custom_functions.open_spectre_with_renaming(arg.source, arg.destination)
+            end,
+          },
+          {
+            event = "file_moved",
+            -- arg: {source, destination}
+            handler = function(arg)
+              custom_functions.open_spectre_with_renaming(arg.source, arg.destination)
+            end,
+          },
+        },
         close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = "rounded",
         enable_git_status = true,
@@ -232,6 +250,16 @@ return {
           },
         },
       })
+    end,
+  },
+  {
+    "antosha417/nvim-lsp-file-operations",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-neo-tree/neo-tree.nvim",
+    },
+    config = function()
+      require("lsp-file-operations").setup()
     end,
   },
   {

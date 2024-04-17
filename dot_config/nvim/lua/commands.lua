@@ -24,6 +24,8 @@ local function buf_kill(kill_command, bufnr, force)
       vim.ui.input({
         prompt = string.format([[%s. Close it anyway? [y]es or [n]o (default: no): ]], warning),
       }, function(choice)
+        if choice ~= nil and choice:match("ye?s?") then
+          buf_kill(kill_command, bufnr, true)
         if choice ~= nil and choice:match "ye?s?" then buf_kill(kill_command, bufnr, true) end
       end)
       return
@@ -66,6 +68,9 @@ local function buf_kill(kill_command, bufnr, force)
   end
 end
 
+vim.api.nvim_create_user_command("BufferKill", function()
+  buf_kill("bd")
+end, { force = true })
 
 vim.api.nvim_create_user_command("BufferKill", function() buf_kill "bd" end, { force = true })
 
@@ -96,9 +101,8 @@ local function create_test_file_for_current_file(bufnr)
       local relative_file_path = current_file_path:make_relative(current_git_dir)
 
       local rel_path_components = vim.split(tostring(relative_file_path), sep)
-      local test_folder_path = Path:new("tests",
-        table.concat(vim.list_slice(rel_path_components, 2, #rel_path_components - 1), sep)
-      )
+      local test_folder_path =
+        Path:new("tests", table.concat(vim.list_slice(rel_path_components, 2, #rel_path_components - 1), sep))
       local test_file_path = test_folder_path:joinpath("test_" .. rel_path_components[#rel_path_components])
 
       -- if file doesn't exist yet, mkdir -p and touch it
@@ -123,16 +127,19 @@ local function create_test_file_for_current_file(bufnr)
       end
       -- TODO: open the file in a new split
       -- vim.cmd.new()
-    end
+    end,
   })
 
   -- vim.print(bufname)
 end
 
+vim.api.nvim_create_user_command("CreateTestFile", function()
+  create_test_file_for_current_file()
+end, { force = true })
 
-vim.api.nvim_create_user_command("CreateTestFile", function() create_test_file_for_current_file() end, { force = true })
-
-
+vim.api.nvim_create_user_command("Format", function(args)
+  local range = nil
+  if args.count ~= -1 then
 vim.api.nvim_create_user_command("Format", function(args)
   local range = nil
   if args.count ~= -1 then
@@ -144,3 +151,12 @@ vim.api.nvim_create_user_command("Format", function(args)
   end
   require("conform").format({ async = true, lsp_fallback = true, range = range })
 end, { range = true })
+
+----------------------------------------------------------------------------------------------
+-- FULL WIDTH SPLIT
+
+vim.api.nvim_create_user_command("FullWidthSplit", function()
+  vim.cmd("vnew")
+  vim.cmd.normal(vim.api.nvim_replace_termcodes("<C-w>J", true, true, true))
+  vim.cmd("resize 30")
+end, { force = true })
