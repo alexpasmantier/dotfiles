@@ -84,7 +84,7 @@ function M.open_spectre_with_renaming(before, after)
     is_insert_mode = false,
     search_text = make_import_path(relative_before, import_separator),
     replace_text = make_import_path(relative_after, import_separator),
-    is_close = false, -- close an exists instance of spectre and open new
+    is_close = false, -- close an existing instance of spectre and open new
   })
 end
 

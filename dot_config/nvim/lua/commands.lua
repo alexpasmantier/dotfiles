@@ -26,7 +26,7 @@ local function buf_kill(kill_command, bufnr, force)
       }, function(choice)
         if choice ~= nil and choice:match("ye?s?") then
           buf_kill(kill_command, bufnr, true)
-        if choice ~= nil and choice:match "ye?s?" then buf_kill(kill_command, bufnr, true) end
+        end
       end)
       return
     end
@@ -71,8 +71,6 @@ end
 vim.api.nvim_create_user_command("BufferKill", function()
   buf_kill("bd")
 end, { force = true })
-
-vim.api.nvim_create_user_command("BufferKill", function() buf_kill "bd" end, { force = true })
 
 ----------------------------------------------------------------------------------------------
 
@@ -137,9 +135,6 @@ vim.api.nvim_create_user_command("CreateTestFile", function()
   create_test_file_for_current_file()
 end, { force = true })
 
-vim.api.nvim_create_user_command("Format", function(args)
-  local range = nil
-  if args.count ~= -1 then
 vim.api.nvim_create_user_command("Format", function(args)
   local range = nil
   if args.count ~= -1 then

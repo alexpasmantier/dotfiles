@@ -211,7 +211,7 @@ vim.keymap.set("n", "<leader>gmc", ":Gvdiffsplit!<CR>", { desc = "resolve merge 
 -- TELESCOPE
 local telescope_builtins = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", custom_functions.project_files, { desc = "Telescope git files", opts.args })
-vim.keymap.set("n", "<leader>st", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
+vim.keymap.set("n", "<leader>tt", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
 vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
 vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
 vim.keymap.set(
@@ -239,19 +239,6 @@ vim.keymap.set("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_defini
 vim.keymap.set("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
 -- TODO: autocmmand to map escape to `close_all_win` when in goto preview buffer
 vim.keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
-
--- ZEN MODE
-vim.keymap.set("n", "<leader>zz", function()
-  require("zen-mode").toggle({
-    window = {
-      backdrop = 0.95,
-      width = 0.65, -- width will be 85% of the editor width
-    },
-    plugins = {
-      twilight = { enabled = false }, -- enable to start Twilight when zen mode opens
-    },
-  })
-end, { desc = "Zen mode" })
 
 -- ZEN MODE
 vim.keymap.set("n", "<leader>zz", function()
