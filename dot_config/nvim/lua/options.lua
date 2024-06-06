@@ -83,7 +83,6 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.o.termguicolors = true
 vim.o.background = "dark"
 
-
 -- tweaks for torte (how did I even get here?)
 -- vim.cmd('source $HOME/.config/nvim/lua/theme_overwrites.vim')
 
@@ -98,11 +97,11 @@ vim.cmd([[
 ]])
 
 -- tweaks for diff highlights which aren't visible enough
--- vim.cmd([[
---   hi DiffAdd    term=bold ctermbg=4 guifg=#1E1E2E guibg=#A6E3A1
---   hi DiffChange term=bold ctermbg=5 guifg=#1E1E2E guibg=#F9E2AF
---   hi DiffDelete term=bold ctermfg=12 ctermbg=6 guifg=#1E1E2E guibg=#F38BA8
---   hi DiffText   term=reverse ctermbg=9 guifg=#1E1E2E guibg=#89B4FA
+vim.cmd([[
+  hi DiffAdd    term=bold ctermbg=4 guifg=#1E1E2E guibg=#A6E3A1
+  hi DiffChange term=bold ctermbg=5 guifg=#1E1E2E guibg=#F9E2AF
+  hi DiffDelete term=bold ctermfg=12 ctermbg=6 guifg=#1E1E2E guibg=#F38BA8
+  hi DiffText   term=reverse ctermbg=9 guifg=#1E1E2E guibg=#89B4FA
 ]])
 
 -- DiffAdd        xxx term=bold ctermbg=4 guifg=#1E1E2E guibg=#A6E3A1

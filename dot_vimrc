@@ -20,7 +20,7 @@ set laststatus=2
 set noshowmode
 syntax on
 set termguicolors
-colorscheme catppuccin_mocha
+colorscheme dogrun
 
 let g:lightline = {
 	      \ 'colorscheme': 'one',
