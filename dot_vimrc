@@ -7,6 +7,7 @@ Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
@@ -15,9 +16,15 @@ set relativenumber
 set number
 set ruler
 set scrolloff=10
+set laststatus=2
+set noshowmode
 syntax on
 set termguicolors
 colorscheme catppuccin_mocha
+
+let g:lightline = {
+	      \ 'colorscheme': 'one',
+	            \ }
 
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"

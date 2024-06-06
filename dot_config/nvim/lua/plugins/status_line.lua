@@ -52,16 +52,20 @@ return {
               if next(clients) == nil then
                 return msg
               end
+              local displayed_clients = {}
               for _, client in ipairs(clients) do
                 local filetypes = client.config.filetypes
                 if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                  return client.name
+                  vim.list_extend(displayed_clients, { client.name })
                 end
+              end
+              if #displayed_clients > 0 then
+                return table.concat(displayed_clients, ", ")
               end
               return msg
             end,
-            -- icon = ' LSP:',
-            -- color = { fg = '#ffffff', gui = 'bold' },
+            -- icon = " LSP:",
+            color = { fg = "#f4d88c", gui = "bold" },
           },
           "progress",
           "location",
@@ -70,11 +74,11 @@ return {
         lualine_z = {},
       },
       winbar = {
-        lualine_c = { { "filename", path = 1, separator = "" } },
+        lualine_c = { { "filename", path = 1, separator = "", shorting_target = 40 } },
       },
 
       inactive_winbar = {
-        lualine_c = { { "filename", path = 1, separator = "" } },
+        lualine_c = { { "filename", path = 1, separator = "", shorting_target = 40 } },
       },
     },
   },

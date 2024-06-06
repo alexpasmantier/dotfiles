@@ -232,7 +232,7 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "<leader>tn", custom_functions.search_notes, { desc = "Telescope note", opts.args })
 vim.keymap.set("n", "<leader>t.", custom_functions.search_dotfiles, { desc = "Telescope dotfiles", opts.args })
-vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope dotfiles", opts.args })
+vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope help tags", opts.args })
 
 -- GOTO PREVIEW
 vim.keymap.set("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
@@ -278,6 +278,10 @@ end, { desc = "Step into", opts.args })
 vim.keymap.set("n", "<leader>dr", function()
   require("dap").repl.open()
 end, { desc = "Open repl", opts.args })
+-- DAP UI
+vim.keymap.set("n", "<leader>du", function()
+  require("dapui").toggle()
+end, { desc = "Toggle DAP UI", opts.args })
 
 -- WHICH-KEY MAPPINGS
 local wk = require("which-key")
@@ -320,7 +324,9 @@ vim.keymap.set("n", "<leader>lpd", function()
     settings = {
       basedpyright = {
         reportMissingImports = true,
-        typeCheckingMode = "off",
+        analysis = {
+          typeCheckingMode = "off",
+        },
       },
     },
   })
@@ -330,7 +336,9 @@ vim.keymap.set("n", "<leader>lpe", function()
     settings = {
       basedpyright = {
         reportMissingImports = true,
-        typeCheckingMode = "standard",
+        analysis = {
+          typeCheckingMode = "all",
+        },
       },
     },
   })

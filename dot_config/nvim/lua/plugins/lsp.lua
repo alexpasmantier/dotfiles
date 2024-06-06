@@ -33,7 +33,7 @@ return {
         lsp.default_keymaps({ buffer = bufnr })
       end)
 
-      require("lspconfig").basedpyright.setup({
+      require("lspconfig").pyright.setup({
         settings = {
           pyright = {
             reportMissingImports = true,

@@ -9,6 +9,7 @@ $git_state\
 $git_status\
 $cmd_duration\
 $line_break\
+$env_var\
 $python\
 $character"""
 
@@ -46,6 +47,11 @@ style = "yellow"
 [python]
 format = "[$virtualenv]($style) "
 style = "red"
+
+[env_var]
+variable = "DATABASE_ENVIRONMENT"
+format = "[$env_value]($style) "
+style = "peach"
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
