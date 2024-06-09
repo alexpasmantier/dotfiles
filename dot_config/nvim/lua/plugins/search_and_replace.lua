@@ -4,8 +4,8 @@ return {
     "nvim-pack/nvim-spectre",
     opts = {
       color_devicons = true,
-      open_cmd = "FullWidthSplit",
-      live_update = false, -- auto execute search again when you write to any file in vim
+      open_cmd = "vnew",
+      live_update = true, -- auto execute search again when you write to any file in vim
       lnum_for_results = true, -- show line number for search/replace results
       line_sep_start = "┌-----------------------------------------",
       result_padding = "¦  ",
