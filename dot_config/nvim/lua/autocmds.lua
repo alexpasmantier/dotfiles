@@ -21,7 +21,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local opts = { buffer = ev.buf }
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
     vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    -- NOTE: this is now a default
+    -- vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "gI", require("telescope.builtin").lsp_implementations, opts)
     -- NOTE: this conflicts with window navigation
     -- vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)

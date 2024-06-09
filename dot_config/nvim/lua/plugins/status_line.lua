@@ -1,3 +1,6 @@
+local bg_color = "#1c1c1c"
+local fg_color = "#969896"
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -40,10 +43,11 @@ return {
               info = " ",
               hint = "󰌵 ",
             },
+            color = { fg = fg_color, bg = bg_color },
           },
           "encoding",
           "fileformat",
-          "filetype",
+          { "filetype", color = { fg = fg_color, bg = bg_color } },
           {
             function()
               local msg = "LSP-Off"
@@ -65,7 +69,7 @@ return {
               return msg
             end,
             -- icon = " LSP:",
-            color = { fg = "#f4d88c", gui = "bold" },
+            color = { fg = "#f4d88c", bg = bg_color, gui = "bold" },
           },
           "progress",
           "location",
