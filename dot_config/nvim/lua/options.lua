@@ -109,16 +109,8 @@ vim.cmd([[
 -- DiffDelete     xxx term=bold ctermfg=12 ctermbg=6 guifg=#1E1E2E guibg=#F38BA8
 -- DiffText       xxx term=reverse ctermbg=9 guifg=#1E1E2E guibg=#89B4FA)
 
-vim.cmd([[
-  hi! lualine_c_normal guifg=#969896 guibg=#1c1c1c
-  hi! lualine_c_insert guifg=#969896 guibg=#1c1c1c
-  hi! lualine_c_visual guifg=#969896 guibg=#1c1c1c
-  hi! lualine_c_command guifg=#969896 guibg=#1c1c1c
-  hi! lualine_c_terminal guifg=#969896 guibg=#1c1c1c
-  hi! lualine_c_inactive guifg=#969896 guibg=#1c1c1c
-  hi! lualine_c_normal guifg=#969896 guibg=#1c1c1c
-  hi! lualine_c_replace guifg=#969896 guibg=#1c1c1c
-]])
+-- tweaks for lualine
+vim.cmd("source $HOME/.config/nvim/lua/lualine_highlights_overwrites.vim")
 
 -- Don't wrap please
 vim.o.wrap = false

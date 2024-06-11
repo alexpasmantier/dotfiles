@@ -150,8 +150,8 @@ end, { range = true })
 ----------------------------------------------------------------------------------------------
 -- FULL WIDTH SPLIT
 
-vim.api.nvim_create_user_command("FullWidthSplit", function()
-  vim.cmd("vnew")
-  vim.cmd.normal(vim.api.nvim_replace_termcodes("<C-w>J", true, true, true))
-  vim.cmd("resize 30")
-end, { force = true })
+-- vim.api.nvim_create_user_command("FullWidthSplit", function()
+--   vim.cmd("vnew")
+--   vim.cmd.normal(vim.api.nvim_replace_termcodes("<C-w>J", true, true, true))
+--   vim.cmd("resize 30")
+-- end, { force = true })

@@ -228,21 +228,6 @@ vim.keymap.set("n", "<leader>tn", custom_functions.search_notes, { desc = "Teles
 vim.keymap.set("n", "<leader>t.", custom_functions.search_dotfiles, { desc = "Telescope dotfiles", opts.args })
 vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope help tags", opts.args })
 
--- telescope integration with trouble
-local actions = require("telescope.actions")
-local open_with_trouble = require("trouble.sources.telescope").open
--- Use this to add more results without clearing the trouble list
-local add_to_trouble = require("trouble.sources.telescope").add
-local telescope = require("telescope")
-telescope.setup({
-  defaults = {
-    mappings = {
-      i = { ["<c-t>"] = open_with_trouble },
-      n = { ["<c-t>"] = open_with_trouble },
-    },
-  },
-})
-
 -- GOTO PREVIEW
 vim.keymap.set("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
 vim.keymap.set("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
@@ -289,25 +274,21 @@ wk.register({
 
 -- LSP-specific
 vim.keymap.set("n", "<leader>lpd", function()
-  require("lspconfig").basedpyright.setup({
+  require("lspconfig").pyright.setup({
     settings = {
-      basedpyright = {
+      pyright = {
         reportMissingImports = true,
-        analysis = {
-          typeCheckingMode = "off",
-        },
+        typeCheckingMode = "off",
       },
     },
   })
 end, { desc = "disable type checking", opts.args })
 vim.keymap.set("n", "<leader>lpe", function()
-  require("lspconfig").basedpyright.setup({
+  require("lspconfig").pyright.setup({
     settings = {
-      basedpyright = {
+      pyright = {
         reportMissingImports = true,
-        analysis = {
-          typeCheckingMode = "all",
-        },
+        typeCheckingMode = "standard",
       },
     },
   })

@@ -5,7 +5,7 @@ return {
     config = function()
       require("lint").linters_by_ft = {
         markdown = { "vale" },
-        python = { "ruff" },
+        python = { "ruff", "mypy" },
         rust = { "rust_analyzer" },
       }
     end,

@@ -193,18 +193,23 @@ return {
           prompt_position = "bottom",
         },
       }
+      -- telescope integration with trouble
+      local open_with_trouble = require("trouble.sources.telescope").open
+      -- Use this to add more results without clearing the trouble list
+      local add_to_trouble = require("trouble.sources.telescope").add
+
       local custom_functions = require("custom_functions")
       require("telescope").setup({
         defaults = {
           mappings = {
             i = {
-              ["<C-n>"] = actions.cycle_history_next,
-              ["<C-p>"] = actions.cycle_history_prev,
+              ["<C-j>"] = actions.cycle_history_next,
+              ["<C-k>"] = actions.cycle_history_prev,
 
-              ["<C-j>"] = actions.move_selection_next,
-              ["<C-k>"] = actions.move_selection_previous,
+              ["<C-n>"] = actions.move_selection_next,
+              ["<C-p>"] = actions.move_selection_previous,
 
-              ["<esc>"] = actions.close,
+              -- ["<esc>"] = actions.close,
 
               ["<CR>"] = actions.select_default,
               ["<C-s>"] = actions.select_horizontal,
@@ -219,10 +224,29 @@ return {
               ["<C-u>"] = actions.preview_scrolling_up,
               ["<C-d>"] = actions.preview_scrolling_down,
 
-              -- ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-              -- ["<C-]>"] = actions.smart_send_to_qflist,
-              -- ["<C-c>"] = actions.edit_command_line,
-              -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+              -- trouble integration
+              ["<C-t>"] = open_with_trouble,
+            },
+            n = {
+              ["j"] = actions.move_selection_next,
+              ["k"] = actions.move_selection_previous,
+
+              ["<esc>"] = actions.close,
+
+              ["<CR>"] = actions.select_default,
+              ["<C-s>"] = actions.select_horizontal,
+              ["<C-v>"] = actions.select_vertical,
+
+              -- Absolutely insane, you can refine your search
+              ["<C-r>"] = actions.to_fuzzy_refine, -- in case C-space doesn't work
+              -- ["<C-space>"] = actions.to_fuzzy_refine, -- already set to ctrl + space
+              ["?"] = actions.which_key,
+
+              ["<C-u>"] = actions.preview_scrolling_up,
+              ["<C-d>"] = actions.preview_scrolling_down,
+
+              -- trouble integration
+              ["<C-t>"] = open_with_trouble,
             },
           },
         },
