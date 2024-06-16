@@ -104,10 +104,12 @@ vim.cmd([[
   hi DiffText   term=reverse ctermbg=9 guifg=#1E1E2E guibg=#89B4FA
 ]])
 
--- DiffAdd        xxx term=bold ctermbg=4 guifg=#1E1E2E guibg=#A6E3A1
--- DiffChange     xxx term=bold ctermbg=5 guifg=#1E1E2E guibg=#F9E2AF
--- DiffDelete     xxx term=bold ctermfg=12 ctermbg=6 guifg=#1E1E2E guibg=#F38BA8
--- DiffText       xxx term=reverse ctermbg=9 guifg=#1E1E2E guibg=#89B4FA)
+-- tweaks for concealing in markdown documents
+vim.cmd([[
+  hi Conceal guifg=#808080 guibg=NONE
+  let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+  let g:markdown_syntax_conceal = 0
+]])
 
 -- tweaks for lualine
 vim.cmd("source $HOME/.config/nvim/lua/lualine_highlights_overwrites.vim")

@@ -27,6 +27,7 @@ return {
           terraform = { "terraform_fmt" },
           rust = { "rustfmt" },
           cpp = { "clang-format" },
+          toml = { "taplo" },
         },
         format_on_save = {
           -- These options will be passed to conform.format()
