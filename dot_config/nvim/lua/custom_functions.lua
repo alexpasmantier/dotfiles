@@ -88,4 +88,98 @@ end
 --   })
 -- end
 
+-- @param module_path string: The path to a python module
+-- @return string: The import path for the module
+local function get_import_path(module_path)
+  return module_path:gsub("/", "."):gsub("%.py$", "")
+end
+
+-- @param import_path string: The import path to be split
+-- @return string, string: The base path and the last part of the import path
+local function split_import_path(import_path)
+  local base_path, module_name = import_path:match("(.-)%.?([^%.]+)$")
+  return base_path, module_name
+end
+
+-- @param import_path string: The import path to be escaped
+local function escape_import_path(import_path)
+  return import_path:gsub("%.", "\\.")
+end
+
+-- @param module_import_path string: The import path to the module to be renamed
+-- @return table: A table containing regex patterns for different import statements
+local function generate_python_import_regex_variants(module_import_path)
+  -- Split the module_import_path to get the base and the last part
+  local base_path, module_name = split_import_path(module_import_path)
+
+  -- Escape dots in the module import path for regex
+  local escaped_module_import_path = escape_import_path(module_import_path)
+  local escaped_base_path = escape_import_path(base_path)
+  local escaped_module_name = escape_import_path(module_name)
+
+  -- Create the regex patterns
+  local regex_variants = {
+    -- import path.to.module
+    direct_import = string.format([[\s*import\s+%s\s*]], escaped_module_import_path),
+    -- from path.to.module import X, Y, Z
+    from_full_import_x = string.format(
+      [[\s*from\s+%s\s+import\s+[a-zA-Z_*][a-zA-Z0-9_]*(?:\s*,\s*[a-zA-Z_*][a-zA-Z0-9_]*)*\s*]],
+      escaped_module_import_path
+    ),
+    -- from path.to import module
+    from_sub_import_last = string.format([[\s*from\s+%s\s+import\s+%s\s*]], escaped_base_path, escaped_module_name),
+  }
+
+  return regex_variants
+end
+
+-- @param source string: The path to the source file
+-- @param destination string: The path to the destination file
+function M.update_python_imports_after_renaming(source, destination)
+  local Job = require("plenary.job")
+  local Path = require("plenary.path")
+  local cwd = vim.fn.getcwd()
+
+  local source_relative = Path:new(source):make_relative(cwd)
+  local destination_relative = Path:new(destination):make_relative(cwd)
+
+  local source_import_path = get_import_path(source_relative)
+  local destination_import_path = get_import_path(destination_relative)
+
+  local destination_base_path, destination_module_name = split_import_path(destination_import_path)
+
+  local source_import_regex_variants = generate_python_import_regex_variants(source_import_path)
+
+  -- `import path.to.module`
+  local rg_command = "rg -l '" .. source_import_regex_variants.direct_import .. "' ."
+  local sed_command = "sed -i 's/"
+    .. escape_import_path(source_import_path)
+    .. "/"
+    .. escape_import_path(destination_import_path)
+    .. "/g'"
+  Job:new({
+    command = rg_command .. " | xargs " .. sed_command,
+    cwd = cwd,
+  }):sync() -- or start()
+
+  -- `from path.to.module import X, Y, Z`
+  local command2 = (
+    'rg -l --python "'
+    .. source_import_regex_variants.from_full_import_x
+    .. '"'
+    .. " "
+    .. cwd
+    .. " | xargs sed -i '' 's/"
+    .. source_import_regex_variants.from_full_import_x
+    .. "/"
+    .. "from "
+    .. destination_import_path
+    .. " import "
+    .. destination_module_name
+    .. "/g'"
+  )
+
+  -- `from path.to import module`
+end
+
 return M
