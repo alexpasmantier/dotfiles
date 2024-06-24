@@ -1,3 +1,7 @@
+" 1c1c1c
+" #3b224c
+
+
 hi! lualine_c_normal guifg=#969896 guibg=#1c1c1c
 hi! lualine_c_insert guifg=#969896 guibg=#1c1c1c
 hi! lualine_c_visual guifg=#969896 guibg=#1c1c1c

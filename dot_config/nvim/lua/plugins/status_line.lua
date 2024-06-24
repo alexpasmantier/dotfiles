@@ -1,5 +1,8 @@
+-- these are for gruvbuddy
 local bg_color = "#1c1c1c"
 local fg_color = "#969896"
+
+-- local bg_color = "#3b224c"
 
 return {
   {
@@ -43,11 +46,20 @@ return {
               info = " ",
               hint = "󰌵 ",
             },
-            color = { fg = fg_color, bg = bg_color },
+            color = {
+              fg = fg_color,
+              bg = bg_color,
+            },
           },
           "encoding",
           "fileformat",
-          { "filetype", color = { fg = fg_color, bg = bg_color } },
+          {
+            "filetype",
+            color = {
+              fg = fg_color,
+              bg = bg_color,
+            },
+          },
           {
             function()
               local msg = "LSP-Off"

@@ -20,6 +20,7 @@ size = 15.0
 
 [font.normal]
 family = "BerkeleyMono Nerd Font"
+# family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
 [font.bold]
@@ -42,4 +43,3 @@ startup_mode = "Maximized"
 [window.padding]
 x = 5
 y = 5
-

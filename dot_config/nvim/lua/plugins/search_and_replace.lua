@@ -3,6 +3,7 @@ return {
   {
     "nvim-pack/nvim-spectre",
     opts = {
+      is_block_ui_break = true,
       color_devicons = true,
       open_cmd = "vnew",
       live_update = true, -- auto execute search again when you write to any file in vim
@@ -186,13 +187,6 @@ return {
     config = function()
       local actions = require("telescope.actions")
       local project_actions = require("telescope._extensions.project.actions")
-      local telescope_layout_opts = {
-        bottom_pane = {
-          height = 40,
-          preview_cutoff = 120,
-          prompt_position = "bottom",
-        },
-      }
       -- telescope integration with trouble
       local open_with_trouble = require("trouble.sources.telescope").open
       -- Use this to add more results without clearing the trouble list
@@ -201,6 +195,10 @@ return {
       local custom_functions = require("custom_functions")
       require("telescope").setup({
         defaults = {
+          layout_config = {
+            vertical = { width = 0.5 },
+            horizontal = { height = 0.9, width = 0.9, preview_width = 0.5 },
+          },
           mappings = {
             i = {
               ["<C-j>"] = actions.cycle_history_next,
@@ -250,63 +248,6 @@ return {
             },
           },
         },
-        pickers = {
-          buffers = {
-            theme = "ivy",
-          },
-          command_history = {
-            theme = "ivy",
-          },
-          live_grep = {
-            theme = "ivy",
-            layout_config = telescope_layout_opts,
-          },
-          grep_string = {
-            theme = "ivy",
-            layout_config = telescope_layout_opts,
-          },
-          quickfix = {
-            theme = "ivy",
-          },
-          lsp_references = {
-            theme = "ivy",
-          },
-          lsp_document_symbols = {
-            theme = "ivy",
-          },
-          lsp_dynamic_workspace_symbols = {
-            theme = "ivy",
-          },
-          lsp_definitions = {
-            theme = "ivy",
-          },
-          lsp_implementations = {
-            theme = "ivy",
-          },
-          lsp_type_definitions = {
-            theme = "ivy",
-          },
-          lsp_workspace_symbols = {
-            theme = "ivy",
-          },
-          diagnostics = {
-            theme = "ivy",
-          },
-          find_files = { -- Search ALL files, even if not tracked by git
-            find_command = { "rg", "--files", "--hidden" },
-            theme = "ivy",
-            layout_config = telescope_layout_opts,
-          },
-          git_files = {
-            -- find_command = { "rg", "--files", "--hidden", },
-            theme = "ivy",
-            layout_config = telescope_layout_opts,
-          },
-          colorscheme = {
-            theme = "ivy",
-            layout_config = telescope_layout_opts,
-          },
-        },
         extensions = {
           fzf = {
             fuzzy = true, -- false will only do exact matching
@@ -336,6 +277,6 @@ return {
       })
     end,
   },
-  "nvim-telescope/telescope-fzf-native.nvim",
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   "nvim-telescope/telescope-project.nvim",
 }

@@ -79,12 +79,22 @@ vim.o.splitright = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
+-- Fillchars
+vim.opt.fillchars = { eob = " ", vert = " " }
+
 -- Set colorscheme
 vim.o.termguicolors = true
 vim.o.background = "dark"
 
+if not vim.g.vscode then
+  vim.cmd.colorscheme("gruvbuddy")
+end
+
 -- tweaks for torte (how did I even get here?)
 -- vim.cmd('source $HOME/.config/nvim/lua/theme_overwrites.vim')
+vim.cmd([[
+  hi! LineNr guifg=#594356
+]])
 
 -- tweaks for dogrun
 vim.cmd([[

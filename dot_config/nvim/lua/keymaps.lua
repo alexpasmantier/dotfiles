@@ -181,96 +181,98 @@ vim.keymap.set("n", "<space>k", vim.diagnostic.open_float, { desc = "Open diagno
 -----------------------------------------------
 -----------------------------------------------
 
--- NEO TREE
-vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo-tree", opts.args })
-vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree float", opts.args })
+if not vim.g.vscode then
+  -- NEO TREE
+  vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo-tree", opts.args })
+  vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree float", opts.args })
 
--- OIL
-vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "Open Oil buffer", opts.args })
+  -- OIL
+  vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "Open Oil buffer", opts.args })
 
--- SPECTRE
-vim.keymap.set("n", "<leader>S", function()
-  require("spectre").open()
-end, { desc = "Replace in files (Spectre)", opts.args })
-vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-  desc = "Search current word",
-})
-vim.keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-  desc = "Search current word",
-})
+  -- SPECTRE
+  vim.keymap.set("n", "<leader>S", function()
+    require("spectre").open()
+  end, { desc = "Replace in files (Spectre)", opts.args })
+  vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+    desc = "Search current word",
+  })
+  vim.keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+    desc = "Search current word",
+  })
 
--- FUGITIVE
-vim.keymap.set("n", "<leader>gmc", ":Gvdiffsplit!<CR>", { desc = "resolve merge conflict", opts.args })
+  -- FUGITIVE
+  vim.keymap.set("n", "<leader>gmc", ":Gvdiffsplit!<CR>", { desc = "resolve merge conflict", opts.args })
 
--- TELESCOPE
-local telescope_builtins = require("telescope.builtin")
-vim.keymap.set("n", "<C-p>", custom_functions.project_files, { desc = "Telescope git files", opts.args })
-vim.keymap.set("n", "<leader>tt", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
-vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
-vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
-vim.keymap.set(
-  "n",
-  "<leader>tC",
-  "<cmd>Telescope git_bcommits<cr>",
-  { desc = "Telescope current buffer git commits", opts.args }
-)
-vim.keymap.set("n", "<leader>tb", "<cmd>Telescope git_branches<cr>", { desc = "Telescope git branches", opts.args })
-vim.keymap.set("n", "<leader>ts", "<cmd>Telescope git_status<cr>", { desc = "Telescope git status", opts.args })
-vim.keymap.set("n", "<leader>tS", "<cmd>Telescope git_stash<cr>", { desc = "Telescope git stash", opts.args })
-vim.keymap.set("n", "<leader>P", custom_functions.open_projects, { desc = "Telescope open projects", opts.args })
-vim.keymap.set(
-  "n",
-  "<leader>tp",
-  custom_functions.colorschemes_with_preview,
-  { desc = "Telescope colorschemes", opts.args }
-)
-vim.keymap.set("n", "<leader>tn", custom_functions.search_notes, { desc = "Telescope note", opts.args })
-vim.keymap.set("n", "<leader>t.", custom_functions.search_dotfiles, { desc = "Telescope dotfiles", opts.args })
-vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope help tags", opts.args })
+  -- TELESCOPE
+  local telescope_builtins = require("telescope.builtin")
+  vim.keymap.set("n", "<C-p>", custom_functions.project_files, { desc = "Telescope git files", opts.args })
+  vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
+  vim.keymap.set("n", "<leader>tb", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
+  vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
+  vim.keymap.set(
+    "n",
+    "<leader>tC",
+    "<cmd>Telescope git_bcommits<cr>",
+    { desc = "Telescope current buffer git commits", opts.args }
+  )
+  vim.keymap.set("n", "<leader>tB", "<cmd>Telescope git_branches<cr>", { desc = "Telescope git branches", opts.args })
+  vim.keymap.set("n", "<leader>ts", "<cmd>Telescope git_status<cr>", { desc = "Telescope git status", opts.args })
+  vim.keymap.set("n", "<leader>tS", "<cmd>Telescope git_stash<cr>", { desc = "Telescope git stash", opts.args })
+  vim.keymap.set("n", "<leader>P", custom_functions.open_projects, { desc = "Telescope open projects", opts.args })
+  vim.keymap.set(
+    "n",
+    "<leader>tp",
+    custom_functions.colorschemes_with_preview,
+    { desc = "Telescope colorschemes", opts.args }
+  )
+  vim.keymap.set("n", "<leader>tn", custom_functions.search_notes, { desc = "Telescope note", opts.args })
+  vim.keymap.set("n", "<leader>t.", custom_functions.search_dotfiles, { desc = "Telescope dotfiles", opts.args })
+  vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope help tags", opts.args })
 
--- GOTO PREVIEW
-vim.keymap.set("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
-vim.keymap.set("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
--- TODO: autocmmand to map escape to `close_all_win` when in goto preview buffer
-vim.keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
+  -- GOTO PREVIEW
+  vim.keymap.set("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+  vim.keymap.set("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
+  -- TODO: autocmmand to map escape to `close_all_win` when in goto preview buffer
+  vim.keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
 
--- AERIAL
-vim.keymap.set("n", "<leader>lo", "<cmd>AerialToggle!<CR>", { desc = "Toggle symbols outline", opts.args })
+  -- AERIAL
+  vim.keymap.set("n", "<leader>lo", "<cmd>AerialToggle!<CR>", { desc = "Toggle symbols outline", opts.args })
 
--- WHICH-KEY MAPPINGS
-local wk = require("which-key")
-wk.register({
-  ["<leader>"] = {
-    m = {
-      name = "Quickfix",
+  -- WHICH-KEY MAPPINGS
+  local wk = require("which-key")
+  wk.register({
+    ["<leader>"] = {
+      m = {
+        name = "Quickfix",
+      },
+      n = {
+        name = "Neorg",
+        n = { "<cmd>Neorg index<cr>", "index" },
+      },
+      d = {
+        name = "DAP",
+      },
+      g = {
+        name = "Git",
+      },
+      l = {
+        name = "Lsp",
+      },
+      v = {
+        name = "Wrap Options",
+      },
+      z = {
+        name = "Misc",
+      },
+      s = {
+        name = "Search",
+      },
+      t = {
+        name = "Telescope",
+      },
     },
-    n = {
-      name = "Neorg",
-      n = { "<cmd>Neorg index<cr>", "index" },
-    },
-    d = {
-      name = "DAP",
-    },
-    g = {
-      name = "Git",
-    },
-    l = {
-      name = "Lsp",
-    },
-    v = {
-      name = "Wrap Options",
-    },
-    z = {
-      name = "Misc",
-    },
-    s = {
-      name = "Search",
-    },
-    t = {
-      name = "Telescope",
-    },
-  },
-})
+  })
+end
 
 -- LSP-specific
 vim.keymap.set("n", "<leader>lpd", function()
