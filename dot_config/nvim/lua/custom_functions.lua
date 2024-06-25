@@ -133,6 +133,54 @@ local function generate_python_import_regex_variants(module_import_path)
   return regex_variants
 end
 
+local loop = vim.loop
+
+-- -l '\s*import\s+scripts\.common_python\.template\.project\s*' .
+
+local function onread(err, data)
+  if err then
+    vim.print("ERROR: ", err)
+  end
+  if data then
+    local results = {}
+    local vals = vim.split(data, "\n")
+    for _, d in pairs(vals) do
+      if d == "" then
+        goto continue
+      end
+      table.insert(results, d)
+      ::continue::
+    end
+    vim.print("RESULTS: ", vim.inspect(results))
+  end
+end
+
+local function rg_into_sed(rg_args, sed_args)
+  local stdout = vim.loop.new_pipe(false)
+  local stderr = vim.loop.new_pipe(false)
+  handle = vim.loop.spawn(
+    -- "rg",
+    -- {
+    --   args = rg_args,
+    --   stdio = { nil, stdout, stderr },
+    -- },
+    "rg",
+    {
+      args = { [[-l 's*imports+scripts.common_python.template.projects*' .]] },
+      stdio = { nil, stdout, stderr },
+    },
+    vim.schedule_wrap(function()
+      stdout:read_stop()
+      stderr:read_stop()
+      stdout:close()
+      stderr:close()
+      handle:close()
+    end)
+  )
+  vim.loop.read_start(stdout, onread)
+  vim.loop.read_start(stderr, onread)
+end
+
 -- @param source string: The path to the source file
 -- @param destination string: The path to the destination file
 function M.update_python_imports_after_renaming(source, destination)
@@ -151,52 +199,13 @@ function M.update_python_imports_after_renaming(source, destination)
   local source_import_regex_variants = generate_python_import_regex_variants(source_import_path)
 
   -- `import path.to.module`
-  local rg_args = { "-l", "'" .. source_import_regex_variants.direct_import .. "'", "." }
+  local rg_args = { "-l", string.format("'%s'", source_import_regex_variants.direct_import), "." }
   local sed_args = {
     "-i",
     "'s/" .. escape_import_path(source_import_path) .. "/" .. escape_import_path(destination_import_path) .. "/g'",
   }
 
-  local on_exit = function(obj)
-    -- vim.print(obj.code)
-    -- vim.print(obj.signal)
-    -- vim.print(obj.stdout)
-    -- vim.print(obj.stderr)
-  end
-  table.insert(rg_args, 1, "rg")
-  local obj = vim.system(rg_args, { text = true }, on_exit):wait()
-  -- Job:new({
-  --   command = "rg",
-  --   args = rg_args,
-  --   cwd = cwd,
-  --   skip_validation = true,
-  --   enabled_recording = true,
-  --   on_stderr = function(error, data)
-  --     vim.print("Error:", error)
-  --     vim.print("Data:", data)
-  --   end,
-  --   on_exit = function(job)
-  --     vim.print("Job exit code:", job.code)
-  --     -- vim.print("Job stderr:", job:stderr_result())
-  --     -- vim.print(vim.inspect(job:stderr_result()))
-  --   end,
-  --   -- on_stdout = function(error, data)
-  --   --   local buf = vim.api.nvim_create_buf(false, true)
-  --   --   vim.api.nvim_buf_set_lines(buf, 0, -1, true, { "Data:", data })
-  --   --   local opts = {
-  --   --     relative = "cursor",
-  --   --     width = 10,
-  --   --     height = 2,
-  --   --     col = 0,
-  --   --     row = 1,
-  --   --     anchor = "NW",
-  --   --     style = "minimal",
-  --   --   }
-  --   --   local win = vim.api.nvim_open_win(buf, 0, opts)
-  --   --   -- optional: change highlight, otherwise Pmenu is used
-  --   --   vim.api.nvim_win_set_option(win, "winhl", "Normal:MyHighlight")
-  --   -- end,
-  -- }):sync() -- or start()
+  rg_into_sed(rg_args, sed_args)
 
   -- `from path.to.module import X, Y, Z`
   local command2 = (
