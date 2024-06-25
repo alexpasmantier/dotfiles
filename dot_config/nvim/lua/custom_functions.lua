@@ -103,7 +103,7 @@ end
 
 -- @param import_path string: The import path to be escaped
 local function escape_import_path(import_path)
-  return import_path:gsub("%.", "\\.")
+  return import_path:gsub("%.", [[\.]])
 end
 
 -- @param module_import_path string: The import path to the module to be renamed
@@ -151,16 +151,52 @@ function M.update_python_imports_after_renaming(source, destination)
   local source_import_regex_variants = generate_python_import_regex_variants(source_import_path)
 
   -- `import path.to.module`
-  local rg_command = "rg -l '" .. source_import_regex_variants.direct_import .. "' ."
-  local sed_command = "sed -i 's/"
-    .. escape_import_path(source_import_path)
-    .. "/"
-    .. escape_import_path(destination_import_path)
-    .. "/g'"
-  Job:new({
-    command = rg_command .. " | xargs " .. sed_command,
-    cwd = cwd,
-  }):sync() -- or start()
+  local rg_args = { "-l", "'" .. source_import_regex_variants.direct_import .. "'", "." }
+  local sed_args = {
+    "-i",
+    "'s/" .. escape_import_path(source_import_path) .. "/" .. escape_import_path(destination_import_path) .. "/g'",
+  }
+
+  local on_exit = function(obj)
+    -- vim.print(obj.code)
+    -- vim.print(obj.signal)
+    -- vim.print(obj.stdout)
+    -- vim.print(obj.stderr)
+  end
+  table.insert(rg_args, 1, "rg")
+  local obj = vim.system(rg_args, { text = true }, on_exit):wait()
+  -- Job:new({
+  --   command = "rg",
+  --   args = rg_args,
+  --   cwd = cwd,
+  --   skip_validation = true,
+  --   enabled_recording = true,
+  --   on_stderr = function(error, data)
+  --     vim.print("Error:", error)
+  --     vim.print("Data:", data)
+  --   end,
+  --   on_exit = function(job)
+  --     vim.print("Job exit code:", job.code)
+  --     -- vim.print("Job stderr:", job:stderr_result())
+  --     -- vim.print(vim.inspect(job:stderr_result()))
+  --   end,
+  --   -- on_stdout = function(error, data)
+  --   --   local buf = vim.api.nvim_create_buf(false, true)
+  --   --   vim.api.nvim_buf_set_lines(buf, 0, -1, true, { "Data:", data })
+  --   --   local opts = {
+  --   --     relative = "cursor",
+  --   --     width = 10,
+  --   --     height = 2,
+  --   --     col = 0,
+  --   --     row = 1,
+  --   --     anchor = "NW",
+  --   --     style = "minimal",
+  --   --   }
+  --   --   local win = vim.api.nvim_open_win(buf, 0, opts)
+  --   --   -- optional: change highlight, otherwise Pmenu is used
+  --   --   vim.api.nvim_win_set_option(win, "winhl", "Normal:MyHighlight")
+  --   -- end,
+  -- }):sync() -- or start()
 
   -- `from path.to.module import X, Y, Z`
   local command2 = (
