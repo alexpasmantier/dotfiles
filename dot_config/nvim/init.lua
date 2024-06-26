@@ -29,9 +29,3 @@ else
   require("commands")
   require("lsp")
 end
-
-local cf = require("custom_functions")
-cf.update_python_imports_after_renaming(
-  "scripts/common_python/template/project.py",
-  "scripts/common_python/template/toto.py"
-)

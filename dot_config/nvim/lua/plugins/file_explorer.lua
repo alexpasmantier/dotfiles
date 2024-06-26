@@ -13,23 +13,22 @@ return {
       local custom_functions = require("custom_functions")
       vim.g.nvim_tree_disable_netrw = 0
       require("neo-tree").setup({
-        -- NOTE: this is kind of annoying actually, maybe find a best way
-        -- event_handlers = {
-        --   {
-        --     event = "file_renamed",
-        --     -- arg: {source, destination}
-        --     handler = function(arg)
-        --       custom_functions.open_spectre_with_renaming(arg.source, arg.destination)
-        --     end,
-        --   },
-        --   {
-        --     event = "file_moved",
-        --     -- arg: {source, destination}
-        --     handler = function(arg)
-        --       custom_functions.open_spectre_with_renaming(arg.source, arg.destination)
-        --     end,
-        --   },
-        -- },
+        event_handlers = {
+          {
+            event = "file_renamed",
+            -- arg: {source, destination}
+            handler = function(arg)
+              custom_functions.update_python_imports_after_renaming(arg.source, arg.destination)
+            end,
+          },
+          {
+            event = "file_moved",
+            -- arg: {source, destination}
+            handler = function(arg)
+              custom_functions.update_python_imports_after_renaming(arg.source, arg.destination)
+            end,
+          },
+        },
         close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = "rounded",
         enable_git_status = true,
