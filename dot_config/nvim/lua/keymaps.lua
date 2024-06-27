@@ -1,6 +1,6 @@
 -- [[ Basic Keymaps ]]
 local opts = { noremap = true, silent = true }
-local custom_functions = require("custom_functions")
+local telescope_functions = require("custom_functions.telescope")
 -- local plugins_config = require("plugins_configuration")
 
 -- Keymaps for better default experience
@@ -205,7 +205,7 @@ if not vim.g.vscode then
 
   -- TELESCOPE
   local telescope_builtins = require("telescope.builtin")
-  vim.keymap.set("n", "<C-p>", custom_functions.project_files, { desc = "Telescope git files", opts.args })
+  vim.keymap.set("n", "<C-p>", telescope_functions.project_files, { desc = "Telescope git files", opts.args })
   vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
   vim.keymap.set("n", "<leader>tb", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
   vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
@@ -218,15 +218,15 @@ if not vim.g.vscode then
   vim.keymap.set("n", "<leader>tB", "<cmd>Telescope git_branches<cr>", { desc = "Telescope git branches", opts.args })
   vim.keymap.set("n", "<leader>ts", "<cmd>Telescope git_status<cr>", { desc = "Telescope git status", opts.args })
   vim.keymap.set("n", "<leader>tS", "<cmd>Telescope git_stash<cr>", { desc = "Telescope git stash", opts.args })
-  vim.keymap.set("n", "<leader>P", custom_functions.open_projects, { desc = "Telescope open projects", opts.args })
+  vim.keymap.set("n", "<leader>P", telescope_functions.open_projects, { desc = "Telescope open projects", opts.args })
   vim.keymap.set(
     "n",
     "<leader>tp",
-    custom_functions.colorschemes_with_preview,
+    telescope_functions.colorschemes_with_preview,
     { desc = "Telescope colorschemes", opts.args }
   )
-  vim.keymap.set("n", "<leader>tn", custom_functions.search_notes, { desc = "Telescope note", opts.args })
-  vim.keymap.set("n", "<leader>t.", custom_functions.search_dotfiles, { desc = "Telescope dotfiles", opts.args })
+  vim.keymap.set("n", "<leader>tn", telescope_functions.search_notes, { desc = "Telescope note", opts.args })
+  vim.keymap.set("n", "<leader>t.", telescope_functions.search_dotfiles, { desc = "Telescope dotfiles", opts.args })
   vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope help tags", opts.args })
 
   -- GOTO PREVIEW

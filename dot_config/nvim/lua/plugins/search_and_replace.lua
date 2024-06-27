@@ -192,7 +192,7 @@ return {
       -- Use this to add more results without clearing the trouble list
       local add_to_trouble = require("trouble.sources.telescope").add
 
-      local custom_functions = require("custom_functions")
+      local telescope_functions = require("custom_functions.telescope")
       require("telescope").setup({
         defaults = {
           layout_config = {
@@ -269,7 +269,7 @@ return {
             on_project_selected = function(prompt_bufnr)
               -- Do anything you want in here. For example:
               project_actions.change_working_directory(prompt_bufnr, false)
-              custom_functions.project_files()
+              telescope_functions.project_files()
               -- require("harpoon.ui").nav_file(1)
             end,
           },

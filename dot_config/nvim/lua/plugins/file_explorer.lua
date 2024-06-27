@@ -10,7 +10,7 @@ return {
     },
     enabled = not vim.g.started_by_firenvim,
     config = function()
-      local custom_functions = require("custom_functions")
+      local python_imports = require("custom_functions.python_imports")
       vim.g.nvim_tree_disable_netrw = 0
       require("neo-tree").setup({
         event_handlers = {
@@ -18,14 +18,14 @@ return {
             event = "file_renamed",
             -- arg: {source, destination}
             handler = function(arg)
-              custom_functions.update_python_imports_after_renaming(arg.source, arg.destination)
+              python_imports.update_imports(arg.source, arg.destination)
             end,
           },
           {
             event = "file_moved",
             -- arg: {source, destination}
             handler = function(arg)
-              custom_functions.update_python_imports_after_renaming(arg.source, arg.destination)
+              python_imports.update_imports(arg.source, arg.destination)
             end,
           },
         },

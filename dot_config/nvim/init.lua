@@ -21,7 +21,6 @@ if vim.g.vscode then
   require("keymaps")
 else
   -- ordinary Neovim
-  require("custom_functions")
   require("lazy").setup("plugins")
   require("options")
   require("keymaps")
