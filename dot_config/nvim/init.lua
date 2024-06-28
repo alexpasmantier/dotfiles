@@ -21,10 +21,10 @@ if vim.g.vscode then
   require("keymaps")
 else
   -- ordinary Neovim
+  require("diagnostics")
   require("lazy").setup("plugins")
   require("options")
   require("keymaps")
   require("autocmds")
   require("commands")
-  require("lsp")
 end

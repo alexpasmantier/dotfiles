@@ -115,19 +115,24 @@ local function recursive_dir_contains_python_files(path)
   return false
 end
 
+-- @param hang_time number: The time to wait before refreshing the buffers
 local function async_refresh_buffers(hang_time)
   vim.defer_fn(function()
     vim.api.nvim_command("checktime")
   end, hang_time or 1000)
 end
 
-function M.update_imports(source, destination)
-  if not is_python_file(source) then
-    if not recursive_dir_contains_python_files(source) then
-      return
-    end
-  end
-
+--[[
+from path.to.dir import file
+from path.to.dir import (
+    file1,
+    file2,
+)
+from path.to.file import Something
+--]]
+-- @param source string: The path to the source file/dir
+-- @param destination string: The path to the destination file/dir
+local function update_imports_split(source, destination)
   local cwd = vim.fn.getcwd()
 
   local source_relative = Path:new(source):make_relative(cwd)
@@ -141,15 +146,6 @@ function M.update_imports(source, destination)
   local source_base_path, source_module_name = split_import_path(source_import_path)
   local destination_base_path, destination_module_name = split_import_path(destination_import_path)
 
-  -- easy case: `import path.to.file/dir[...]`
-  local rg_args =
-    { "--json", "-t", "py", "-t", "md", string.format("'%s'", escape_import_path(source_import_path)), "." }
-  local sed_args = {
-    "'s/" .. escape_import_path(source_import_path) .. "/" .. escape_import_path(destination_import_path) .. "/'",
-  }
-  rg_into_sed(rg_args, sed_args)
-
-  -- harder case: `from path.to.dir import file` (potentially multiline)
   local rg_args_split = {
     "--json",
     "-U",
@@ -168,8 +164,44 @@ function M.update_imports(source, destination)
   }
   rg_into_sed(rg_args_split, sed_args_base, true)
   rg_into_sed(rg_args_split, sed_args_module, true)
+end
 
-  -- this needs to happen once the jobs are done -> investigate
+--[[
+from path.to.dir import file
+from path.to.dir import (
+   file1,
+   file2,
+)
+]]
+-- @param source string: The path to the source file/dir
+-- @param destination string: The path to the destination file/dir
+local function update_imports_monolithic(source, destination)
+  local cwd = vim.fn.getcwd()
+
+  -- path/to/here
+  local source_relative = Path:new(source):make_relative(cwd)
+  local destination_relative = Path:new(destination):make_relative(cwd)
+
+  -- path.to.here
+  local source_import_path = get_import_path(source_relative)
+  local destination_import_path = get_import_path(destination_relative)
+
+  local rg_args =
+    { "--json", "-t", "py", "-t", "md", string.format("'%s'", escape_import_path(source_import_path)), "." }
+  local sed_args = {
+    "'s/" .. escape_import_path(source_import_path) .. "/" .. escape_import_path(destination_import_path) .. "/'",
+  }
+  rg_into_sed(rg_args, sed_args)
+end
+
+-- @param source string: The path to the source file/dir
+-- @param destination string: The path to the destination file/dir
+function M.update_imports(source, destination)
+  if is_python_file(source) and is_python_file(destination) then
+    update_imports_split(source, destination)
+  elseif recursive_dir_contains_python_files(source) then
+    update_imports_monolithic(source, destination)
+  end
   async_refresh_buffers()
 end
 
