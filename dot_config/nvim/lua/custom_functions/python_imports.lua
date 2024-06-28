@@ -1,14 +1,6 @@
 local M = {}
 
 -- to be formatted using the full import path to the renamed file/dir
-local IMPORT_PATH_REGEX = [[%s(?:\.[a-zA-Z0-9_]+)*]]
-local IMPORT_MODULE_REGEX = [[import\s+]] .. IMPORT_PATH_REGEX
-local FROM_MODULE_IMPORT_X_REGEX = [[from\s+]] .. IMPORT_PATH_REGEX .. [[\s+import\s+]]
-
--- to be formatted using the base path and the module name (e.g. `path.to` and `module`)
-local FROM_PACKAGE_IMPORT_MODULE_REGEX = [[from\s+%s\s+import\s+\(?\n[\sa-zA-Z0-9_,\n]+\)]]
-local MULTILINE_FROM_PACKAGE_IMPORT_MODULE_REGEX = [[from\s+%s\s+import\s+(?:\(\n)(?:\s+[a-zA-Z0-9_]+,?\n)+\)]]
-
 local SPLIT_IMPORT_REGEX = [[from\s+%s\s+import\s+\(?\n?[\sa-zA-Z0-9_,\n]+\)?\s*$]]
 
 -- @param module_path string: The path to a python module
@@ -27,41 +19,6 @@ end
 -- @param import_path string: The import path to be escaped
 local function escape_import_path(import_path)
   return import_path:gsub("%.", [[\.]])
-end
-
--- @param module_import_path string: The import path to the module to be renamed
--- @return table: A table containing regex patterns for different import statements
-local function generate_python_import_regex_variants(module_import_path)
-  -- Split the module_import_path to get the base and the last part
-  local base_path, module_name = split_import_path(module_import_path)
-
-  -- Escape dots in the module import path for regex
-  local escaped_module_import_path = escape_import_path(module_import_path)
-  local escaped_base_path = escape_import_path(base_path)
-  local escaped_module_name = escape_import_path(module_name)
-
-  -- Create the regex patterns
-  -- FIXME: these do not cover all cases:
-  -- imports that are split across multiple lines
-  -- renaming of packages (directories)
-  -- others?
-  local regex_variants = {
-    -- import path.to.module
-    import_module = string.format([[import\s+%s()]], escaped_module_import_path),
-    -- from path.to.module import X, Y, Z
-    from_module_import_x = string.format(
-      [[\s*from\s+%s\s+import\s+(?:[a-zA-Z_*][a-zA-Z0-9_]*(?:\s*,\s*[a-zA-Z_*][a-zA-Z0-9_]*)*|\()\s*]],
-      escaped_module_import_path
-    ),
-    -- from path.to import module
-    from_package_import_module = string.format(
-      [[\s*from\s+%s\s+import\s+%s\s*]],
-      escaped_base_path,
-      escaped_module_name
-    ),
-  }
-
-  return regex_variants
 end
 
 local Job = require("plenary.job")
@@ -84,13 +41,6 @@ local function global_sed(rg_job_results, sed_args)
       "sed -i '' " .. table.concat(sed_args, " ") .. " " .. table.concat(file_paths, " "),
     },
   }):start()
-end
-
-local function log_to_file(text)
-  local file = io.open("/tmp/imports.log", "a")
-  file:write("\n")
-  file:write(text)
-  file:close()
 end
 
 local MATCH = "match"
@@ -165,6 +115,12 @@ local function recursive_dir_contains_python_files(path)
   return false
 end
 
+local function async_refresh_buffers(hang_time)
+  vim.defer_fn(function()
+    vim.api.nvim_command("checktime")
+  end, hang_time or 1000)
+end
+
 function M.update_imports(source, destination)
   if not is_python_file(source) then
     if not recursive_dir_contains_python_files(source) then
@@ -188,7 +144,6 @@ function M.update_imports(source, destination)
   -- easy case: `import path.to.file/dir[...]`
   local rg_args =
     { "--json", "-t", "py", "-t", "md", string.format("'%s'", escape_import_path(source_import_path)), "." }
-  log_to_file("rg " .. table.concat(rg_args, " "))
   local sed_args = {
     "'s/" .. escape_import_path(source_import_path) .. "/" .. escape_import_path(destination_import_path) .. "/'",
   }
@@ -205,7 +160,6 @@ function M.update_imports(source, destination)
     string.format("'%s'", SPLIT_IMPORT_REGEX:format(escape_import_path(source_base_path))),
     ".",
   }
-  log_to_file("rg " .. table.concat(rg_args_split, " "))
   local sed_args_base = {
     "'%s,%ss/" .. escape_import_path(source_base_path) .. "/" .. escape_import_path(destination_base_path) .. "/'",
   }
@@ -216,7 +170,7 @@ function M.update_imports(source, destination)
   rg_into_sed(rg_args_split, sed_args_module, true)
 
   -- this needs to happen once the jobs are done -> investigate
-  vim.api.nvim_command("checktime")
+  async_refresh_buffers()
 end
 
 return M

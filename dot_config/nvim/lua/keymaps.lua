@@ -73,8 +73,8 @@ vim.keymap.set("n", "<leader>y", '<cmd>let @+ = expand("%")<cr>', { desc = "Yank
 -- ----------------------------------------------------------------------------------------
 -- NOTE: this needs to be remapped since it conflicts with <leader>q
 vim.keymap.set("n", "<leader>mo", ":copen 25<CR>", { desc = "quicklist open", opts.args })
-vim.keymap.set("n", "]]", ":cn<CR>", { desc = "quicklist next", opts.args })
-vim.keymap.set("n", "[[", ":cp<CR>", { desc = "quicklist prev", opts.args })
+vim.keymap.set("n", "<leader>]", ":cn<CR>", { desc = "quicklist next", opts.args })
+vim.keymap.set("n", "<leader>[", ":cp<CR>", { desc = "quicklist prev", opts.args })
 -- vim.keymap.set("n", "<leader>qn", ":cn<CR>zz", { desc = "Quicklist next", opts.args })
 -- vim.keymap.set("n", "<leader>qp", ":cp<CR>zz", { desc = "Quicklist prev", opts.args })
 -- vim.keymap.set("n", "<leader>qo", ":copen 15<CR>", { desc = "Quicklist open", opts.args })
