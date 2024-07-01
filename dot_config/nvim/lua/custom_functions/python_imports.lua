@@ -205,4 +205,46 @@ function M.update_imports(source, destination)
   async_refresh_buffers()
 end
 
+IGNORE_PATHS = {
+  "./.venv",
+  "./db_migrations",
+}
+
+function M.find_missing_import()
+  vim.cmd("set cmdheight=20")
+  local cwd = vim.fn.getcwd()
+  local symbol = vim.fn.expand("<cword>")
+
+  local rg_args = { "-l", "-t", "py" }
+  -- classes, functions, and variables
+  local class_pattern = [['^class\s+%s\b']]
+  local function_pattern = [['^def\s+%s\b']]
+  local variable_pattern = [['^%s\s*=']]
+  local patterns = { class_pattern, function_pattern, variable_pattern }
+  for _, pattern in ipairs(patterns) do
+    table.insert(rg_args, "-e")
+    table.insert(rg_args, string.format(pattern, symbol))
+  end
+  table.insert(rg_args, ".")
+  Job:new({
+    command = "zsh",
+    args = { "-c", "rg " .. table.concat(rg_args, " ") },
+    on_exit = function(job, _)
+      local results = job:result()
+      if #results == 0 then
+        -- print("No results found in workspace for the current symbol")
+        return
+      end
+      local potential_imports = {}
+      for _, line in ipairs(results) do
+        local path = string.gsub(line, "^%./", "")
+        local import_path = get_import_path(path)
+        table.insert(potential_imports, import_path)
+      end
+      print("Missing imports:", vim.inspect(potential_imports))
+      -- TODO: add the import suggestions to nvim-cmp somehow or to an lsp code action
+    end,
+  }):start()
+end
+
 return M

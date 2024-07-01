@@ -155,3 +155,9 @@ end, { range = true })
 --   vim.cmd.normal(vim.api.nvim_replace_termcodes("<C-w>J", true, true, true))
 --   vim.cmd("resize 30")
 -- end, { force = true })
+
+----------------------------------------------------------------------------------------------
+-- FIND MISSING PYTHON IMPORTS
+vim.api.nvim_create_user_command("FindMissingPythonImports", function()
+  require("custom_functions.python_imports").find_missing_import()
+end, { force = true })
