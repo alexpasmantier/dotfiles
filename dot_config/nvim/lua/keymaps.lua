@@ -295,6 +295,7 @@ vim.keymap.set("n", "<leader>lpe", function()
     },
   })
 end, { desc = "enable type checking", opts.args })
+vim.keymap.set("n", "<leader>li", "<cmd>ResolvePythonImport<cr>", { desc = "Resolve python import", opts.args })
 
 -- COPILOT
 -- set <c-e> for accepting copilot suggestions (and <c-d> to dismiss) and unmap tab

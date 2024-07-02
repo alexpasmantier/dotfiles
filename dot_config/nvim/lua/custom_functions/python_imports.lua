@@ -210,8 +210,55 @@ IGNORE_PATHS = {
   "./db_migrations",
 }
 
-function M.find_missing_import()
-  vim.cmd("set cmdheight=20")
+local function schedule_output(message)
+  vim.schedule(function()
+    for _, line in ipairs(message) do
+      vim.api.nvim_out_write(line[1])
+    end
+  end)
+end
+
+local function schedule_input(prompt)
+  vim.schedule(function()
+    vim.fn.input(prompt)
+  end)
+end
+
+-- @param buf number: The buffer number
+-- @return int: The height (in lines) of the docstring
+local function find_docstring_end_line_number(buf)
+  local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+  local docstring_start_line_number = 0
+  -- if the first line does not contain a docstring, return 0
+  if not lines[1]:match('^"""') then
+    return 0
+  elseif lines[1]:match('"""$') then
+    return 1
+  else
+    for i = 2, #lines do
+      if lines[i]:match('"""') then
+        return i
+      end
+    end
+  end
+end
+
+local function add_import_to_current_buf(import_path, symbol)
+  local docstring_height = find_docstring_end_line_number(0)
+  vim.api.nvim_buf_set_lines(
+    0,
+    docstring_height,
+    docstring_height,
+    false,
+    { "from " .. import_path .. " import " .. symbol }
+  )
+end
+
+function M.resolve_python_import()
+  if not is_python_file(vim.fn.expand("%")) then
+    vim.api.nvim_echo({ { "Not a python file", "ErrorMsg" } }, false, {})
+    return
+  end
   local cwd = vim.fn.getcwd()
   local symbol = vim.fn.expand("<cword>")
 
@@ -232,7 +279,14 @@ function M.find_missing_import()
     on_exit = function(job, _)
       local results = job:result()
       if #results == 0 then
-        -- print("No results found in workspace for the current symbol")
+        vim.schedule(function()
+          vim.api.nvim_echo({ { "No results found in current workdir", "ErrorMsg" } }, false, {})
+        end)
+        return
+      elseif #results == 1 then
+        vim.schedule(function()
+          add_import_to_current_buf(get_import_path(results[1]), symbol)
+        end)
         return
       end
       local potential_imports = {}
@@ -241,8 +295,24 @@ function M.find_missing_import()
         local import_path = get_import_path(path)
         table.insert(potential_imports, import_path)
       end
-      print("Missing imports:", vim.inspect(potential_imports))
-      -- TODO: add the import suggestions to nvim-cmp somehow or to an lsp code action
+      -- sort imports by length
+      table.sort(potential_imports, function(a, b)
+        return #a < #b
+      end)
+
+      local message = {}
+      for i, import_path in ipairs(potential_imports) do
+        table.insert(message, string.format("%s: ", i) .. import_path)
+      end
+      vim.schedule(function()
+        local user_input = vim.fn.input(table.concat(message, "\n") .. "\nSelect an import: ")
+        local chosen_import = potential_imports[tonumber(user_input)]
+        if chosen_import then
+          add_import_to_current_buf(chosen_import, symbol)
+        else
+          vim.api.nvim_echo({ { "Invalid selection", "ErrorMsg" } }, false, {})
+        end
+      end)
     end,
   }):start()
 end

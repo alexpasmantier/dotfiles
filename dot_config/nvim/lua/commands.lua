@@ -158,6 +158,6 @@ end, { range = true })
 
 ----------------------------------------------------------------------------------------------
 -- FIND MISSING PYTHON IMPORTS
-vim.api.nvim_create_user_command("FindMissingPythonImports", function()
-  require("custom_functions.python_imports").find_missing_import()
+vim.api.nvim_create_user_command("ResolvePythonImport", function()
+  require("custom_functions.python_imports").resolve_python_import()
 end, { force = true })
