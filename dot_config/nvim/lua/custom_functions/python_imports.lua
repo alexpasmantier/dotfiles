@@ -109,17 +109,19 @@ local function recursive_dir_contains_python_files(path)
         return true
       end
     elseif is_python_file(full_path) then
+      -- vim.fn.writefile({ "IS PYTHON FILE" }, "/tmp/neotree.log", "a")
       return true
     end
   end
   return false
 end
 
+DEFAULT_HANG_TIME = 1000
 -- @param hang_time number: The time to wait before refreshing the buffers
 local function async_refresh_buffers(hang_time)
   vim.defer_fn(function()
     vim.api.nvim_command("checktime")
-  end, hang_time or 1000)
+  end, hang_time or DEFAULT_HANG_TIME)
 end
 
 --[[
@@ -199,7 +201,8 @@ end
 function M.update_imports(source, destination)
   if is_python_file(source) and is_python_file(destination) then
     update_imports_split(source, destination)
-  elseif recursive_dir_contains_python_files(source) then
+    update_imports_monolithic(source, destination)
+  elseif recursive_dir_contains_python_files(destination) then
     update_imports_monolithic(source, destination)
   end
   async_refresh_buffers()
@@ -210,25 +213,10 @@ IGNORE_PATHS = {
   "./db_migrations",
 }
 
-local function schedule_output(message)
-  vim.schedule(function()
-    for _, line in ipairs(message) do
-      vim.api.nvim_out_write(line[1])
-    end
-  end)
-end
-
-local function schedule_input(prompt)
-  vim.schedule(function()
-    vim.fn.input(prompt)
-  end)
-end
-
 -- @param buf number: The buffer number
 -- @return int: The height (in lines) of the docstring
 local function find_docstring_end_line_number(buf)
   local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-  local docstring_start_line_number = 0
   -- if the first line does not contain a docstring, return 0
   if not lines[1]:match('^"""') then
     return 0
@@ -245,10 +233,16 @@ end
 
 local function add_import_to_current_buf(import_path, symbol)
   local docstring_height = find_docstring_end_line_number(0)
+  local insert_on_line
+  if docstring_height == 0 then
+    insert_on_line = 0
+  else
+    insert_on_line = docstring_height + 1
+  end
   vim.api.nvim_buf_set_lines(
     0,
-    docstring_height,
-    docstring_height,
+    insert_on_line,
+    insert_on_line,
     false,
     { "from " .. import_path .. " import " .. symbol }
   )
@@ -259,7 +253,6 @@ function M.resolve_python_import()
     vim.api.nvim_echo({ { "Not a python file", "ErrorMsg" } }, false, {})
     return
   end
-  local cwd = vim.fn.getcwd()
   local symbol = vim.fn.expand("<cword>")
 
   local rg_args = { "-l", "-t", "py" }
@@ -285,7 +278,9 @@ function M.resolve_python_import()
         return
       elseif #results == 1 then
         vim.schedule(function()
-          add_import_to_current_buf(get_import_path(results[1]), symbol)
+          local path = string.gsub(results[1], "^%./", "")
+          local import_path = get_import_path(path)
+          add_import_to_current_buf(get_import_path(import_path), symbol)
         end)
         return
       end
