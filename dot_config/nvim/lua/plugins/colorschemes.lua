@@ -13,7 +13,30 @@ return {
     },
   },
   "wadackel/vim-dogrun",
-  "catppuccin/nvim",
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    config = function()
+      require("catppuccin").setup({
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        color_overrides = {
+          mocha = {
+            base = "#1a1a2a",
+          },
+        },
+        highlight_overrides = {
+          mocha = function(C)
+            return {
+              TabLineSel = { bg = C.pink },
+              CmpBorder = { fg = C.surface2 },
+              Pmenu = { bg = C.none },
+              TelescopeBorder = { link = "FloatBorder" },
+            }
+          end,
+        },
+      })
+    end,
+  },
   {
     "rebelot/kanagawa.nvim",
     opts = {

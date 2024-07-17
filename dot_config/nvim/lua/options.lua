@@ -87,14 +87,22 @@ vim.o.termguicolors = true
 vim.o.background = "dark"
 
 if not vim.g.vscode then
-  vim.cmd.colorscheme("gruvbuddy")
+  vim.cmd.colorscheme("catppuccin-mocha")
+  -- local cp = require("catppuccin")
+  -- cp.setup({
+  --   color_overrides = {
+  --     all = {
+  --       base = "#000000",
+  --     },
+  --   },
+  -- })
 end
 
 -- tweaks for torte (how did I even get here?)
 -- vim.cmd('source $HOME/.config/nvim/lua/theme_overwrites.vim')
-vim.cmd([[
-  hi! LineNr guifg=#594356
-]])
+-- vim.cmd([[
+--   hi! LineNr guifg=#594356
+-- ]])
 
 -- tweaks for dogrun
 vim.cmd([[
@@ -122,7 +130,7 @@ vim.cmd([[
 ]])
 
 -- tweaks for lualine
-vim.cmd("source $HOME/.config/nvim/lua/lualine_highlights_overwrites.vim")
+-- vim.cmd("source $HOME/.config/nvim/lua/lualine_highlights_overwrites.vim")
 
 -- Don't wrap please
 vim.o.wrap = false
