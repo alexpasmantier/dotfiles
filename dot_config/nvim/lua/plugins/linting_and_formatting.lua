@@ -10,6 +10,7 @@ return {
           -- "mypy"
         },
         rust = { "rust_analyzer" },
+        yaml = { "yamllint" },
       }
     end,
   },
@@ -31,6 +32,7 @@ return {
           rust = { "rustfmt" },
           cpp = { "clang-format" },
           toml = { "taplo" },
+          yaml = { "yamlfmt" },
         },
         format_on_save = {
           -- These options will be passed to conform.format()

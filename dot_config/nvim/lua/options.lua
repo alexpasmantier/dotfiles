@@ -61,6 +61,7 @@ vim.o.smartindent = true
 vim.wo.signcolumn = "yes"
 vim.o.showbreak = "> "
 vim.o.linebreak = true -- so that wrapping does not occur in middle of word
+vim.o.textwidth = 120
 -- vim.o.nolist = true -- same as above
 
 -- Modify jumplist behavior
@@ -88,14 +89,6 @@ vim.o.background = "dark"
 
 if not vim.g.vscode then
   vim.cmd.colorscheme("catppuccin-mocha")
-  -- local cp = require("catppuccin")
-  -- cp.setup({
-  --   color_overrides = {
-  --     all = {
-  --       base = "#000000",
-  --     },
-  --   },
-  -- })
 end
 
 -- tweaks for torte (how did I even get here?)
@@ -123,11 +116,11 @@ vim.cmd([[
 ]])
 
 -- tweaks for concealing in markdown documents
-vim.cmd([[
-  hi Conceal guifg=#808080 guibg=NONE
-  let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
-  let g:markdown_syntax_conceal = 0
-]])
+-- vim.cmd([[
+--   hi Conceal guifg=#808080 guibg=NONE
+--   let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+--   let g:markdown_syntax_conceal = 0
+-- ]])
 
 -- tweaks for lualine
 -- vim.cmd("source $HOME/.config/nvim/lua/lualine_highlights_overwrites.vim")

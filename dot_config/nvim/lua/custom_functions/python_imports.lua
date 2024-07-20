@@ -3,26 +3,29 @@ local M = {}
 -- to be formatted using the full import path to the renamed file/dir
 local SPLIT_IMPORT_REGEX = [[from\s+%s\s+import\s+\(?\n?[\sa-zA-Z0-9_,\n]+\)?\s*$]]
 
--- @param module_path string: The path to a python module
--- @return string: The import path for the module
+---@param module_path string: The path to a python module
+---@return string: The import path for the module
 local function get_import_path(module_path)
-  return module_path:gsub("/", "."):gsub("%.py$", "")
+  local result, _ = module_path:gsub("/", "."):gsub("%.py$", "")
+  return result
 end
 
--- @param import_path string: The import path to be split
--- @return string, string: The base path and the last part of the import path
+---@param import_path string: The import path to be split
+---@return string, string: The base path and the last part of the import path
 local function split_import_path(import_path)
   local base_path, module_name = import_path:match("(.-)%.?([^%.]+)$")
   return base_path, module_name
 end
 
--- @param import_path string: The import path to be escaped
+---@param import_path string: The import path to be escaped
 local function escape_import_path(import_path)
   return import_path:gsub("%.", [[\.]])
 end
 
 local Job = require("plenary.job")
 
+---@param rg_job_results table: The results of the rg job
+---@param sed_args table: The arguments to pass to sed
 local function global_sed(rg_job_results, sed_args)
   local file_paths = {}
   for _, line in ipairs(rg_job_results) do
@@ -45,6 +48,8 @@ end
 
 local MATCH = "match"
 
+---@param rg_job_results table: The results of the rg job
+---@param sed_args table: The arguments to pass to sed
 local function ranged_sed(rg_job_results, sed_args)
   local matches = {}
   for _, line in ipairs(rg_job_results) do
@@ -76,9 +81,9 @@ local function ranged_sed(rg_job_results, sed_args)
   end
 end
 
--- @param rg_args table: The arguments to pass to rg
--- @param sed_args table: The arguments to pass to sed
--- @param range bool: Whether or not to call sed with a range specifier
+---@param rg_args table: The arguments to pass to rg
+---@param sed_args table: The arguments to pass to sed
+---@param range boolean: Whether or not to call sed with a range specifier
 local function rg_into_sed(rg_args, sed_args, range)
   Job:new({
     command = "zsh",
@@ -96,10 +101,14 @@ end
 local filetype = require("plenary.filetype")
 local Path = require("plenary.path")
 
+---@param path string: The path to the file
+---@return boolean: Whether or not the file is a python file
 local function is_python_file(path)
   return filetype.detect(path, {}) == "python"
 end
 
+---@param path string: The path to the directory
+---@return boolean: Whether or not the directory contains python files
 local function recursive_dir_contains_python_files(path)
   local files = vim.fn.readdir(path)
   for _, file in ipairs(files) do
@@ -116,6 +125,7 @@ local function recursive_dir_contains_python_files(path)
   return false
 end
 
+---@type number: The time to wait before refreshing open buffers
 DEFAULT_HANG_TIME = 1000
 -- @param hang_time number: The time to wait before refreshing the buffers
 local function async_refresh_buffers(hang_time)
@@ -132,8 +142,8 @@ from path.to.dir import (
 )
 from path.to.file import Something
 --]]
--- @param source string: The path to the source file/dir
--- @param destination string: The path to the destination file/dir
+---@param source string: The path to the source file/dir
+---@param destination string: The path to the destination file/dir
 local function update_imports_split(source, destination)
   local cwd = vim.fn.getcwd()
 
@@ -175,8 +185,8 @@ from path.to.dir import (
    file2,
 )
 ]]
--- @param source string: The path to the source file/dir
--- @param destination string: The path to the destination file/dir
+---@param source string: The path to the source file/dir
+---@param destination string: The path to the destination file/dir
 local function update_imports_monolithic(source, destination)
   local cwd = vim.fn.getcwd()
 
@@ -193,11 +203,11 @@ local function update_imports_monolithic(source, destination)
   local sed_args = {
     "'s/" .. escape_import_path(source_import_path) .. "/" .. escape_import_path(destination_import_path) .. "/'",
   }
-  rg_into_sed(rg_args, sed_args)
+  rg_into_sed(rg_args, sed_args, false)
 end
 
--- @param source string: The path to the source file/dir
--- @param destination string: The path to the destination file/dir
+---@param source string: The path to the source file/dir
+---@param destination string: The path to the destination file/dir
 function M.update_imports(source, destination)
   if is_python_file(source) and is_python_file(destination) then
     update_imports_split(source, destination)
@@ -205,7 +215,7 @@ function M.update_imports(source, destination)
   elseif recursive_dir_contains_python_files(destination) then
     update_imports_monolithic(source, destination)
   end
-  async_refresh_buffers()
+  async_refresh_buffers(DEFAULT_HANG_TIME)
 end
 
 IGNORE_PATHS = {
@@ -213,8 +223,8 @@ IGNORE_PATHS = {
   "./db_migrations",
 }
 
--- @param buf number: The buffer number
--- @return int: The height (in lines) of the docstring
+---@param buf number: The buffer number
+---@return number | nil: The height (in lines) of the docstring
 local function find_docstring_end_line_number(buf)
   local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
   -- if the first line does not contain a docstring, return 0
@@ -229,8 +239,11 @@ local function find_docstring_end_line_number(buf)
       end
     end
   end
+  return nil
 end
 
+---@param import_path string: The import path to be added
+---@param symbol string: The symbol to be imported
 local function add_import_to_current_buf(import_path, symbol)
   local docstring_height = find_docstring_end_line_number(0)
   local insert_on_line
@@ -248,9 +261,17 @@ local function add_import_to_current_buf(import_path, symbol)
   )
 end
 
+---@type table<string, string>
+local HL_GROUPS = {
+  Error = "ErrorMsg",
+  Warning = "WarningMsg",
+  More = "MoreMsg",
+  Mode = "ModeMsg",
+}
+
 function M.resolve_python_import()
   if not is_python_file(vim.fn.expand("%")) then
-    vim.api.nvim_echo({ { "Not a python file", "ErrorMsg" } }, false, {})
+    vim.api.nvim_echo({ { "Not a python file", HL_GROUPS.Error } }, false, {})
     return
   end
   local symbol = vim.fn.expand("<cword>")
@@ -273,7 +294,7 @@ function M.resolve_python_import()
       local results = job:result()
       if #results == 0 then
         vim.schedule(function()
-          vim.api.nvim_echo({ { "No results found in current workdir", "ErrorMsg" } }, false, {})
+          vim.api.nvim_echo({ { "No results found in current workdir", HL_GROUPS.Error } }, false, {})
         end)
         return
       elseif #results == 1 then
@@ -305,7 +326,7 @@ function M.resolve_python_import()
         if chosen_import then
           add_import_to_current_buf(chosen_import, symbol)
         else
-          vim.api.nvim_echo({ { "Invalid selection", "ErrorMsg" } }, false, {})
+          vim.api.nvim_echo({ { "Invalid selection", HL_GROUPS.Error } }, false, {})
         end
       end)
     end,

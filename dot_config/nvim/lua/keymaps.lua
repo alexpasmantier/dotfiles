@@ -240,37 +240,17 @@ if not vim.g.vscode then
 
   -- WHICH-KEY MAPPINGS
   local wk = require("which-key")
-  wk.register({
-    ["<leader>"] = {
-      m = {
-        name = "Quickfix",
-      },
-      n = {
-        name = "Neorg",
-        n = { "<cmd>Neorg index<cr>", "index" },
-      },
-      d = {
-        name = "DAP",
-      },
-      g = {
-        name = "Git",
-      },
-      l = {
-        name = "Lsp",
-      },
-      v = {
-        name = "Wrap Options",
-      },
-      z = {
-        name = "Misc",
-      },
-      s = {
-        name = "Search",
-      },
-      t = {
-        name = "Telescope",
-      },
-    },
+  wk.add({
+    { "<leader>d", group = "DAP" },
+    { "<leader>g", group = "Git" },
+    { "<leader>l", group = "Lsp" },
+    { "<leader>m", group = "Quickfix" },
+    { "<leader>n", group = "Neorg" },
+    { "<leader>nn", "<cmd>Neorg index<cr>", desc = "index" },
+    { "<leader>s", group = "Search" },
+    { "<leader>t", group = "Telescope" },
+    { "<leader>v", group = "Wrap Options" },
+    { "<leader>z", group = "Misc" },
   })
 end
 
