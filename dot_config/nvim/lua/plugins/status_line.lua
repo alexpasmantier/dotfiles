@@ -48,7 +48,7 @@ return {
             },
             color = {
               fg = fg_color,
-              bg = bg_color,
+              -- bg = bg_color,
             },
           },
           "encoding",
@@ -57,7 +57,7 @@ return {
             "filetype",
             color = {
               fg = fg_color,
-              bg = bg_color,
+              -- bg = bg_color,
             },
           },
           {
@@ -81,7 +81,11 @@ return {
               return msg
             end,
             -- icon = " LSP:",
-            color = { fg = "#f4d88c", bg = bg_color, gui = "bold" },
+            color = {
+              fg = "#f4d88c",
+              -- bg = bg_color,
+              gui = "bold",
+            },
           },
           "progress",
           "location",

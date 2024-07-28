@@ -11,6 +11,7 @@ return {
         },
         rust = { "rust_analyzer" },
         yaml = { "yamllint" },
+        json = { "jsonlint" },
       }
     end,
   },
@@ -33,6 +34,7 @@ return {
           cpp = { "clang-format" },
           toml = { "taplo" },
           yaml = { "yamlfmt" },
+          json = { "jq" },
         },
         format_on_save = {
           -- These options will be passed to conform.format()

@@ -10,25 +10,24 @@ return {
     },
     enabled = not vim.g.started_by_firenvim,
     config = function()
-      local python_imports = require("custom_functions.python_imports")
       vim.g.nvim_tree_disable_netrw = 0
       require("neo-tree").setup({
-        event_handlers = {
-          {
-            event = "file_renamed",
-            -- arg: {source, destination}
-            handler = function(arg)
-              python_imports.update_imports(arg.source, arg.destination)
-            end,
-          },
-          {
-            event = "file_moved",
-            -- arg: {source, destination}
-            handler = function(arg)
-              python_imports.update_imports(arg.source, arg.destination)
-            end,
-          },
-        },
+        -- event_handlers = {
+        --   {
+        --     event = "file_renamed",
+        --     -- arg: {source, destination}
+        --     handler = function(arg)
+        --       python_imports.update_imports(arg.source, arg.destination)
+        --     end,
+        --   },
+        --   {
+        --     event = "file_moved",
+        --     -- arg: {source, destination}
+        --     handler = function(arg)
+        --       python_imports.update_imports(arg.source, arg.destination)
+        --     end,
+        --   },
+        -- },
         close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = "rounded",
         enable_git_status = true,

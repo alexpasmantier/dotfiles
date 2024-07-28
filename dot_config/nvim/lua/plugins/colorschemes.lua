@@ -19,6 +19,7 @@ return {
     config = function()
       require("catppuccin").setup({
         flavour = "mocha", -- latte, frappe, macchiato, mocha
+        transparent_background = true,
         color_overrides = {
           mocha = {
             base = "#1a1a2a",
