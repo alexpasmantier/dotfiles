@@ -235,9 +235,6 @@ if not vim.g.vscode then
   -- TODO: autocmmand to map escape to `close_all_win` when in goto preview buffer
   vim.keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
 
-  -- AERIAL
-  vim.keymap.set("n", "<leader>lo", "<cmd>AerialToggle!<CR>", { desc = "Toggle symbols outline", opts.args })
-
   -- WHICH-KEY MAPPINGS
   local wk = require("which-key")
   wk.add({
@@ -287,3 +284,6 @@ vim.keymap.set("i", "<C-d>", 'copilot#Dismiss("\\<CR>")', {
   replace_keycodes = false,
 })
 vim.g.copilot_no_tab_map = true
+
+-- PLENARY tests
+vim.keymap.set("n", "<leader>pt", "<cmd>PlenaryBustedFile %<cr>", { desc = "Run tests for current file", opts.args })

@@ -97,6 +97,10 @@ end
 --   hi! LineNr guifg=#594356
 -- ]])
 
+vim.cmd([[
+  hi! CursorLine guibg=#3f2334
+]])
+
 -- tweaks for dogrun
 vim.cmd([[
   hi! link @constructor @type

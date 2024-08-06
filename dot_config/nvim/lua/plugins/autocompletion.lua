@@ -43,6 +43,7 @@ return {
           }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
+          { name = "lazydev", group_index = 0 },
           { name = "nvim_lsp_signature_help", priority = 100 },
           { name = "nvim_lsp", priority = 100 },
           { name = "luasnip", priority = 8 },

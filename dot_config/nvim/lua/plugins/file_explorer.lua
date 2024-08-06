@@ -12,26 +12,10 @@ return {
     config = function()
       vim.g.nvim_tree_disable_netrw = 0
       require("neo-tree").setup({
-        -- event_handlers = {
-        --   {
-        --     event = "file_renamed",
-        --     -- arg: {source, destination}
-        --     handler = function(arg)
-        --       python_imports.update_imports(arg.source, arg.destination)
-        --     end,
-        --   },
-        --   {
-        --     event = "file_moved",
-        --     -- arg: {source, destination}
-        --     handler = function(arg)
-        --       python_imports.update_imports(arg.source, arg.destination)
-        --     end,
-        --   },
-        -- },
         close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
         popup_border_style = "rounded",
-        enable_git_status = true,
-        enable_diagnostics = true,
+        enable_git_status = false,
+        enable_diagnostics = false,
         open_files_do_not_replace_types = { "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
         sort_case_insensitive = false, -- used when sorting files and directories in the tree
         sort_function = nil, -- use a custom function for sorting files and directories in the tree
@@ -108,6 +92,17 @@ return {
           end,
         }, -- Add a custom command or override a global one using the same function name
         window = {
+          popup = {
+            position = { col = "0%", row = "2" },
+            size = function(state)
+              local root_name = vim.fn.fnamemodify(state.path, ":~")
+              local root_len = string.len(root_name) + 4
+              return {
+                width = math.max(root_len, 50),
+                height = vim.o.lines - 6,
+              }
+            end,
+          },
           position = "left",
           width = 40,
           mapping_options = {

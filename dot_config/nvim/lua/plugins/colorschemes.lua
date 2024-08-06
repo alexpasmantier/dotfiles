@@ -23,6 +23,7 @@ return {
         color_overrides = {
           mocha = {
             base = "#1a1a2a",
+            -- base = "#040404",
           },
         },
         highlight_overrides = {

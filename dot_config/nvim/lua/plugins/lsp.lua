@@ -1,14 +1,16 @@
 return {
   {
-    "folke/neodev.nvim",
-    config = function()
-      require("neodev").setup({
-        override = function(root_dir, options)
-          vim.notify("Neodev with root dir " .. root_dir, vim.log.levels.INFO)
-        end,
-      })
-    end,
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+      },
+    },
   },
+  { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
   {
     "VonHeikemen/lsp-zero.nvim",
     branch = "v2.x",
@@ -22,7 +24,16 @@ return {
       { "hrsh7th/nvim-cmp" }, -- Required
       { "hrsh7th/cmp-nvim-lsp" }, -- Required
       { "L3MON4D3/LuaSnip" }, -- Required
-      { "j-hui/fidget.nvim", opts = {} },
+      {
+        "j-hui/fidget.nvim",
+        opts = {
+          notification = {
+            window = {
+              winblend = 0,
+            },
+          },
+        },
+      },
     },
     config = function()
       local lsp = require("lsp-zero").preset({})
@@ -65,5 +76,18 @@ return {
   },
 
   -- LSP outline
-  { "stevearc/aerial.nvim", config = true },
+  {
+    "hedyhli/outline.nvim",
+    lazy = true,
+    cmd = { "Outline", "OutlineOpen" },
+    keys = { -- Example mapping to toggle outline
+      { "<leader>lo", "<cmd>Outline<CR>", desc = "Toggle outline" },
+    },
+    opts = {
+      outline_window = {
+        split_command = "rightbelow vsplit",
+      },
+    },
+  },
+  -- { "stevearc/aerial.nvim", config = true },
 }

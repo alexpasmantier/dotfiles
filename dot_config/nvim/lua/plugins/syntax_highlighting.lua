@@ -81,6 +81,25 @@ return {
           },
         },
       }))
+      -- Add vlog support
+      vim.filetype.add({
+        extension = {
+          vlog = "vlog",
+        },
+      })
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      parser_config.vlog = {
+        install_info = {
+          url = "https://github.com/alexpasmantier/tree-sitter-vlog", -- local path or git repo
+          files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+          -- optional entries:
+          branch = "main", -- default branch in case of git repo if different from master
+          generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+          requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+        },
+        filetype = "vlog", -- if filetype does not match the parser name
+      }
+      vim.treesitter.language.register("vlog", "vlog") -- the someft filetype will use the python parser and queries.
     end,
   },
   "nvim-treesitter/nvim-treesitter-textobjects",

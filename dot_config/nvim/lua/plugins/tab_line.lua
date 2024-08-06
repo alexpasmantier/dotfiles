@@ -40,12 +40,13 @@ return {
           show_buffer_close_icons = false,
           show_close_icon = false, -- true | false,
           show_tab_indicators = false, --true | false,
-          show_duplicate_prefix = true, -- | false, -- whether to show duplicate buffer prefix
+          show_duplicate_prefix = false, -- | false, -- whether to show duplicate buffer prefix
           persist_buffer_sort = false, -- whether or not custom sorted buffers should persist
           move_wraps_at_ends = false, -- whether or not the move command "wraps" at the first or last position
           -- can also be a table containing 2 custom separators
           -- [focused and unfocused]. eg: { '|', '|' }
-          separator_style = "thin", -- "slant" | "slope" | "thick" | "thin" | { "any", "any" },
+          -- separator_style = "thin", -- "slant" | "slope" | "thick" | "thin" | { "any", "any" },
+          separator_style = { "", "" },
           enforce_regular_tabs = false, -- | true,
           always_show_bufferline = false, -- | false,
           sort_by = "insert_at_end",
