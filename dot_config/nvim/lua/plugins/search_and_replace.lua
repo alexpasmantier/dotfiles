@@ -188,9 +188,9 @@ return {
       local actions = require("telescope.actions")
       local project_actions = require("telescope._extensions.project.actions")
       -- telescope integration with trouble
-      local open_with_trouble = require("trouble.sources.telescope").open
+      -- local open_with_trouble = require("trouble.sources.telescope").open
       -- Use this to add more results without clearing the trouble list
-      local add_to_trouble = require("trouble.sources.telescope").add
+      -- local add_to_trouble = require("trouble.sources.telescope").add
 
       local telescope_functions = require("custom_functions.telescope")
       require("telescope").setup({
@@ -223,7 +223,7 @@ return {
               ["<C-d>"] = actions.preview_scrolling_down,
 
               -- trouble integration
-              ["<C-t>"] = open_with_trouble,
+              -- ["<C-t>"] = open_with_trouble,
             },
             n = {
               ["j"] = actions.move_selection_next,
@@ -244,7 +244,7 @@ return {
               ["<C-d>"] = actions.preview_scrolling_down,
 
               -- trouble integration
-              ["<C-t>"] = open_with_trouble,
+              -- ["<C-t>"] = open_with_trouble,
             },
           },
         },
