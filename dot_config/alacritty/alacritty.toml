@@ -33,11 +33,11 @@ style = "Bold Italic"
 style = "Italic"
 
 [window]
-decorations = "Buttonless"
-dynamic_title = true
-opacity = 1
+decorations = "buttonless"
+dynamic_title = false
+opacity = 0.95
 option_as_alt = "OnlyLeft"
-title = "Alacritty"
+title = "Terminal"
 startup_mode = "Maximized"
 
 [window.padding]

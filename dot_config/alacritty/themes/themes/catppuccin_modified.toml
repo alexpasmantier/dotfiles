@@ -6,7 +6,8 @@ foreground = '#D6D6D6'
 
 [colors.cursor]
 text = '#1E1E2E'
-cursor = '#D9D9D9'
+# cursor = '#D9D9D9'
+cursor = "#C86681"
 
 [colors.normal]
 black = '#181A1F'

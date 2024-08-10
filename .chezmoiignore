@@ -1,4 +1,3 @@
 **/.git
 **/nvim/session
 **/nvim/plugin/packer_compiled.lua
-**/nvim/.luarc.json
