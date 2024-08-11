@@ -1,10 +1,10 @@
 return {
   {
-    dir = "/Users/alexandrepasmantier/code/lua/pymple.nvim/",
+    dir = "/Users/alex/code/lua/pymple.nvim/",
     name = "pymple.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "grapp-dev/nui-components.nvim",
+      "MunifTanjim/nui.nvim",
     },
     opts = {
       update_imports = {
@@ -15,8 +15,15 @@ return {
       },
       logging = {
         enabled = true,
-        use_file = true,
-        level = "trace",
+        file = {
+          enabled = true,
+          path = vim.fn.stdpath("data") .. "/pymple.vlog",
+          max_lines = 1000,
+        },
+        console = {
+          enabled = false,
+        },
+        level = "debug",
       },
     },
   },

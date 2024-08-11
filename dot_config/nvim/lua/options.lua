@@ -88,7 +88,8 @@ vim.o.termguicolors = true
 vim.o.background = "dark"
 
 if not vim.g.vscode then
-  vim.cmd.colorscheme("catppuccin-mocha")
+  -- vim.cmd.colorscheme("catppuccin-mocha")
+  vim.cmd.colorscheme("dogrun")
 end
 
 -- tweaks for torte (how did I even get here?)
