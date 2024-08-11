@@ -281,3 +281,6 @@ vim.g.copilot_no_tab_map = true
 
 -- PLENARY tests
 vim.keymap.set("n", "<leader>pt", "<cmd>PlenaryBustedFile %<cr>", { desc = "Run tests for current file", opts.args })
+
+-- PERSISTENCE
+vim.keymap.set("n", "<leader>ss", "<cmd>lua require('persistence').load()<cr>", { desc = "Load session", opts.args })
