@@ -1,9 +1,3 @@
--- these are for gruvbuddy
-local bg_color = "#1c1c1c"
-local fg_color = "#969896"
-
--- local bg_color = "#3b224c"
-
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -11,7 +5,6 @@ return {
     opts = {
       options = {
         theme = "auto",
-        -- theme = dogrun,
         component_separators = "|",
         section_separators = { left = "", right = "" },
         globalstatus = true,
@@ -26,6 +19,7 @@ return {
         lualine_b = {},
         lualine_c = {
           "mode",
+          "vim.fn.fnamemodify(vim.fn.getcwd(), ':t')",
           "branch",
           {
             "diff",
@@ -46,19 +40,11 @@ return {
               info = " ",
               hint = "󰌵 ",
             },
-            color = {
-              fg = fg_color,
-              -- bg = bg_color,
-            },
           },
           "encoding",
           "fileformat",
           {
             "filetype",
-            color = {
-              fg = fg_color,
-              -- bg = bg_color,
-            },
           },
           {
             function()
@@ -80,10 +66,8 @@ return {
               end
               return msg
             end,
-            -- icon = " LSP:",
             color = {
               fg = "#f4d88c",
-              -- bg = bg_color,
               gui = "bold",
             },
           },

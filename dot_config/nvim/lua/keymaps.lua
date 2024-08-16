@@ -212,7 +212,12 @@ if not vim.g.vscode then
   vim.keymap.set("n", "<leader>tB", "<cmd>Telescope git_branches<cr>", { desc = "Telescope git branches", opts.args })
   vim.keymap.set("n", "<leader>ts", "<cmd>Telescope git_status<cr>", { desc = "Telescope git status", opts.args })
   vim.keymap.set("n", "<leader>tS", "<cmd>Telescope git_stash<cr>", { desc = "Telescope git stash", opts.args })
-  vim.keymap.set("n", "<leader>P", telescope_functions.open_projects, { desc = "Telescope open projects", opts.args })
+  vim.keymap.set(
+    "n",
+    "<leader>P",
+    "<cmd>Telescope neovim-project discover<cr>",
+    { desc = "Telescope open projects", opts.args }
+  )
   vim.keymap.set(
     "n",
     "<leader>tp",
