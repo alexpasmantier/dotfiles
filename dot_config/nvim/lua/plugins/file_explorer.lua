@@ -6,7 +6,6 @@ return {
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
       "s1n7ax/nvim-window-picker",
-      "nvim-pack/nvim-spectre",
     },
     enabled = not vim.g.started_by_firenvim,
     config = function()

@@ -88,7 +88,6 @@ vim.o.termguicolors = true
 if not vim.g.vscode then
   -- vim.cmd.colorscheme("catppuccin-mocha")
   vim.cmd.colorscheme("dogrun")
-  -- vim.cmd.colorscheme("dawnfox")
   require("custom_highlights")
 end
 
