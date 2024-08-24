@@ -87,7 +87,8 @@ vim.opt.fillchars = { eob = " ", vert = " " }
 vim.o.termguicolors = true
 if not vim.g.vscode then
   -- vim.cmd.colorscheme("catppuccin-mocha")
-  vim.cmd.colorscheme("dogrun")
+  -- vim.cmd.colorscheme("dogrun")
+  vim.cmd.colorscheme("vague")
   require("custom_highlights")
 end
 

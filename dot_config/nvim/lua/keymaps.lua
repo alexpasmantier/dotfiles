@@ -40,7 +40,7 @@ end, { desc = "Toggle config files", opts.args })
 
 -- WINDOWS
 -- ----------------------------------------------------------------------------------------
--- Navigating between open windows
+-- Navigating between open windows (overriden by smart-splits)
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to window on the right", opts.args })
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to window on the left", opts.args })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to window below", opts.args })
@@ -289,3 +289,9 @@ vim.keymap.set("n", "<leader>pt", "<cmd>PlenaryBustedFile %<cr>", { desc = "Run 
 
 -- PERSISTENCE
 vim.keymap.set("n", "<leader>ss", "<cmd>lua require('persistence').load()<cr>", { desc = "Load session", opts.args })
+
+-- SMART SPLITS
+vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
+vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
+vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
+vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)

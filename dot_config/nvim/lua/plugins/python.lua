@@ -8,6 +8,9 @@ return {
       "MunifTanjim/nui.nvim",
       "stevearc/dressing.nvim",
     },
+    build = function()
+      require("pymple").install()
+    end,
     opts = {
       update_imports = {
         filetypes = {
