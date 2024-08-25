@@ -1,6 +1,4 @@
-# import = ["~/.config/alacritty/themes/themes/tomorrow_night_bright.toml"]
-# import = ["~/.config/alacritty/themes/themes/solarized_light.toml"]
-import = ["~/.config/alacritty/themes/themes/catppuccin_modified.toml"]
+import = ["~/.config/alacritty/custom_themes/vague_theme.toml"]
 
 live_config_reload = true
 
@@ -35,7 +33,7 @@ style = "Italic"
 [window]
 decorations = "buttonless"
 dynamic_title = false
-opacity = 0.95
+opacity = 1
 option_as_alt = "OnlyLeft"
 title = "Terminal"
 startup_mode = "Maximized"

@@ -45,13 +45,13 @@ if colorscheme == "vague" then
   local custom_color_light = "#9A9AbE"
   table.insert(custom_highlights, { "StatusLine", { bg = "#282830" } })
   table.insert(custom_highlights, { "TelescopeBorder", { bg = vague_bg, fg = custom_color_light } })
-  table.insert(custom_highlights, { "NeoTreeWinSeparator", { bg = vague_bg } })
+  table.insert(custom_highlights, { "NeoTreeWinSeparator", { bg = vague_bg, fg = custom_color_light } })
   table.insert(custom_highlights, { "WinSeparator", { bg = vague_bg, fg = custom_color_light } })
-  table.insert(custom_highlights, { "CmpItemKindText", { link = "@text" } })
-  table.insert(custom_highlights, { "CmpItemKindKeyword", { link = "@keyword" } })
-  table.insert(custom_highlights, { "CmpItemKindModule", { link = "@type" } })
-  table.insert(custom_highlights, { "CmpItemKindFunction", { link = "@text.literal" } })
-  table.insert(custom_highlights, { "CmpItemKindVariable", { link = "@text.reference" } })
+  table.insert(custom_highlights, { "CmpItemKindText", { link = "@function" } })
+  table.insert(custom_highlights, { "CmpItemKindKeyword", { link = "@constant" } })
+  table.insert(custom_highlights, { "CmpItemKindModule", { link = "@attribute" } })
+  table.insert(custom_highlights, { "CmpItemKindFunction", { link = "@character" } })
+  table.insert(custom_highlights, { "CmpItemKindVariable", { link = "@diff.plus" } })
 end
 
 set_highlights(custom_highlights)
