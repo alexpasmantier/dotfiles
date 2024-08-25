@@ -81,7 +81,7 @@ vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Fillchars
-vim.opt.fillchars = { eob = " ", vert = " " }
+vim.opt.fillchars = { eob = " ", vert = "│" }
 
 -- Set colorscheme
 vim.o.termguicolors = true

@@ -24,12 +24,29 @@ if vim.o.background == "dark" then
   )
   table.insert(custom_highlights, { "DiffText", { reverse = true, ctermbg = 9, fg = "#1E1E2E", bg = "#89B4FA" } })
   -- make cursorline more visible
-  table.insert(custom_highlights, { "CursorLine", { bg = "#3f2334" } })
+  -- table.insert(custom_highlights, { "CursorLine", { bg = "#3f2334" } })
+  table.insert(custom_highlights, { "CursorLine", { bg = "#2e1c1c" } })
 end
 
 -- more nuances for dogrun
 if colorscheme == "dogrun" then
   table.insert(custom_highlights, { "@constructor", { link = "@type" } })
+  table.insert(custom_highlights, { "CmpItemKindText", { link = "@text" } })
+  table.insert(custom_highlights, { "CmpItemKindKeyword", { link = "@keyword" } })
+  table.insert(custom_highlights, { "CmpItemKindModule", { link = "@type" } })
+  table.insert(custom_highlights, { "CmpItemKindFunction", { link = "@text.literal" } })
+  table.insert(custom_highlights, { "CmpItemKindVariable", { link = "@text.reference" } })
+end
+
+-- change grey status bar and winbars for vague
+if colorscheme == "vague" then
+  local vague_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
+  local custom_color_dark = "#242437"
+  local custom_color_light = "#9A9AbE"
+  table.insert(custom_highlights, { "StatusLine", { bg = "#282830" } })
+  table.insert(custom_highlights, { "TelescopeBorder", { bg = vague_bg, fg = custom_color_light } })
+  table.insert(custom_highlights, { "NeoTreeWinSeparator", { bg = vague_bg } })
+  table.insert(custom_highlights, { "WinSeparator", { bg = vague_bg, fg = custom_color_light } })
   table.insert(custom_highlights, { "CmpItemKindText", { link = "@text" } })
   table.insert(custom_highlights, { "CmpItemKindKeyword", { link = "@keyword" } })
   table.insert(custom_highlights, { "CmpItemKindModule", { link = "@type" } })

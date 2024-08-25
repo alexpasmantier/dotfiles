@@ -87,11 +87,10 @@ vim.keymap.set("n", "<leader>[", ":cp<CR>", { desc = "quicklist prev", opts.args
 
 -- MISCELLANEOUS
 -- ----------------------------------------------------------------------------------------
--- Wrap/unwrap
-vim.keymap.set("n", "<leader>vw", ":setlocal wrap<CR>", { desc = "Wrap text", opts.args })
-vim.keymap.set("n", "<leader>vW", ":setlocal nowrap<CR>", { desc = "Unwrap text", opts.args })
+-- Wrap/unwrap (I actually never use this)
+-- vim.keymap.set("n", "<leader>vw", ":setlocal wrap<CR>", { desc = "Wrap text", opts.args })
+-- vim.keymap.set("n", "<leader>vW", ":setlocal nowrap<CR>", { desc = "Unwrap text", opts.args })
 -- Remap for dealing with word wrap
--- TODO: is this useful ?
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
