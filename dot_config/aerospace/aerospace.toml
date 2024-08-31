@@ -103,13 +103,15 @@ alt-shift-l = 'focus right'
 alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-ctrl-1 = 'workspace social'
+ctrl-1 = 'workspace slack'
 ctrl-2 = 'workspace browser'
 ctrl-3 = 'workspace terminal'
-ctrl-4 = 'workspace 4'
-ctrl-5 = 'workspace 5'
-ctrl-6 = 'workspace 6'
+ctrl-4 = 'workspace sql'
+ctrl-5 = 'workspace notes'
+ctrl-6 = 'workspace music'
+ctrl-7 = 'workspace other'
 # alt-7 = 'workspace 7'
 # alt-8 = 'workspace 8'
 # alt-9 = 'workspace 9'
@@ -137,13 +139,13 @@ ctrl-6 = 'workspace 6'
 # alt-z = 'workspace Z'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-shift-1 = 'move-node-to-workspace social'
+alt-shift-1 = 'move-node-to-workspace slack'
 alt-shift-2 = 'move-node-to-workspace browser'
 alt-shift-3 = 'move-node-to-workspace terminal'
-alt-shift-4 = 'move-node-to-workspace 4'
-alt-shift-5 = 'move-node-to-workspace 5'
-alt-shift-6 = 'move-node-to-workspace 6'
-alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-4 = 'move-node-to-workspace sql'
+alt-shift-5 = 'move-node-to-workspace notes'
+alt-shift-6 = 'move-node-to-workspace music'
+alt-shift-7 = 'move-node-to-workspace other'
 # alt-shift-8 = 'move-node-to-workspace 8'
 # alt-shift-9 = 'move-node-to-workspace 9'
 # alt-shift-a = 'move-node-to-workspace A'
@@ -169,6 +171,7 @@ alt-shift-7 = 'move-node-to-workspace 7'
 # alt-shift-y = 'move-node-to-workspace Y'
 # alt-shift-z = 'move-node-to-workspace Z'
 
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
@@ -193,3 +196,42 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+
+# assign different apps to different workspaces
+# -----------------------------------------------------------
+# terminals
+[[on-window-detected]]
+if.app-id = 'org.alacritty'
+run = ['move-node-to-workspace terminal']
+
+# browsers
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = ['move-node-to-workspace browser']
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+run = ['move-node-to-workspace browser']
+
+# slack
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace slack']
+
+# sql
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.datagrip'
+run = ['move-node-to-workspace sql']
+
+# notes
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = ['move-node-to-workspace notes']
+
+# music
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = ['move-node-to-workspace music']
+
+# -----------------------------------------------------------
