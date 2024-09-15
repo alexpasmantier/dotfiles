@@ -84,12 +84,17 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.fillchars = { eob = " ", vert = "│" }
 
 -- Set colorscheme
+local light_colorscheme = "dawnfox"
+local dark_colorscheme = "vague"
+
 vim.o.termguicolors = true
 if not vim.g.vscode then
-  -- vim.cmd.colorscheme("catppuccin-mocha")
-  -- vim.cmd.colorscheme("dogrun")
-  vim.cmd.colorscheme("vague")
-  require("custom_highlights")
+  if vim.o.background == "light" then
+    vim.cmd.colorscheme(light_colorscheme)
+  else
+    vim.cmd.colorscheme(dark_colorscheme)
+    require("custom_highlights").apply(vim.o.background)
+  end
 end
 
 -- Don't wrap please

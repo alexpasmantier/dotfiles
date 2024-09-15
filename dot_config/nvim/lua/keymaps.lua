@@ -63,7 +63,7 @@ vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 -- vim.keymap.set("n", "<leader>w", "<cmd>w!<CR>", { desc = "Save changes in current buffer", opts.args })
 -- this is now handled by bufremove plugin
 -- vim.keymap.set("n", "<leader>c", "<CMD>:bp<CR><CMD>:bd#<CR>", { desc = "Close buffer", opts.args })
-vim.keymap.set("n", "<leader>c", "<cmd>BufferKill<CR>", { desc = "Close buffer", opts.args })
+-- vim.keymap.set("n", "<leader>c", "<cmd>BufferKill<CR>", { desc = "Close buffer", opts.args })
 vim.keymap.set("n", "<C-c>", "<cmd>BufferKill<CR>", { desc = "Close buffer", opts.args })
 vim.keymap.set("n", "<leader>C", "<CMD>:bp<CR><CMD>:bd!#<CR>", { desc = "Close buffer (force)", opts.args })
 -- yank current buffer file path
@@ -173,6 +173,15 @@ vim.keymap.set("n", "<space>k", vim.diagnostic.open_float, { desc = "Open diagno
 -- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 -- vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 -- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+
+-----------------------------------------------
+--            CUSTOM FUNCTIONS               --
+-----------------------------------------------
+
+local themes = require("custom_functions.themes")
+vim.keymap.set("n", "<leader>c", function()
+  themes.toggle()
+end, { desc = "Toggle theme", opts.args })
 
 -----------------------------------------------
 -----------------------------------------------
