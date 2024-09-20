@@ -76,6 +76,25 @@ return {
               conflict = "",
             },
           },
+          file_size = {
+            enabled = false,
+            required_width = 64, -- min width of window required to show this column
+          },
+          type = {
+            enabled = false,
+            required_width = 122, -- min width of window required to show this column
+          },
+          last_modified = {
+            enabled = false,
+            required_width = 88, -- min width of window required to show this column
+          },
+          created = {
+            enabled = false,
+            required_width = 110, -- min width of window required to show this column
+          },
+          symlink_target = {
+            enabled = false,
+          },
         },
         -- A list of functions, each representing a global custom command
         -- that will be available in all sources (if not overridden in `opts[source_name].commands`)

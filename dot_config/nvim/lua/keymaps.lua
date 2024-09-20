@@ -67,7 +67,12 @@ vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<C-c>", "<cmd>BufferKill<CR>", { desc = "Close buffer", opts.args })
 vim.keymap.set("n", "<leader>C", "<CMD>:bp<CR><CMD>:bd!#<CR>", { desc = "Close buffer (force)", opts.args })
 -- yank current buffer file path
-vim.keymap.set("n", "<leader>y", '<cmd>let @+ = expand("%")<cr>', { desc = "Yank current file path", opts.args })
+vim.keymap.set(
+  "n",
+  "<leader>y",
+  '<cmd>let @+ = fnamemodify(expand("%"), ":.")<cr>',
+  { desc = "Yank current file path", opts.args }
+)
 
 -- QUICKLIST NAVIGATION
 -- ----------------------------------------------------------------------------------------

@@ -94,6 +94,10 @@ if not vim.g.vscode then
   else
     vim.cmd.colorscheme(dark_colorscheme)
     require("custom_highlights").apply(vim.o.background)
+    -- if lualine is loaded, update the colorscheme
+    if pcall(require, "lualine") then
+      require("lualine").setup()
+    end
   end
 end
 
@@ -157,6 +161,17 @@ if vim.g.started_by_firenvim == true then
     ["t"] = "TERMINAL",
   }
   vim.o.statusline = "%{expanded_modes[mode()]} %m%r%=%y  %-14.(%l,%c%V%) %P"
-  vim.cmd([[let g:firenvim_config = { 'localSettings': { '.*': { 'takeover': 'never' } } }]])
   vim.o.wrap = true
+  vim.g.firenvim_config = {
+    globalSettings = { alt = "all" },
+    localSettings = {
+      [".*"] = {
+        cmdline = "neovim",
+        content = "text",
+        priority = 0,
+        selector = "textarea",
+        takeover = "never",
+      },
+    },
+  }
 end

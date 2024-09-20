@@ -1,4 +1,5 @@
 import = ["~/.config/alacritty/custom_themes/vague_theme.toml"]
+# import = ["~/.config/alacritty/themes/themes/solarized_light.toml"]
 
 live_config_reload = true
 
@@ -37,6 +38,9 @@ opacity = 1
 option_as_alt = "OnlyLeft"
 title = "Terminal"
 startup_mode = "Maximized"
+
+[selection]
+save_to_clipboard = true
 
 [window.padding]
 x = 5
