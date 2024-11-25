@@ -31,4 +31,5 @@ else
   require("keymaps")
   require("autocmds")
   require("commands")
+  require("lsp")
 end

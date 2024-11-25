@@ -1,7 +1,7 @@
 return {
   {
-    -- "alexpasmantier/pymple.nvim",
-    dir = "~/code/lua/pymple.nvim/",
+    "alexpasmantier/pymple.nvim",
+    -- dir = "~/code/lua/pymple.nvim/",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
@@ -51,7 +51,6 @@ return {
             -- automatically manage this for you so you don't have to worry about
             -- the log file getting too big)
             max_lines = 200,
-            path = "/Users/alex/.local/share/nvim/pymple.vlog",
           },
           -- the log level to use
           -- (one of "trace", "debug", "info", "warn", "error", "fatal")

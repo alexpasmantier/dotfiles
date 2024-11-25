@@ -197,7 +197,7 @@ end, { desc = "Toggle theme", opts.args })
 if not vim.g.vscode then
   -- NEO TREE
   vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo-tree", opts.args })
-  vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree float", opts.args })
+  -- vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree float", opts.args })
 
   -- OIL
   vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "Open Oil buffer", opts.args })
@@ -259,6 +259,7 @@ if not vim.g.vscode then
     { "<leader>s", group = "Search" },
     { "<leader>t", group = "Telescope" },
     { "<leader>v", group = "Wrap Options" },
+    { "<leader>x", group = "Overseer" },
     { "<leader>z", group = "Misc" },
   })
 end
@@ -308,3 +309,12 @@ vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
 vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
 vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
 vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
+
+-- OVERSEER
+vim.keymap.set("n", "<leader>xx", "<cmd>OverseerToggle<cr>", { desc = "OverseerToggle", opts.args })
+vim.keymap.set("n", "<leader>xr", "<cmd>OverseerRun<cr>", { desc = "OverseerRun", opts.args })
+
+-- pretty hover
+-- vim.keymap.set("n", "K", function()
+--   require("pretty_hover").hover()
+-- end, { desc = "Show hover" })

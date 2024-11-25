@@ -42,6 +42,39 @@ return {
         },
       })
 
+      require("lspconfig").rust_analyzer.setup({
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = {
+              allFeatures = true,
+              loadOutDirsFromCheck = true,
+              runBuildScripts = true,
+            },
+            -- Add clippy lints for Rust.
+            checkOnSave = {
+              allFeatures = true,
+              command = "clippy",
+              extraArgs = {
+                "--",
+                "--no-deps",
+                "-Dclippy::correctness",
+                "-Dclippy::complexity",
+                "-Wclippy::perf",
+                "-Wclippy::pedantic",
+              },
+            },
+            procMacro = {
+              enable = true,
+              ignored = {
+                ["async-trait"] = { "async_trait" },
+                ["napi-derive"] = { "napi" },
+                ["async-recursion"] = { "async_recursion" },
+              },
+            },
+          },
+        },
+      })
+
       lsp.setup()
     end,
   },
@@ -77,5 +110,19 @@ return {
         split_command = "rightbelow vsplit",
       },
     },
+  },
+  -- pretty hover
+  -- {
+  --   "Fildo7525/pretty_hover",
+  --   event = "LspAttach",
+  --   opts = {},
+  -- },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+    end,
   },
 }

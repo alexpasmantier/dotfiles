@@ -84,7 +84,7 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.fillchars = { eob = " ", vert = "│" }
 
 -- Set colorscheme
-local light_colorscheme = "dawnfox"
+local light_colorscheme = "solarized8"
 local dark_colorscheme = "vague"
 
 vim.o.termguicolors = true
@@ -121,7 +121,7 @@ vim.o.conceallevel = 1
 
 -- treesitter based folding
 vim.o.foldmethod = "indent"
--- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldenable = false
 
 -- [[NEOVIDE]]
@@ -129,7 +129,7 @@ vim.o.foldenable = false
 if vim.g.neovide then
   vim.o.guifont = "BerkeleyMono Nerd Font"
   vim.g.neovide_scale_factor = 1
-  vim.g.neovide_fullscreen = true
+  vim.g.neovide_fullscreen = false
   vim.g.neovide_input_macos_option_key_is_meta = true
   vim.g.neovide_cursor_animation_length = 0.08
   vim.g.neovide_cursor_trail_size = 0.4
