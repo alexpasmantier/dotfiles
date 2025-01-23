@@ -214,9 +214,18 @@ run = ['move-node-to-workspace browser']
 if.app-id = 'com.brave.Browser'
 run = ['move-node-to-workspace browser']
 
-# slack
+[[on-window-detected]]
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+run = ['move-node-to-workspace browser']
+
+# slack, signal, ...
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace slack']
+
+[[on-window-detected]]
+if.app-id = 'org.whispersystems.signal-desktop'
 run = ['move-node-to-workspace slack']
 
 # sql
