@@ -157,3 +157,8 @@ end, { range = true })
 -- end, { force = true })
 
 ----------------------------------------------------------------------------------------------
+
+-- TELEVISION
+vim.api.nvim_create_user_command("Tv", function()
+  require("custom_functions.television").show()
+end, { force = true })

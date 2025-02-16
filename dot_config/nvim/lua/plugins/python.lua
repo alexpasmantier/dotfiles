@@ -68,7 +68,8 @@ return {
     end,
   },
   {
-    dir = "~/code/lua/other.nvim/",
+    "rgroli/other.nvim",
+    -- dir = "~/code/lua/other.nvim/",
     name = "other-nvim",
     opts = {
       mappings = {
