@@ -1,0 +1,10 @@
+@import "catppuccin-mocha"
+
+configuration {
+  modes: [ combi ];
+  combi-modes: [ window, drun, run ];
+  background: transparent;
+}
+
+@theme "catppuccin-default"
+/* Insert theme modifications after this */
