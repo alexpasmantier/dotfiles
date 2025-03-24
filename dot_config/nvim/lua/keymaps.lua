@@ -188,6 +188,11 @@ vim.keymap.set("n", "<leader>c", function()
   themes.toggle()
 end, { desc = "Toggle theme", opts.args })
 
+local splits = require("custom_functions.splits")
+vim.keymap.set("n", "<leader>3", function()
+  splits.three_way_split()
+end, { desc = "Three way split", opts.args })
+
 -----------------------------------------------
 -----------------------------------------------
 --            PLUGINS KEYMAPS                --
