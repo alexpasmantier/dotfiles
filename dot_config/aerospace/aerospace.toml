@@ -105,13 +105,13 @@ alt-shift-equal = 'resize smart +50'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-ctrl-1 = 'workspace slack'
-ctrl-2 = 'workspace browser'
-ctrl-3 = 'workspace terminal'
-ctrl-4 = 'workspace sql'
-ctrl-5 = 'workspace notes'
-ctrl-6 = 'workspace music'
-ctrl-7 = 'workspace other'
+cmd-1 = 'workspace slack'
+cmd-2 = 'workspace browser'
+cmd-3 = 'workspace terminal'
+cmd-4 = 'workspace sql'
+cmd-5 = 'workspace notes'
+cmd-6 = 'workspace music'
+cmd-7 = 'workspace other'
 # alt-7 = 'workspace 7'
 # alt-8 = 'workspace 8'
 # alt-9 = 'workspace 9'
@@ -139,13 +139,13 @@ ctrl-7 = 'workspace other'
 # alt-z = 'workspace Z'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-shift-1 = 'move-node-to-workspace slack'
-alt-shift-2 = 'move-node-to-workspace browser'
-alt-shift-3 = 'move-node-to-workspace terminal'
-alt-shift-4 = 'move-node-to-workspace sql'
-alt-shift-5 = 'move-node-to-workspace notes'
-alt-shift-6 = 'move-node-to-workspace music'
-alt-shift-7 = 'move-node-to-workspace other'
+cmd-shift-1 = 'move-node-to-workspace slack'
+cmd-shift-2 = 'move-node-to-workspace browser'
+cmd-shift-3 = 'move-node-to-workspace terminal'
+cmd-shift-4 = 'move-node-to-workspace sql'
+cmd-shift-5 = 'move-node-to-workspace notes'
+cmd-shift-6 = 'move-node-to-workspace music'
+cmd-shift-7 = 'move-node-to-workspace other'
 # alt-shift-8 = 'move-node-to-workspace 8'
 # alt-shift-9 = 'move-node-to-workspace 9'
 # alt-shift-a = 'move-node-to-workspace A'
@@ -214,7 +214,6 @@ run = ['move-node-to-workspace browser']
 if.app-id = 'com.brave.Browser'
 run = ['move-node-to-workspace browser']
 
-[[on-window-detected]]
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
 run = ['move-node-to-workspace browser']
