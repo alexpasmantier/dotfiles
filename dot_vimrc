@@ -3,11 +3,14 @@ call plug#begin()
 
 Plug 'wadackel/vim-dogrun'
 Plug 'lifepillar/vim-solarized8'
+Plug 'jnz/studio98'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'prabirshrestha/tv.vim'
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
@@ -39,10 +42,12 @@ set clipboard=unnamed
 let mapleader=" "
 
 " Split navigation
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-h> :<C-U>TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :<C-U>TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :<C-U>TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :<C-U>TmuxNavigateRight<cr>
 
 " Buffer navigation
 nnoremap <S-l> :bnext<CR>
@@ -52,8 +57,8 @@ nnoremap <S-h> :bprev<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader><BS> :x<CR>
 
-" File navigation (fzf)
-nnoremap <C-p> :Files<CR>
+" File navigation (tv)
+nnoremap <C-p> :Tv<CR>
 
 " Fugitive
 nnoremap <leader>gg :G<CR>

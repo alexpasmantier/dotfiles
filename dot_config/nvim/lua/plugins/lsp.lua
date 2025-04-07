@@ -98,19 +98,19 @@ return {
   },
 
   -- LSP outline
-  {
-    "hedyhli/outline.nvim",
-    lazy = true,
-    cmd = { "Outline", "OutlineOpen" },
-    keys = { -- Example mapping to toggle outline
-      { "<leader>lo", "<cmd>Outline<CR>", desc = "Toggle outline" },
-    },
-    opts = {
-      outline_window = {
-        split_command = "rightbelow vsplit",
-      },
-    },
-  },
+  -- {
+  --   "hedyhli/outline.nvim",
+  --   lazy = true,
+  --   cmd = { "Outline", "OutlineOpen" },
+  --   keys = { -- Example mapping to toggle outline
+  --     { "<leader>lo", "<cmd>Outline<CR>", desc = "Toggle outline" },
+  --   },
+  --   opts = {
+  --     outline_window = {
+  --       split_command = "rightbelow vsplit",
+  --     },
+  --   },
+  -- },
   -- pretty hover
   -- {
   --   "Fildo7525/pretty_hover",
@@ -123,6 +123,39 @@ return {
     opts = {},
     config = function(_, opts)
       require("lsp_signature").setup(opts)
+    end,
+  },
+  {
+    "bassamsdata/namu.nvim",
+    config = function()
+      require("namu").setup({
+        -- Enable the modules you want
+        namu_symbols = {
+          enable = true,
+          options = {}, -- here you can configure namu
+        },
+        -- Optional: Enable other modules if needed
+        colorscheme = {
+          enable = false,
+          options = {
+            -- NOTE: if you activate persist, then please remove any vim.cmd("colorscheme ...") in your config, no needed anymore
+            persist = true, -- very efficient mechanism to Remember selected colorscheme
+            write_shada = false, -- If you open multiple nvim instances, then probably you need to enable this
+          },
+        },
+        ui_select = { enable = false }, -- vim.ui.select() wrapper
+      })
+      -- === Suggested Keymaps: ===
+      local namu = require("namu.namu_symbols")
+      local colorscheme = require("namu.colorscheme")
+      vim.keymap.set("n", "<leader>lo", ":Namu symbols<cr>", {
+        desc = "Jump to LSP symbol",
+        silent = true,
+      })
+      vim.keymap.set("n", "<leader>te", ":Namu colorscheme<cr>", {
+        desc = "Colorscheme Picker",
+        silent = true,
+      })
     end,
   },
 }
