@@ -32,6 +32,4 @@ function M.three_way_split(left_width, right_width)
   vim.cmd("wincmd h")
 end
 
-M.three_way_split()
-
 return M

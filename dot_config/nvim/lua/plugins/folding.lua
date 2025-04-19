@@ -4,8 +4,8 @@ return {
     event = "VeryLazy",
     opts = {
       foldKeymaps = {
-        hOnlyOpensOnFirstColumn = true,
-      },
-    },
+        hOnlyOpensOnFirstColumn = true
+      }
+    }, -- needed even when using default config
   },
 }
