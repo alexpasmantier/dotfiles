@@ -210,4 +210,28 @@ return {
   },
   { "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {} },
   { "norcalli/nvim-colorizer.lua" },
+  -- Lua
+  {
+    "f-person/auto-dark-mode.nvim",
+    opts = {
+      set_dark_mode = function()
+        vim.cmd.colorscheme(require("options").dark_colorscheme)
+        require("custom_highlights").apply(vim.o.background)
+        -- if lualine is loaded, update the colorscheme
+        if pcall(require, "lualine") then
+          require("lualine").setup()
+        end
+      end,
+      set_light_mode = function()
+        vim.cmd.colorscheme(require("options").light_colorscheme)
+        require("custom_highlights").apply(vim.o.background)
+        -- if lualine is loaded, update the colorscheme
+        if pcall(require, "lualine") then
+          require("lualine").setup()
+        end
+      end,
+      update_interval = 3000,
+      fallback = "dark",
+    },
+  },
 }

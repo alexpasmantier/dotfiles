@@ -1,4 +1,5 @@
 -- [[ Setting options ]]
+M = {}
 
 -- See `:help vim.o`
 vim.o.encoding = "utf-8"
@@ -84,27 +85,11 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.fillchars = { eob = " ", vert = "│" }
 
 -- Set colorscheme
-local light_colorscheme = "solarized8_flat"
-local dark_colorscheme = "vague"
+vim.o.background = "light"
+M.light_colorscheme = "solarized8_flat"
+M.dark_colorscheme = "vague"
 
 vim.o.termguicolors = true
-if not vim.g.vscode then
-  if vim.o.background == "light" then
-    vim.cmd.colorscheme(light_colorscheme)
-    require("custom_highlights").apply(vim.o.background)
-    -- if lualine is loaded, update the colorscheme
-    if pcall(require, "lualine") then
-      require("lualine").setup()
-    end
-  else
-    vim.cmd.colorscheme(dark_colorscheme)
-    require("custom_highlights").apply(vim.o.background)
-    -- if lualine is loaded, update the colorscheme
-    if pcall(require, "lualine") then
-      require("lualine").setup()
-    end
-  end
-end
 
 -- Don't wrap please
 vim.o.wrap = false
