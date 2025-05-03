@@ -1,0 +1,22 @@
+fullscreen = true
+
+confirm-close-surface = false
+
+window-decoration = auto
+window-padding-balance = true
+
+font-size = 16
+font-family = BerkeleyMono Nerd Font
+
+mouse-hide-while-typing = true
+
+# macos
+macos-non-native-fullscreen = true
+macos-titlebar-style = hidden
+macos-icon = retro
+macos-icon-frame = beige
+
+
+shell-integration = zsh
+
+theme = dark:vague,light:Builtin Solarized Light
