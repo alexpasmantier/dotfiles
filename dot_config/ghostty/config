@@ -19,4 +19,4 @@ macos-icon-frame = beige
 
 shell-integration = zsh
 
-theme = dark:vague,light:Builtin Solarized Light
+theme = dark:vague_aubergine,light:Builtin Solarized Light

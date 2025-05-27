@@ -40,7 +40,7 @@ save_to_clipboard = true
 
 [general]
 live_config_reload = true
-import = ["~/.config/alacritty/custom_themes/vague_theme.toml"]
+import = ["~/.config/alacritty/custom_themes/vague_aubergine.toml"]
 # import = ["~/.config/alacritty/themes/themes/catppuccin_mocha.toml"]
 # import = ["~/.config/alacritty/themes/themes/solarized_light.toml"]
 # import = ["~/.config/alacritty/themes/themes/ayu_dark.toml"]
