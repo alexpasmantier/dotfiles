@@ -11,7 +11,7 @@ shape = "Beam"
 TERM = "xterm-256color"
 
 [font]
-size = 17.0
+size = 13.0
 
 [font.normal]
 family = "BerkeleyMono Nerd Font"
@@ -28,23 +28,21 @@ style = "Bold Italic"
 style = "Italic"
 
 [window]
-decorations = "buttonless"
+decorations = "None"
 dynamic_title = false
 opacity = 1
 option_as_alt = "OnlyLeft"
-title = "Terminal"
+title = "terminal"
 startup_mode = "Maximized"
+# dimensions = { columns = 170, lines = 40 }
 
 [selection]
 save_to_clipboard = true
 
 [general]
 live_config_reload = true
-import = ["~/.config/alacritty/custom_themes/vague_aubergine.toml"]
-# import = ["~/.config/alacritty/themes/themes/catppuccin_mocha.toml"]
-# import = ["~/.config/alacritty/themes/themes/solarized_light.toml"]
-# import = ["~/.config/alacritty/themes/themes/ayu_dark.toml"]
+import = ["light.toml"]
 
 [window.padding]
-x = 5
-y = 5
+x = 0
+y = 0

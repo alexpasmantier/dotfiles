@@ -1,5 +1,6 @@
 return {
   "github/copilot.vim",
+  -- dir = "~/code/lua/copilot.vim",
   -- NOTE: this doesn't seem very stable for the moment
   -- {
   --   "zbirenbaum/copilot.lua",
@@ -49,5 +50,4 @@ return {
   --     require("copilot_cmp").setup()
   --   end
   -- }
-
 }

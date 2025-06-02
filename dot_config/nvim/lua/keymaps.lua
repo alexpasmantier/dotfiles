@@ -59,8 +59,7 @@ vim.keymap.set("n", "<M-Right>", "<cmd>vertical resize +2<CR>", { desc = "Resize
 -- ----------------------------------------------------------------------------------------
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
--- not sure this is actually that useful
--- vim.keymap.set("n", "<leader>w", "<cmd>w!<CR>", { desc = "Save changes in current buffer", opts.args })
+vim.keymap.set("n", "<leader>w", "<cmd>w!<CR>", { desc = "Save changes in current buffer", opts.args })
 -- this is now handled by bufremove plugin
 -- vim.keymap.set("n", "<leader>c", "<CMD>:bp<CR><CMD>:bd#<CR>", { desc = "Close buffer", opts.args })
 -- vim.keymap.set("n", "<leader>c", "<cmd>BufferKill<CR>", { desc = "Close buffer", opts.args })

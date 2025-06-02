@@ -18,6 +18,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.have_nerd_font = true
+
 if vim.g.vscode then
   -- VSCode
   require("options")
@@ -25,7 +27,6 @@ if vim.g.vscode then
 else
   -- ordinary Neovim
   require("globals")
-  require("diagnostics")
   require("lazy").setup("plugins")
   require("options")
   require("keymaps")

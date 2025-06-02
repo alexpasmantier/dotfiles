@@ -85,7 +85,7 @@ return {
               return msg
             end,
             color = {
-              fg = "#f4d88c",
+              fg = vim.api.nvim_get_hl(0, { name = "@tag" }).fg,
               gui = "bold",
             },
           },
