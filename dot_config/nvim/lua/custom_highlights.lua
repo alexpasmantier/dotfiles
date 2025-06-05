@@ -12,9 +12,9 @@ local set_highlights = function(highlights)
 end
 
 local function apply_custom_highlights(background)
-  local custom_highlights = {}
-
-  -- local cursor_line = "#231c3c"
+  -- local custom_highlights = {}
+  --
+  -- local cursor_line = "#755375"
   --
   -- -- global changes for dark themes
   -- if background == "dark" then
@@ -32,7 +32,7 @@ local function apply_custom_highlights(background)
   --   -- table.insert(custom_highlights, { "CursorLine", { bg = "#3f2334" } })
   --   table.insert(custom_highlights, { "CursorLine", { bg = cursor_line } })
   -- end
-  --
+
   -- -- more nuances for dogrun
   -- if colorscheme == "dogrun" then
   --   table.insert(custom_highlights, { "@constructor", { link = "@type" } })

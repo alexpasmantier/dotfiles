@@ -243,7 +243,7 @@ return {
           bg = "#241f31",
           fg = "#cdcdcd",
           floatBorder = "#878787",
-          line = "#252530",
+          line = "#342f41",
           comment = "#606079",
           builtin = "#b4d4cf",
           func = "#c48282",

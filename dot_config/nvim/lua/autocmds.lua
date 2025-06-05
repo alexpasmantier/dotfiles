@@ -73,7 +73,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- [[ Lint on Bufwrite ]]
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  pattern = { "*.py" },
   callback = function()
     require("lint").try_lint()
   end,

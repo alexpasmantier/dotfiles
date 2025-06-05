@@ -9,7 +9,7 @@ return {
           "ruff",
           -- "mypy"
         },
-        rust = { "rust_analyzer" },
+        rust = { "clippy" },
         yaml = { "yamllint" },
         json = { "jsonlint" },
       }

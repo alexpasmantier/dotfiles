@@ -1,17 +1,24 @@
 return {
-  {
-    "stevearc/quicker.nvim",
-    event = "FileType qf",
-    opts = {},
-  },
+  -- {
+  --   "stevearc/quicker.nvim",
+  --   event = "FileType qf",
+  --   opts = {},
+  -- },
   {
     "folke/trouble.nvim",
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    opts = {
+      preview = {
+        type = "split",
+        relative = "win",
+        position = "right",
+        size = 0.4,
+      },
+    }, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
     keys = {
       {
         "<leader>dd",
-        "<cmd>Trouble diagnostics toggle win = { type = split, position=bottom}<cr>",
+        "<cmd>Trouble diagnostics toggle win = { type = split, position=bottom, relative=editor, size=0.4}<cr>",
         desc = "Diagnostics (Trouble)",
       },
       {
