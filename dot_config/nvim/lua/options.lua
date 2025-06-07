@@ -97,7 +97,7 @@ vim.o.wrap = false
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menu,menuone,noselect"
 
--- Allow vim to access the system clipboard
+-- Allow vim to access the system clipboard (linux)
 vim.o.clipboard = "unnamedplus"
 
 -- Maximum height of the completion window

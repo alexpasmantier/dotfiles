@@ -9,7 +9,6 @@ return {
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
       { "mason-org/mason.nvim", opts = {} },
-      "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
       -- Useful status updates for LSP.
@@ -97,17 +96,6 @@ return {
         } or {},
       })
 
-      -- rust-analyzer / rust_analyzer...
-      lspconfig["rust_analyzer"].setup({
-        settings = {
-          ["rust-analyzer"] = {
-            check = {
-              command = "clippy", -- Use clippy for linting
-            },
-          },
-        },
-      })
-
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -121,38 +109,88 @@ return {
         clangd = {},
         gopls = {},
         pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = {},
         ts_ls = {},
         --
 
         lua_ls = {},
       }
+      --
+      -- local ensure_installed = vim.tbl_keys(servers or {})
+      -- vim.list_extend(ensure_installed, {
+      --   "stylua", -- Used to format Lua code
+      -- })
+      -- require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+      --
+      -- require("mason-lspconfig").setup({
+      --   ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+      --   automatic_installation = true,
+      --   automatic_enable = false,
+      --   handlers = {
+      --     function(server_name)
+      --       local server = servers[server_name] or {}
+      --       require("lspconfig")[server_name].setup(server)
+      --     end,
+      --   },
+      -- })
 
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        "stylua", -- Used to format Lua code
-      })
-      require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-      require("mason-lspconfig").setup({
-        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-        automatic_installation = true,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            require("lspconfig")[server_name].setup(server)
-          end,
+      -- rust-analyzer / rust_analyzer...
+      lspconfig["rust_analyzer"].setup({
+        settings = {
+          ["rust-analyzer"] = {
+            check = {
+              command = "clippy", -- Use clippy for linting
+            },
+          },
         },
       })
 
-      --       settings = {
-      --   diagnostics = {
-      --     enable = true,
-      --   },
-      --   check = {
-      --     command = "clippy",
-      --   },
-      -- },
+      -- pyright
+      lspconfig.pyright.setup({
+        settings = {
+          pyright = {
+            reportMissingImports = true,
+            typeCheckingMode = "off",
+          },
+        },
+      })
+
+      -- lua_ls
+      lspconfig.lua_ls.setup({
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" }, -- Recognize 'vim' as a global variable
+            },
+            workspace = {
+              checkThirdParty = false, -- Disable third-party checks
+            },
+            telemetry = {
+              enable = false, -- Disable telemetry
+            },
+          },
+        },
+      })
+
+      -- clangd
+      lspconfig.clangd.setup({
+        cmd = { "clangd", "--background-index" }, -- Use clangd with background indexing
+        filetypes = { "c", "cpp", "objc", "objcpp" }, -- Specify filetypes for clangd
+      })
+
+      -- gopls
+      lspconfig.gopls.setup({
+        cmd = { "gopls", "-remote=auto" }, -- Use gopls with remote auto-detection
+        filetypes = { "go", "gomod" }, -- Specify filetypes for gopls
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true, -- Enable unused parameter analysis
+            },
+            staticcheck = true, -- Enable static check
+          },
+        },
+      })
     end,
   },
   -- {

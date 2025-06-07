@@ -5,7 +5,7 @@ confirm-close-surface = false
 window-decoration = auto
 window-padding-balance = true
 
-font-size = 16
+font-size = 14
 font-family = BerkeleyMono Nerd Font
 
 mouse-hide-while-typing = true
