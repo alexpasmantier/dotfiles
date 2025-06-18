@@ -189,7 +189,7 @@ end, { desc = "Toggle theme", opts.args })
 
 local splits = require("custom_functions.splits")
 vim.keymap.set("n", "<leader>3", function()
-  splits.three_way_split()
+  splits.three_way_split_blank()
 end, { desc = "Three way split", opts.args })
 
 -----------------------------------------------
@@ -244,6 +244,23 @@ if not vim.g.vscode then
   vim.keymap.set("n", "<leader>tn", telescope_functions.search_notes, { desc = "Telescope note", opts.args })
   vim.keymap.set("n", "<leader>t.", telescope_functions.search_dotfiles, { desc = "Telescope dotfiles", opts.args })
   vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope help tags", opts.args })
+  vim.keymap.set({ "n", "v" }, "<leader>ss", function()
+    if vim.fn.mode() == "v" then
+      -- if in visual mode, search for the selected text
+      local search_string = require("custom_functions.selections").get_visual_selection()
+      telescope_builtins.grep_string({
+        default_text = search_string,
+      })
+    else
+      -- if in normal mode, search for the word under cursor
+      telescope_builtins.grep_string({
+        default_text = vim.fn.expand("<cword>"),
+      })
+    end
+  end, {
+    desc = "Telescope grep string",
+    opts.args,
+  })
 
   -- GOTO PREVIEW
   vim.keymap.set("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
@@ -304,9 +321,6 @@ vim.g.copilot_no_tab_map = true
 
 -- PLENARY tests
 vim.keymap.set("n", "<leader>pt", "<cmd>PlenaryBustedFile %<cr>", { desc = "Run tests for current file", opts.args })
-
--- PERSISTENCE
-vim.keymap.set("n", "<leader>ss", "<cmd>lua require('persistence').load()<cr>", { desc = "Load session", opts.args })
 
 -- SMART SPLITS
 vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)

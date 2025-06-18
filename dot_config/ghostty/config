@@ -1,8 +1,8 @@
-fullscreen = true
+maximize = true
 
 confirm-close-surface = false
 
-window-decoration = auto
+window-decoration = none
 window-padding-balance = true
 
 font-size = 14
