@@ -4,7 +4,6 @@ return {
     "mfussenegger/nvim-lint",
     config = function()
       require("lint").linters_by_ft = {
-        markdown = { "vale" },
         python = {
           "ruff",
           -- "mypy"
@@ -26,14 +25,15 @@ return {
           python = { "isort", "ruff_fix", "ruff_format" },
           -- python = { "isort", "black" },
           -- Use a sub-list to run only the first available formatter
-          javascript = { { "prettierd", "prettier" } },
-          typescript = { { "prettierd", "prettier" } },
+          javascript = { "prettier" },
+          typescript = { "prettier" },
           terraform = { "terraform_fmt" },
           rust = { "rustfmt" },
           cpp = { "clang-format" },
           toml = { "taplo" },
           yaml = { "yamlfmt" },
           json = { "jq" },
+          markdown = { "prettier" },
         },
         format_on_save = {
           -- These options will be passed to conform.format()

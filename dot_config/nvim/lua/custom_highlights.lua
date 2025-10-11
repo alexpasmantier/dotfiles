@@ -93,7 +93,7 @@ local function apply_custom_highlights(background)
   --
   -- set_highlights(custom_highlights)
 
-  -- require("lualine").setup({ options = { theme = "auto" } })
+  require("lualine").setup({ options = { theme = "auto" } })
 end
 
 M.apply = apply_custom_highlights

@@ -322,11 +322,21 @@ vim.g.copilot_no_tab_map = true
 -- PLENARY tests
 vim.keymap.set("n", "<leader>pt", "<cmd>PlenaryBustedFile %<cr>", { desc = "Run tests for current file", opts.args })
 
--- SMART SPLITS
-vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
-vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
-vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
-vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
+-- SMART SPLITS (if enabled)
+if _G["smart-splits"] then
+  vim.keymap.set("n", "<C-h>", function()
+    require("smart-splits").move_cursor_left()
+  end)
+  vim.keymap.set("n", "<C-j>", function()
+    require("smart-splits").move_cursor_down()
+  end)
+  vim.keymap.set("n", "<C-k>", function()
+    require("smart-splits").move_cursor_up()
+  end)
+  vim.keymap.set("n", "<C-l>", function()
+    require("smart-splits").move_cursor_right()
+  end)
+end
 
 -- OVERSEER
 vim.keymap.set("n", "<leader>xx", "<cmd>OverseerToggle<cr>", { desc = "OverseerToggle", opts.args })

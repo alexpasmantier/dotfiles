@@ -85,7 +85,6 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.fillchars = { eob = " ", vert = "│" }
 
 -- Set colorscheme
-vim.o.background = "light"
 M.light_colorscheme = "solarized8_flat"
 M.dark_colorscheme = "vague"
 

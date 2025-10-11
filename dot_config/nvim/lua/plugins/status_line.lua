@@ -59,8 +59,6 @@ return {
               hint = "󰌵 ",
             },
           },
-          "encoding",
-          "fileformat",
           {
             "filetype",
           },

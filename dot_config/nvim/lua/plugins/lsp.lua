@@ -15,6 +15,7 @@ return {
       { "j-hui/fidget.nvim", opts = {} },
     },
     config = function()
+      -- local lspconfig = vim.lsp.config
       local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
       if not lspconfig_status_ok then
         print("lspconfig not found!")
@@ -96,46 +97,8 @@ return {
         } or {},
       })
 
-      -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-      --
-      --  Add any additional override configuration in the following tables. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-      local servers = {
-        clangd = {},
-        gopls = {},
-        pyright = {},
-        rust_analyzer = {},
-        ts_ls = {},
-        --
-
-        lua_ls = {},
-      }
-      --
-      -- local ensure_installed = vim.tbl_keys(servers or {})
-      -- vim.list_extend(ensure_installed, {
-      --   "stylua", -- Used to format Lua code
-      -- })
-      -- require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-      --
-      -- require("mason-lspconfig").setup({
-      --   ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-      --   automatic_installation = true,
-      --   automatic_enable = false,
-      --   handlers = {
-      --     function(server_name)
-      --       local server = servers[server_name] or {}
-      --       require("lspconfig")[server_name].setup(server)
-      --     end,
-      --   },
-      -- })
-
       -- rust-analyzer / rust_analyzer...
-      lspconfig["rust_analyzer"].setup({
+      vim.lsp.config("rust_analyzer", {
         settings = {
           ["rust-analyzer"] = {
             check = {
@@ -144,9 +107,10 @@ return {
           },
         },
       })
+      vim.lsp.enable("rust_analyzer")
 
       -- pyright
-      lspconfig.pyright.setup({
+      vim.lsp.config("pyright", {
         settings = {
           pyright = {
             reportMissingImports = true,
@@ -154,9 +118,10 @@ return {
           },
         },
       })
+      vim.lsp.enable("pyright")
 
       -- lua_ls
-      lspconfig.lua_ls.setup({
+      vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
             diagnostics = {
@@ -171,15 +136,17 @@ return {
           },
         },
       })
+      vim.lsp.enable("lua_ls")
 
       -- clangd
-      lspconfig.clangd.setup({
+      vim.lsp.config("clangd", {
         cmd = { "clangd", "--background-index" }, -- Use clangd with background indexing
         filetypes = { "c", "cpp", "objc", "objcpp" }, -- Specify filetypes for clangd
       })
+      vim.lsp.enable("clangd")
 
       -- gopls
-      lspconfig.gopls.setup({
+      vim.lsp.config("gopls", {
         cmd = { "gopls", "-remote=auto" }, -- Use gopls with remote auto-detection
         filetypes = { "go", "gomod" }, -- Specify filetypes for gopls
         settings = {
@@ -191,6 +158,33 @@ return {
           },
         },
       })
+      vim.lsp.enable("gopls")
+
+      -- ts_ls
+      vim.lsp.config("ts_ls", {
+        cmd = { "typescript-language-server", "--stdio" }, -- Use TypeScript language server
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx" }, -- Specify filetypes for ts_ls
+        settings = {
+          typescript = {
+            format = {
+              enable = true, -- Enable formatting for TypeScript
+            },
+          },
+        },
+      })
+      vim.lsp.enable("ts_ls")
+
+      -- css_lsp
+      vim.lsp.config("cssls", {
+        cmd = { "vscode-css-language-server", "--stdio" }, -- Use CSS language server
+        filetypes = { "css", "scss", "less" }, -- Specify filetypes for css_lsp
+        settings = {
+          css = {
+            validate = true, -- Enable validation for CSS
+          },
+        },
+      })
+      vim.lsp.enable("cssls")
     end,
   },
   -- {
