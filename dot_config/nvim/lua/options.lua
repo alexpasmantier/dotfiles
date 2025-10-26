@@ -54,6 +54,9 @@ vim.o.showmode = false
 -- Highlight cursorline
 vim.o.cursorline = true
 
+-- no empty command line by default
+vim.o.cmdheight = 0
+
 -- Decrease update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
