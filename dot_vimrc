@@ -54,12 +54,12 @@ set clipboard=unnamed
 let mapleader=" "
 
 " Split navigation
-let g:tmux_navigator_no_mappings = 1
+"let g:tmux_navigator_no_mappings = 1
 
-nnoremap <silent> <C-h> :<C-U>TmuxNavigateLeft<cr>
-nnoremap <silent> <C-j> :<C-U>TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :<C-U>TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :<C-U>TmuxNavigateRight<cr>
+nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <C-j> :TmuxNavigateDown<CR>
+nnoremap <silent> <C-k> :TmuxNavigateUp<CR>
+nnoremap <silent> <C-l> :TmuxNavigateRight<CR>
 
 " Buffer navigation
 nnoremap <S-l> :bnext<CR>
@@ -67,7 +67,7 @@ nnoremap <S-h> :bprev<CR>
 
 " Saving and quitting
 nnoremap <leader>w :w<CR>
-nnoremap <leader><BS> :x<CR>
+nnoremap <leader><BS> :xa<CR>
 
 " File navigation (tv)
 nnoremap <C-p> :Tv<CR>
@@ -75,4 +75,7 @@ nnoremap <C-p> :Tv<CR>
 " Fugitive
 nnoremap <leader>gg :G<CR>
 
-
+" diff mode
+" get changes from left/right
+nnoremap <leader>gh :diffget 1<CR>
+nnoremap <leader>gl :diffget 3<CR>

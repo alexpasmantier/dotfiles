@@ -1,0 +1,12 @@
+[user]
+	email = alex.pasmant@gmail.com
+	name = Alex Pasmantier
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[diff]
+	tool = nvimdiff
+[core]
+	editor = nvim
+	excludesFile = ~/.gitignore
