@@ -4,11 +4,23 @@ confirm-close-surface = false
 
 window-decoration = none
 window-padding-balance = true
+window-theme = ghostty
+window-title-font-family = "JetBrainsMono"
+window-save-state = always
+background-opacity = 0.9
+gtk-wide-tabs = false
+gtk-toolbar-style = flat
+gtk-tabs-location = top
 
 font-size = 14
 font-family = BerkeleyMono Nerd Font
 
 mouse-hide-while-typing = true
+
+
+shell-integration = zsh
+
+theme = dark:vague_aubergine,light:Builtin Solarized Light
 
 # macos
 macos-non-native-fullscreen = true
@@ -16,7 +28,3 @@ macos-titlebar-style = hidden
 macos-icon = retro
 macos-icon-frame = beige
 
-
-shell-integration = zsh
-
-theme = dark:vague_aubergine,light:Builtin Solarized Light

@@ -286,4 +286,31 @@ return {
   },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   "nvim-telescope/telescope-project.nvim",
+  {
+    dir = "~/code/lua/tv.nvim/",
+    opts = {
+      tv_binary = "tv",
+      -- Global window defaults (can be overridden per channel)
+      window = {
+        width = 0.8, -- 80% of editor width
+        height = 0.8, -- 80% of editor height
+        border = "none", -- Border style: "none", "single", "double", "rounded", "solid", "shadow"
+      },
+      files = {
+        args = { "--no-remote", "--no-status-bar", "--preview-size", "70", "--layout", "portrait" },
+        -- Optional: Override window settings for files channel
+        -- window = { width = 0.9, title = " Files ", border = "rounded" },
+      },
+      text = {
+        args = { "--no-remote", "--no-status-bar", "--preview-size", "70", "--layout", "portrait" },
+        -- Optional: Override window settings for text channel
+        -- window = { width = 0.7, title = " Text Search " },
+      },
+      keybindings = {
+        files = "<c-p>",
+        text = "<leader><leader>", -- Set to false to disable
+        both = "<leader>tv", -- Set to false to disable
+      },
+    },
+  },
 }

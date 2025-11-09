@@ -77,3 +77,17 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     require("lint").try_lint()
   end,
 })
+
+-- [[ enable cursorline only in active buffer ]]
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+  callback = function()
+    vim.wo.cursorline = true
+  end,
+})
+
+-- [[ disable cursorline when leaving buffer ]]
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+  callback = function()
+    vim.wo.cursorline = false
+  end,
+})

@@ -216,8 +216,8 @@ if not vim.g.vscode then
 
   -- TELESCOPE
   local telescope_builtins = require("telescope.builtin")
-  vim.keymap.set("n", "<C-p>", telescope_functions.project_files, { desc = "Telescope git files", opts.args })
-  vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
+  -- vim.keymap.set("n", "<C-p>", telescope_functions.project_files, { desc = "Telescope git files", opts.args })
+  -- vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
   vim.keymap.set("n", "<leader>tb", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
   vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
   vim.keymap.set(
