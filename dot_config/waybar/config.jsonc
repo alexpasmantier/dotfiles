@@ -72,7 +72,7 @@
     "tooltip-format-discharging": "{time}",
     "tooltip-format-charging": "{time}",
     "interval": 5,
-    "on-click": "omarchy-menu power",
+    "on-click": "tlpui",
     "states": {
       "warning": 20,
       "critical": 10

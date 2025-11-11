@@ -2,3 +2,4 @@
 
 ./keyd.sh
 ./gnome.sh
+./hyprland.sh
