@@ -8,4 +8,5 @@ return {
       return tmux_pane_id ~= nil
     end,
   },
+  "tpope/vim-repeat",
 }
