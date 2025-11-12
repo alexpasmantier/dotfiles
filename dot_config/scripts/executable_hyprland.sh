@@ -4,7 +4,7 @@ sudo pacman -Syu --noconfirm \
 	hyprland cmake kitty waybar hyprpaper \
 	brightnessctl playerctl hypridle hyprlock \
 	pipewire wireplumber xdg-desktop-portal-hyprland \
-	bluetui bottom
+	bluetui bottom wiremix
 
 
 yay -S --noconfirm \
