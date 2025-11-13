@@ -38,9 +38,14 @@
       "5": []
     }
   },
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 100,
+    "icon": false
+  },
   "cpu": {
     "interval": 5,
-    "format": "󰍛 ",
+    "format": "󰍛 CPU: {usage}%",
     "on-click": "kitty -e btm"
   },
   "clock": {
@@ -51,7 +56,7 @@
   "network": {
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     "format": "{icon}",
-    "format-wifi": "{icon}",
+    "format-wifi": "{icon} {essid}",
     "format-ethernet": "󰀂",
     "format-disconnected": "󰤮",
     "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
@@ -59,7 +64,8 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "kitty -e wifitui"
+    "on-click": "kitty -e wifitui",
+    "on-click-right": "nmcli radio wifi off"
   },
   "battery": {
     "format": "{icon} {capacity}%",
@@ -81,14 +87,14 @@
   "bluetooth": {
     "format": "",
     "format-disabled": "󰂲",
-    "format-connected": " {num_connections} connected",
+    "format-connected": " {device_alias}",
     "tooltip-format": "Bluetooth is {status}",
     "tooltip-format-connected": "Connected to:\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
     "on-click": "kitty -e bluetui",
   },
   "pulseaudio": {
-    "format": "{icon}",
+    "format": "{icon} {volume}%",
     "on-click": "kitty -e wiremix",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
@@ -109,12 +115,6 @@
   "custom/expand-icon": {
     "format": "+",
     "tooltip": false
-  },
-  "custom/screenrecording-indicator": {
-    "on-click": "omarchy-cmd-screenrecord",
-    "exec": "$OMARCHY_PATH/default/waybar/indicators/screen-recording.sh",
-    "signal": 8,
-    "return-type": "json"
   },
   "tray": {
     "icon-size": 14,
