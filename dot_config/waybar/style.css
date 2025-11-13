@@ -6,7 +6,6 @@
 * {
   background-color: transparent;
   color: @foreground;
-
   border: none;
   border-radius: 0;
   min-height: 0;
@@ -33,6 +32,10 @@
   opacity: 0.5;
 }
 
+#clock {
+  margin-right: 20px;
+}
+
 #cpu,
 #battery,
 #tray,
@@ -54,4 +57,3 @@ tooltip {
 .hidden {
   opacity: 0;
 }
-

@@ -112,7 +112,7 @@ vim.o.conceallevel = 1
 -- vim.g.loaded_netrwPlugin = 1
 
 -- treesitter based folding
-vim.o.foldmethod = "indent"
+-- vim.o.foldmethod = "indent"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.foldenable = false
 vim.o.foldlevel = 99

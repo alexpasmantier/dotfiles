@@ -41,7 +41,10 @@
   "hyprland/window": {
     "format": "{title}",
     "max-length": 100,
-    "icon": false
+    "icon": false,
+    "rewrite": {
+      "t": "tmux"
+    }
   },
   "cpu": {
     "interval": 5,
