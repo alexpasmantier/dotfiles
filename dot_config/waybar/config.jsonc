@@ -8,6 +8,7 @@
   "modules-center": ["clock", "hyprland/window"],
   "modules-right": [
     "group/tray-expander",
+    "memory",
     "cpu",
     "bluetooth",
     "network",
@@ -45,6 +46,10 @@
     "rewrite": {
       "t": "tmux"
     }
+  },
+  "memory": {
+    "interval": 5,
+    "format": " {used:0.1f}/{total:0.1f}G"
   },
   "cpu": {
     "interval": 5,

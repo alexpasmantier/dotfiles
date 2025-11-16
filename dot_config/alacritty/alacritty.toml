@@ -41,7 +41,7 @@ save_to_clipboard = true
 
 [general]
 live_config_reload = true
-import = ["light.toml"]
+import = ["dark.toml"]
 
 [window.padding]
 x = 0

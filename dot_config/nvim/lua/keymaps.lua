@@ -346,3 +346,6 @@ vim.keymap.set("n", "<leader>xr", "<cmd>OverseerRun<cr>", { desc = "OverseerRun"
 -- vim.keymap.set("n", "K", function()
 --   require("pretty_hover").hover()
 -- end, { desc = "Show hover" })
+
+-- markdown preview
+vim.keymap.set("n", "<leader>M", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown Preview Toggle", opts.args })
