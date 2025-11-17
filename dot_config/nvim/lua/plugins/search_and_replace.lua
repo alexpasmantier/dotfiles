@@ -287,7 +287,7 @@ return {
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   "nvim-telescope/telescope-project.nvim",
   {
-    dir = "~/code/lua/tv.nvim/",
+    "alexpasmantier/tv.nvim",
     opts = {
       tv_binary = "tv",
       -- Global window defaults (can be overridden per channel)
