@@ -1,3 +1,3 @@
 return {
-	{ "folke/todo-comments.nvim", config = true, lazy = false },
+  { "folke/todo-comments.nvim", config = true, lazy = false },
 }

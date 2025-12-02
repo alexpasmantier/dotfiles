@@ -17,21 +17,21 @@ vim.keymap.set("n", "<leader>Q", ":qa!<CR>", { desc = "Force Exit neovim", opts.
 local configuration_directory_path = vim.api.nvim_list_runtime_paths()[1]
 Last_working_directory = nil
 vim.keymap.set("n", "<leader>;", function()
-	local current_dir = vim.fn.getcwd()
-	if current_dir ~= configuration_directory_path then
-		-- save last working directory
-		Last_working_directory = current_dir
-		-- cd to config and open a telescope prompt in a new tab
-		vim.cmd("tabnew")
-		vim.api.nvim_set_current_dir(configuration_directory_path)
-	-- plugins_config.project_files()
-	elseif #vim.api.nvim_list_tabpages() > 1 then
-		-- close tab and revert to last working directory if there is one
-		vim.cmd("tabclose")
-		if Last_working_directory ~= nil then
-			vim.api.nvim_set_current_dir(Last_working_directory)
-		end
-	end
+  local current_dir = vim.fn.getcwd()
+  if current_dir ~= configuration_directory_path then
+    -- save last working directory
+    Last_working_directory = current_dir
+    -- cd to config and open a telescope prompt in a new tab
+    vim.cmd("tabnew")
+    vim.api.nvim_set_current_dir(configuration_directory_path)
+    -- plugins_config.project_files()
+  elseif #vim.api.nvim_list_tabpages() > 1 then
+    -- close tab and revert to last working directory if there is one
+    vim.cmd("tabclose")
+    if Last_working_directory ~= nil then
+      vim.api.nvim_set_current_dir(Last_working_directory)
+    end
+  end
 end, { desc = "Toggle config files", opts.args })
 
 -----------------------
@@ -67,10 +67,10 @@ vim.keymap.set("n", "<C-c>", "<cmd>BufferKill<CR>", { desc = "Close buffer", opt
 vim.keymap.set("n", "<leader>C", "<CMD>:bp<CR><CMD>:bd!#<CR>", { desc = "Close buffer (force)", opts.args })
 -- yank current buffer file path
 vim.keymap.set(
-	"n",
-	"<leader>y",
-	'<cmd>let @+ = fnamemodify(expand("%"), ":.")<cr>',
-	{ desc = "Yank current file path", opts.args }
+  "n",
+  "<leader>y",
+  '<cmd>let @+ = fnamemodify(expand("%"), ":.")<cr>',
+  { desc = "Yank current file path", opts.args }
 )
 
 -- QUICKLIST NAVIGATION
@@ -118,10 +118,10 @@ vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "No highligth s
 
 -- help
 vim.keymap.set(
-	"n",
-	"<leader>H",
-	":vertical rightbelow help<Space>",
-	{ noremap = true, silent = false, desc = "Vim help" }
+  "n",
+  "<leader>H",
+  ":vertical rightbelow help<Space>",
+  { noremap = true, silent = false, desc = "Vim help" }
 )
 
 -- Replace under cursor
@@ -184,12 +184,12 @@ vim.keymap.set("n", "<space>k", vim.diagnostic.open_float, { desc = "Open diagno
 
 local themes = require("custom_functions.themes")
 vim.keymap.set("n", "<leader>c", function()
-	themes.toggle()
+  themes.toggle()
 end, { desc = "Toggle theme", opts.args })
 
 local splits = require("custom_functions.splits")
 vim.keymap.set("n", "<leader>3", function()
-	splits.three_way_split_blank()
+  splits.three_way_split_blank()
 end, { desc = "Three way split", opts.args })
 
 -----------------------------------------------
@@ -199,117 +199,117 @@ end, { desc = "Three way split", opts.args })
 -----------------------------------------------
 
 if not vim.g.vscode then
-	-- NEO TREE
-	vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo-tree", opts.args })
-	-- vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree float", opts.args })
+  -- NEO TREE
+  vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo-tree", opts.args })
+  -- vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree float", opts.args })
 
-	-- OIL
-	vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "Open Oil buffer", opts.args })
+  -- OIL
+  vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "Open Oil buffer", opts.args })
 
-	-- SPECTRE
-	vim.keymap.set("n", "<leader>S", function()
-		require("spectre").open()
-	end, { desc = "Replace in files (Spectre)", opts.args })
+  -- SPECTRE
+  vim.keymap.set("n", "<leader>S", function()
+    require("spectre").open()
+  end, { desc = "Replace in files (Spectre)", opts.args })
 
-	-- FUGITIVE
-	vim.keymap.set("n", "<leader>gmc", ":Gvdiffsplit!<CR>", { desc = "resolve merge conflict", opts.args })
+  -- FUGITIVE
+  vim.keymap.set("n", "<leader>gmc", ":Gvdiffsplit!<CR>", { desc = "resolve merge conflict", opts.args })
 
-	-- TELESCOPE
-	local telescope_builtins = require("telescope.builtin")
-	-- vim.keymap.set("n", "<C-p>", telescope_functions.project_files, { desc = "Telescope git files", opts.args })
-	-- vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
-	vim.keymap.set("n", "<leader>tb", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
-	vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
-	vim.keymap.set(
-		"n",
-		"<leader>tC",
-		"<cmd>Telescope git_bcommits<cr>",
-		{ desc = "Telescope current buffer git commits", opts.args }
-	)
-	vim.keymap.set("n", "<leader>tB", "<cmd>Telescope git_branches<cr>", { desc = "Telescope git branches", opts.args })
-	vim.keymap.set("n", "<leader>ts", "<cmd>Telescope git_status<cr>", { desc = "Telescope git status", opts.args })
-	vim.keymap.set("n", "<leader>tS", "<cmd>Telescope git_stash<cr>", { desc = "Telescope git stash", opts.args })
-	vim.keymap.set(
-		"n",
-		"<leader>tp",
-		telescope_functions.colorschemes_with_preview,
-		{ desc = "Telescope colorschemes", opts.args }
-	)
-	vim.keymap.set("n", "<leader>tn", telescope_functions.search_notes, { desc = "Telescope note", opts.args })
-	vim.keymap.set("n", "<leader>t.", telescope_functions.search_dotfiles, { desc = "Telescope dotfiles", opts.args })
-	vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope help tags", opts.args })
-	vim.keymap.set({ "n", "v" }, "<leader>ss", function()
-		if vim.fn.mode() == "v" then
-			-- if in visual mode, search for the selected text
-			local search_string = require("custom_functions.selections").get_visual_selection()
-			telescope_builtins.grep_string({
-				default_text = search_string,
-			})
-		else
-			-- if in normal mode, search for the word under cursor
-			telescope_builtins.grep_string({
-				default_text = vim.fn.expand("<cword>"),
-			})
-		end
-	end, {
-		desc = "Telescope grep string",
-		opts.args,
-	})
+  -- TELESCOPE
+  local telescope_builtins = require("telescope.builtin")
+  -- vim.keymap.set("n", "<C-p>", telescope_functions.project_files, { desc = "Telescope git files", opts.args })
+  -- vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
+  vim.keymap.set("n", "<leader>tb", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
+  vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
+  vim.keymap.set(
+    "n",
+    "<leader>tC",
+    "<cmd>Telescope git_bcommits<cr>",
+    { desc = "Telescope current buffer git commits", opts.args }
+  )
+  vim.keymap.set("n", "<leader>tB", "<cmd>Telescope git_branches<cr>", { desc = "Telescope git branches", opts.args })
+  vim.keymap.set("n", "<leader>ts", "<cmd>Telescope git_status<cr>", { desc = "Telescope git status", opts.args })
+  vim.keymap.set("n", "<leader>tS", "<cmd>Telescope git_stash<cr>", { desc = "Telescope git stash", opts.args })
+  vim.keymap.set(
+    "n",
+    "<leader>tp",
+    telescope_functions.colorschemes_with_preview,
+    { desc = "Telescope colorschemes", opts.args }
+  )
+  vim.keymap.set("n", "<leader>tn", telescope_functions.search_notes, { desc = "Telescope note", opts.args })
+  vim.keymap.set("n", "<leader>t.", telescope_functions.search_dotfiles, { desc = "Telescope dotfiles", opts.args })
+  vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope help tags", opts.args })
+  vim.keymap.set({ "n", "v" }, "<leader>ss", function()
+    if vim.fn.mode() == "v" then
+      -- if in visual mode, search for the selected text
+      local search_string = require("custom_functions.selections").get_visual_selection()
+      telescope_builtins.grep_string({
+        default_text = search_string,
+      })
+    else
+      -- if in normal mode, search for the word under cursor
+      telescope_builtins.grep_string({
+        default_text = vim.fn.expand("<cword>"),
+      })
+    end
+  end, {
+    desc = "Telescope grep string",
+    opts.args,
+  })
 
-	-- GOTO PREVIEW
-	vim.keymap.set("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
-	vim.keymap.set("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
-	-- TODO: autocmmand to map escape to `close_all_win` when in goto preview buffer
-	vim.keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
+  -- GOTO PREVIEW
+  vim.keymap.set("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+  vim.keymap.set("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
+  -- TODO: autocmmand to map escape to `close_all_win` when in goto preview buffer
+  vim.keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>")
 
-	-- WHICH-KEY MAPPINGS
-	local wk = require("which-key")
-	wk.add({
-		{ "<leader>d", group = "DAP" },
-		{ "<leader>g", group = "Git" },
-		{ "<leader>l", group = "Lsp" },
-		{ "<leader>m", group = "Quickfix" },
-		{ "<leader>n", group = "Neorg" },
-		{ "<leader>nn", "<cmd>Neorg index<cr>", desc = "index" },
-		{ "<leader>s", group = "Search" },
-		{ "<leader>t", group = "Telescope" },
-		{ "<leader>v", group = "Wrap Options" },
-		{ "<leader>x", group = "Overseer" },
-		{ "<leader>z", group = "Misc" },
-	})
+  -- WHICH-KEY MAPPINGS
+  local wk = require("which-key")
+  wk.add({
+    { "<leader>d", group = "DAP" },
+    { "<leader>g", group = "Git" },
+    { "<leader>l", group = "Lsp" },
+    { "<leader>m", group = "Quickfix" },
+    { "<leader>n", group = "Neorg" },
+    { "<leader>nn", "<cmd>Neorg index<cr>", desc = "index" },
+    { "<leader>s", group = "Search" },
+    { "<leader>t", group = "Telescope" },
+    { "<leader>v", group = "Wrap Options" },
+    { "<leader>x", group = "Overseer" },
+    { "<leader>z", group = "Misc" },
+  })
 end
 
 -- LSP-specific
 vim.keymap.set("n", "<leader>lpd", function()
-	require("lspconfig").pyright.setup({
-		settings = {
-			pyright = {
-				reportMissingImports = true,
-				typeCheckingMode = "off",
-			},
-		},
-	})
+  require("lspconfig").pyright.setup({
+    settings = {
+      pyright = {
+        reportMissingImports = true,
+        typeCheckingMode = "off",
+      },
+    },
+  })
 end, { desc = "disable type checking", opts.args })
 vim.keymap.set("n", "<leader>lpe", function()
-	require("lspconfig").pyright.setup({
-		settings = {
-			pyright = {
-				reportMissingImports = true,
-				typeCheckingMode = "standard",
-			},
-		},
-	})
+  require("lspconfig").pyright.setup({
+    settings = {
+      pyright = {
+        reportMissingImports = true,
+        typeCheckingMode = "standard",
+      },
+    },
+  })
 end, { desc = "enable type checking", opts.args })
 
 -- COPILOT
 -- set <c-e> for accepting copilot suggestions (and <c-d> to dismiss) and unmap tab
 vim.keymap.set("i", "<C-e>", 'copilot#Accept("\\<CR>")', {
-	expr = true,
-	replace_keycodes = false,
+  expr = true,
+  replace_keycodes = false,
 })
 vim.keymap.set("i", "<C-d>", 'copilot#Dismiss("\\<CR>")', {
-	expr = true,
-	replace_keycodes = false,
+  expr = true,
+  replace_keycodes = false,
 })
 vim.g.copilot_no_tab_map = true
 
@@ -318,18 +318,18 @@ vim.keymap.set("n", "<leader>pt", "<cmd>PlenaryBustedFile %<cr>", { desc = "Run 
 
 -- SMART SPLITS (if enabled)
 if _G["smart-splits"] then
-	vim.keymap.set("n", "<C-h>", function()
-		require("smart-splits").move_cursor_left()
-	end)
-	vim.keymap.set("n", "<C-j>", function()
-		require("smart-splits").move_cursor_down()
-	end)
-	vim.keymap.set("n", "<C-k>", function()
-		require("smart-splits").move_cursor_up()
-	end)
-	vim.keymap.set("n", "<C-l>", function()
-		require("smart-splits").move_cursor_right()
-	end)
+  vim.keymap.set("n", "<C-h>", function()
+    require("smart-splits").move_cursor_left()
+  end)
+  vim.keymap.set("n", "<C-j>", function()
+    require("smart-splits").move_cursor_down()
+  end)
+  vim.keymap.set("n", "<C-k>", function()
+    require("smart-splits").move_cursor_up()
+  end)
+  vim.keymap.set("n", "<C-l>", function()
+    require("smart-splits").move_cursor_right()
+  end)
 end
 
 -- OVERSEER
