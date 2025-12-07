@@ -20,7 +20,7 @@ mouse-hide-while-typing = true
 
 shell-integration = zsh
 
-theme = dark:vague_aubergine,light:Builtin Solarized Light
+theme = dark:Ayu,light:Builtin Solarized Light
 
 # macos
 macos-non-native-fullscreen = true

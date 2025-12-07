@@ -32,10 +32,10 @@ vim.o.breakindent = true
 -- Do not continue comments on new line
 -- (the autocmd is a workaround to the fact that this gets overriden by default ftplugins)
 vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "*",
-  callback = function()
-    vim.opt_local.formatoptions:remove("o")
-  end,
+	pattern = "*",
+	callback = function()
+		vim.opt_local.formatoptions:remove("o")
+	end,
 })
 
 -- Save undo history
@@ -48,14 +48,14 @@ vim.o.swapfile = false
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- Do not show current mode (status line already does)
-vim.o.showmode = false
+-- should we show the mode in the cmd line?
+vim.o.showmode = true
 
 -- Highlight cursorline
 vim.o.cursorline = true
 
 -- no empty command line by default
-vim.o.cmdheight = 0
+vim.o.cmdheight = 1
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -89,7 +89,7 @@ vim.opt.fillchars = { eob = " ", vert = "│" }
 
 -- Set colorscheme
 M.light_colorscheme = "solarized8_flat"
-M.dark_colorscheme = "vague"
+M.dark_colorscheme = "hubbamax"
 
 vim.o.termguicolors = true
 
@@ -120,53 +120,53 @@ vim.o.foldlevel = 99
 -- [[NEOVIDE]]
 -- ------------------------------------------------------------------------------------------------
 if vim.g.neovide then
-  vim.o.guifont = "BerkeleyMono Nerd Font"
-  vim.g.neovide_scale_factor = 1
-  vim.g.neovide_fullscreen = false
-  vim.g.neovide_input_macos_option_key_is_meta = true
-  vim.g.neovide_cursor_animation_length = 0.08
-  vim.g.neovide_cursor_trail_size = 0.4
+	vim.o.guifont = "BerkeleyMono Nerd Font"
+	vim.g.neovide_scale_factor = 1
+	vim.g.neovide_fullscreen = false
+	vim.g.neovide_input_macos_option_key_is_meta = true
+	vim.g.neovide_cursor_animation_length = 0.08
+	vim.g.neovide_cursor_trail_size = 0.4
 end
 
 -- [[FIRENVIM]]
 -- ------------------------------------------------------------------------------------------------
 if vim.g.started_by_firenvim == true then
-  vim.g.expanded_modes = {
-    ["n"] = "NORMAL",
-    ["no"] = "NORMAL",
-    ["v"] = "VISUAL",
-    ["V"] = "VISUAL LINE",
-    [""] = "VISUAL BLOCK",
-    ["s"] = "SELECT",
-    ["S"] = "SELECT LINE",
-    [""] = "SELECT BLOCK",
-    ["i"] = "INSERT",
-    ["ic"] = "INSERT",
-    ["R"] = "REPLACE",
-    ["Rv"] = "VISUAL REPLACE",
-    ["c"] = "COMMAND",
-    ["cv"] = "VIM EX",
-    ["ce"] = "EX",
-    ["r"] = "PROMPT",
-    ["rm"] = "MOAR",
-    ["r?"] = "CONFIRM",
-    ["!"] = "SHELL",
-    ["t"] = "TERMINAL",
-  }
-  vim.o.statusline = "%{expanded_modes[mode()]} %m%r%=%y  %-14.(%l,%c%V%) %P"
-  vim.o.wrap = true
-  vim.g.firenvim_config = {
-    globalSettings = { alt = "all" },
-    localSettings = {
-      [".*"] = {
-        cmdline = "neovim",
-        content = "text",
-        priority = 0,
-        selector = "textarea",
-        takeover = "never",
-      },
-    },
-  }
+	vim.g.expanded_modes = {
+		["n"] = "NORMAL",
+		["no"] = "NORMAL",
+		["v"] = "VISUAL",
+		["V"] = "VISUAL LINE",
+		[""] = "VISUAL BLOCK",
+		["s"] = "SELECT",
+		["S"] = "SELECT LINE",
+		[""] = "SELECT BLOCK",
+		["i"] = "INSERT",
+		["ic"] = "INSERT",
+		["R"] = "REPLACE",
+		["Rv"] = "VISUAL REPLACE",
+		["c"] = "COMMAND",
+		["cv"] = "VIM EX",
+		["ce"] = "EX",
+		["r"] = "PROMPT",
+		["rm"] = "MOAR",
+		["r?"] = "CONFIRM",
+		["!"] = "SHELL",
+		["t"] = "TERMINAL",
+	}
+	vim.o.statusline = "%{expanded_modes[mode()]} %m%r%=%y  %-14.(%l,%c%V%) %P"
+	vim.o.wrap = true
+	vim.g.firenvim_config = {
+		globalSettings = { alt = "all" },
+		localSettings = {
+			[".*"] = {
+				cmdline = "neovim",
+				content = "text",
+				priority = 0,
+				selector = "textarea",
+				takeover = "never",
+			},
+		},
+	}
 end
 
 return M
