@@ -12,7 +12,9 @@ local set_highlights = function(highlights)
 end
 
 local function apply_custom_highlights(background)
-	-- local custom_highlights = {}
+	local custom_highlights = {}
+	-- local cursor_line = "#755375"
+
 	-- local cursor_line = "#755375"
 
 	-- grey italic comments
@@ -52,7 +54,7 @@ local function apply_custom_highlights(background)
 		table.insert(custom_highlights, { "CmpItemKindFunction", { link = "@text.literal" } })
 		table.insert(custom_highlights, { "CmpItemKindVariable", { link = "@text.reference" } })
 	end
-	--
+
 	-- change grey status bar and winbars for vague
 	-- if colorscheme == "vague" then
 	-- too bright I guess
@@ -101,6 +103,7 @@ local function apply_custom_highlights(background)
 	--   end
 	-- end
 	-- vim.notify("Custom highlights: " .. vim.inspect(custom_highlights))
+
 	set_highlights(custom_highlights)
 
 	-- require("lualine").setup({ options = { theme = "auto" } })

@@ -91,6 +91,8 @@ vim.opt.fillchars = { eob = " ", vert = "│" }
 M.light_colorscheme = "solarized8_flat"
 M.dark_colorscheme = "hubbamax"
 
+-- require("custom_highlights").apply(vim.o.background)
+
 vim.o.termguicolors = true
 
 -- Don't wrap please
