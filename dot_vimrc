@@ -8,15 +8,14 @@ endif
 call plug#begin()
 "NOTE: path: '~/.vim/plugged'
 
-Plug 'wadackel/vim-dogrun'
-Plug 'lifepillar/vim-solarized8'
-Plug 'jnz/studio98'
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+" Plug 'wadackel/vim-dogrun'
+" Plug 'lifepillar/vim-solarized8'
+" Plug 'jnz/studio98'
+" Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'prabirshrestha/tv.vim'
 
 call plug#end()
 
@@ -34,7 +33,7 @@ set laststatus=2
 set noshowmode
 syntax on
 set termguicolors
-colorscheme dogrun
+colorscheme habamax
 
 let g:lightline = {
 	      \ 'colorscheme': 'one',
@@ -68,8 +67,9 @@ nnoremap <S-h> :bprev<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader><BS> :xa<CR>
 
-" File navigation (tv)
-nnoremap <C-p> :Tv<CR>
+" Fuzzy finder
+nnoremap <C-p> :Files<CR>
+nnoremap <leader><leader> :Rg<CR>
 
 " Fugitive
 nnoremap <leader>gg :G<CR>
