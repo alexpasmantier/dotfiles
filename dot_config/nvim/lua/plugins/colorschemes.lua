@@ -137,6 +137,7 @@ return {
   -- Lua
   {
     dir = "~/code/lua/hubbamax.nvim",
+    opts = { transparent_background = false },
   },
   {
     "f-person/auto-dark-mode.nvim",

@@ -4,8 +4,8 @@
 @define-color background-darker #1e192a;
 
 * {
-  background-color: transparent;
-  color: @foreground;
+  background-color: @background-darker;
+  color: @foreground-lighter;
   border: none;
   border-radius: 0;
   min-height: 0;
