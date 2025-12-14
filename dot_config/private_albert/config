@@ -1,5 +1,6 @@
 [General]
 frontend=widgetsboxmodel
+memoryDecay=0.75
 telemetry=false
 
 [application]
@@ -8,6 +9,9 @@ enabled=true
 [applications]
 enabled=true
 terminal=com.mitchellh.ghostty
+
+[caffeine]
+enabled=true
 
 [files]
 enabled=true
@@ -32,6 +36,9 @@ enabled=true
 [python.kill]
 enabled=true
 
+[python.pacman]
+enabled=false
+
 [urlhandler]
 enabled=true
 
@@ -49,7 +56,7 @@ followCursor=true
 hideOnFocusLoss=true
 historySearch=true
 itemCount=8
-lightTheme=Numix
+lightTheme=Default Dark
 quitOnClose=false
 showCentered=false
 systemShadow=false

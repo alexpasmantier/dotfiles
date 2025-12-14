@@ -49,9 +49,10 @@
 }
 
 tooltip {
-  padding: 2px;
-  border: 1px solid @foreground-lighter;
-  border-radius: 4px;
+  padding: 0px;
+  /* border: 1px solid @foreground-lighter; */
+  border: none;
+  /* border-radius: 10px; */
   background-color: @background-darker;
   color: @foreground-lighter;
 }

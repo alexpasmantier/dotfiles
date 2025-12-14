@@ -79,7 +79,8 @@
   "clock": {
     "format": "{:L%A %H:%M}",
     "format-alt": "{:L%d %B W%V %Y}",
-    "tooltip": false
+    "tooltip": true,
+    "tooltip-format": "{:L%A, %d %B %Y - Week %V}"
   },
   "network": {
     "format-icons": [

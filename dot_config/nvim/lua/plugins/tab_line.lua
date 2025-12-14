@@ -11,7 +11,7 @@ return {
           style_preset = bufferline.style_preset.no_italic,
           mode = "buffers", -- set to "tabs" to only show tabpages instead
           -- style_preset = bufferline.style_preset.minimal, -- or bufferline.style_preset.minimal,
-          themable = false, -- | false, -- allows highlight groups to be overriden i.e. sets highlights as default
+          themable = true, -- | false, -- allows highlight groups to be overriden i.e. sets highlights as default
           numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
           close_command = "bdelete! %d", -- can be a string | function, | false see "Mouse actions"
           right_mouse_command = "bdelete! %d", -- can be a string | function | false, see "Mouse actions"
@@ -61,6 +61,7 @@ return {
           --   return buffer_a.modified > buffer_b.modified
           -- end,
         },
+        highlights = require("bufferline.themes.hubbamax"),
       })
     end,
   },

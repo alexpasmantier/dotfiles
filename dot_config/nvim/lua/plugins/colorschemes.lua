@@ -146,18 +146,18 @@ return {
         vim.o.background = "dark"
         vim.cmd.colorscheme(require("options").dark_colorscheme)
         -- if lualine is loaded, update the colorscheme
-        if pcall(require, "lualine") then
-          require("lualine").setup()
-        end
+        -- if pcall(require, "lualine") then
+        --   require("lualine").setup()
+        -- end
         require("custom_highlights").apply(vim.o.background)
       end,
       set_light_mode = function()
         vim.o.background = "light"
         vim.cmd.colorscheme(require("options").light_colorscheme)
         -- if lualine is loaded, update the colorscheme
-        if pcall(require, "lualine") then
-          require("lualine").setup()
-        end
+        -- if pcall(require, "lualine") then
+        --   require("lualine").setup()
+        -- end
         require("custom_highlights").apply(vim.o.background)
       end,
       update_interval = 3000,

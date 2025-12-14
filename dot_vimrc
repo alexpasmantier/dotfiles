@@ -15,7 +15,7 @@ call plug#begin()
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
@@ -35,7 +35,7 @@ syntax on
 set termguicolors
 colorscheme habamax
 
-let g:lightline = {
+" let g:lightline = {
 	      \ 'colorscheme': 'one',
 	            \ }
 
