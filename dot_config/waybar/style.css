@@ -1,7 +1,7 @@
 @define-color foreground #727294;
 @define-color foreground-lighter #b2b2d3;
 @define-color background #241f31;
-@define-color background-darker #1e192a;
+@define-color background-darker #1c1c1c;
 
 * {
   background-color: @background-darker;
