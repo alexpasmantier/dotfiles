@@ -72,6 +72,13 @@ vim.keymap.set(
   '<cmd>let @+ = fnamemodify(expand("%"), ":.")<cr>',
   { desc = "Yank current file path", opts.args }
 )
+-- yank current buffer path:line
+vim.keymap.set(
+  "n",
+  "<leader>Y",
+  '<cmd>let @+ = fnamemodify(expand("%"), ":.") . ":" . line(".")<cr>',
+  { desc = "Yank current file path with line number", opts.args }
+)
 
 -- QUICKLIST NAVIGATION
 -- ----------------------------------------------------------------------------------------
@@ -348,3 +355,16 @@ vim.keymap.set("n", "<leader>M", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Mar
 -- when in diff mode, use <leader>gh and <leader>gl to :diffget 1 and :diffget 3 (three-way diff)
 vim.keymap.set("n", "<leader>gh", ":diffget 1<CR>", { desc = "Diff get left", opts.args })
 vim.keymap.set("n", "<leader>gl", ":diffget 3<CR>", { desc = "Diff get right", opts.args })
+
+-- codediff
+vim.keymap.set("n", "<leader>df", "<cmd>CodeDiff<cr>", { desc = "Code Diff", opts.args })
+
+-- lualine toggle
+-- vim.keymap.set("n", "<leader>ll", function()
+--   local current_status = vim.o.laststatus
+--   if current_status == 0 then
+--     vim.o.laststatus = 3
+--   else
+--     vim.o.laststatus = 0
+--   end
+-- end, { desc = "Toggle lualine", opts.args })

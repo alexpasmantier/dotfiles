@@ -39,6 +39,9 @@ enabled=true
 [python.pacman]
 enabled=false
 
+[system]
+enabled=true
+
 [urlhandler]
 enabled=true
 

@@ -12,17 +12,30 @@ return {
   -- },
   { "tpope/vim-fugitive" },
   { "tpope/vim-rhubarb" },
-  { 
-    "sindrets/diffview.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {
-      file_panel = {
-        win_config = {
+  -- {
+  --   "sindrets/diffview.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   opts = {
+  --     file_panel = {
+  --       win_config = {
+  --         position = "bottom",
+  --         height = 10,
+  --       },
+  --     },
+  --   },
+  -- },
+  {
+    "esmuellert/vscode-diff.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    cmd = "CodeDiff",
+    config = function()
+      require("vscode-diff").setup({
+        explorer = {
           position = "bottom",
-          height = 10,
+          view_mode = "tree",
         },
-      },
-    },
+      })
+    end,
   },
   {
     "lewis6991/gitsigns.nvim",
