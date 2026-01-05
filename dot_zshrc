@@ -1,0 +1,52 @@
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+# avoid keybinding conflicts with zsh-vi-mode (https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#initialization-mode)
+export ZVM_INIT_MODE="sourcing"
+export MANPATH="/usr/local/man:$MANPATH"
+export EDITOR='nvim'
+# bat
+export BAT_THEME="ansi"
+# starship
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+# node
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# pnpm
+export PNPM_HOME="/home/alex/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# television
+export TV_DIR="/home/alex/code/rust/television"
+
+plugins=(git zsh-autosuggestions zsh-vi-mode zsh-syntax-highlighting colored-man-pages)
+
+ZSH="$HOME/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+
+# widgets
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+eval "$(tv init zsh)"
+
+# Aliases
+# git
+alias gpush='git push origin $(current_branch)'
+# eza
+alias l='eza -l'
+alias la='eza -la'
+# nvim
+alias n='nvim'
+alias nvimdiff='nvim -d'
+# tmux
+alias t='tmux a || tmux new -s default'
+# lazygit
+alias lg=lazygit
+# local ssh
+alias lux='ssh alex@lux-ts'
+# television
+alias tvrd="RUST_LOG=debug cargo run --manifest-path $TV_DIR/Cargo.toml"
+# pacman
+alias u='sudo pacman -Syyu'
+alias s='pacman -S'
