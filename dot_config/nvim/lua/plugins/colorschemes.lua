@@ -136,7 +136,7 @@ return {
   { "norcalli/nvim-colorizer.lua" },
   -- Lua
   {
-    dir = "~/code/lua/hubbamax.nvim",
+    "alexpasmantier/hubbamax.nvim",
     opts = { transparent_background = false },
   },
   {

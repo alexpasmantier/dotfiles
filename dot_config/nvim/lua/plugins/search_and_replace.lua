@@ -255,8 +255,8 @@ return {
   },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   {
-    -- "alexpasmantier/tv.nvim",
-    dir = "~/code/lua/tv.nvim",
+    "alexpasmantier/tv.nvim",
+    -- dir = "~/code/lua/tv.nvim",
     config = function()
       -- built-in niceties
       local h = require("tv").handlers

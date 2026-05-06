@@ -1,0 +1,25 @@
+skip-shell-integration-prompt = true
+
+post-switch = '''
+  common=$(git rev-parse --git-common-dir)
+  repo=$(basename "$(dirname "$(realpath "$common")")")
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  session="$repo/$branch"
+  tmux has-session -t="$session" 2>/dev/null || tmux new-session -ds "$session" -c "$PWD"
+  if [ -n "$TMUX" ]; then
+    tmux switch-client -t "$session"
+  else
+    tmux attach -t "$session"
+  fi
+'''
+
+post-start = '''
+  command -v zoxide >/dev/null && zoxide add "$PWD" || true
+'''
+
+pre-remove = '''
+  common=$(git rev-parse --git-common-dir)
+  repo=$(basename "$(dirname "$(realpath "$common")")")
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  tmux kill-session -t "$repo/$branch" 2>/dev/null || true
+'''

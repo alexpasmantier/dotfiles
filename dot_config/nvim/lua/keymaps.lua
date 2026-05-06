@@ -352,7 +352,7 @@ vim.keymap.set("n", "<leader>gh", ":diffget 1<CR>", { desc = "Diff get left", op
 vim.keymap.set("n", "<leader>gl", ":diffget 3<CR>", { desc = "Diff get right", opts.args })
 
 -- codediff
-vim.keymap.set("n", "<leader>df", "<cmd>CodeDiff<cr>", { desc = "Code Diff", opts.args })
+vim.keymap.set("n", "<leader>df", ":CodeDiff ", { desc = "Code Diff", opts.args })
 
 -- lualine toggle
 -- vim.keymap.set("n", "<leader>ll", function()

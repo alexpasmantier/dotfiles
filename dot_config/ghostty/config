@@ -20,11 +20,12 @@ mouse-hide-while-typing = true
 
 shell-integration = zsh
 
-theme = dark:hubbamax,light:Builtin Solarized Light
+theme = dark:hubbamax,light:iTerm2 Solarized Light
 
 # macos
 macos-non-native-fullscreen = true
 macos-titlebar-style = hidden
 macos-icon = retro
 macos-icon-frame = beige
+macos-option-as-alt = true
 
