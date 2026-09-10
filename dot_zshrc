@@ -51,4 +51,7 @@ alias tvrd="RUST_LOG=debug cargo run --manifest-path $TV_DIR/Cargo.toml"
 alias u='sudo pacman -Syyu'
 alias s='pacman -S'
 # claude
-alias c='claude --dangerously-skip-permissions'
+alias c='claude'
+
+# mise
+eval "$(mise activate zsh)"

@@ -29,7 +29,7 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
     cmd = "CodeDiff",
     config = function()
-      require("vscode-diff").setup({
+      require("codediff").setup({
         explorer = {
           position = "bottom",
           view_mode = "tree",

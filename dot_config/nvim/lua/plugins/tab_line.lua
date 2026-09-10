@@ -61,7 +61,7 @@ return {
           --   return buffer_a.modified > buffer_b.modified
           -- end,
         },
-        highlights = require("bufferline.themes.hubbamax"),
+        -- highlights = require("bufferline.themes.hubbamax"),
       })
     end,
   },

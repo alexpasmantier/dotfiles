@@ -55,38 +55,43 @@ local function apply_custom_highlights(background)
   end
 
   -- change grey status bar and winbars for vague
-  -- if colorscheme == "vague" then
-  -- too bright I guess
-  -- local vague_bg = "#241f31"
-  --   local vague_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
-  --   local black = "#080808"
-  --   local almost_black = "#1a1a1e"
-  --   local grey = "#9a9a9e"
-  --   local custom_color_dark = "#242437"
-  --   local custom_color_light = "#9A9AbE"
-  --   local custom_lines_bg = "#282830"
-  --   local custom_lines_bg_lighter = "#383840"
-  --   table.insert(custom_highlights, { "Normal", { bg = vague_bg } })
-  --   table.insert(custom_highlights, { "SignColumn", { bg = vague_bg } })
-  --   table.insert(custom_highlights, { "StatusLine", { bg = custom_lines_bg, fg = grey } })
-  --   table.insert(custom_highlights, { "Visual", { bg = cursor_line } })
-  --   table.insert(custom_highlights, { "Folded", { bg = almost_black, fg = custom_lines_bg_lighter } })
-  --   table.insert(custom_highlights, { "lualine_c_normal", { bg = almost_black, fg = custom_color_light } })
-  --   table.insert(custom_highlights, { "lualine_c_insert", { bg = almost_black } })
-  --   table.insert(custom_highlights, { "lualine_c_visual", { bg = almost_black } })
-  --   table.insert(custom_highlights, { "lualine_c_replace", { bg = almost_black } })
-  --   table.insert(custom_highlights, { "lualine_c_command", { bg = almost_black } })
-  --   table.insert(custom_highlights, { "lualine_c_inactive", { bg = almost_black } })
-  --   table.insert(custom_highlights, { "lualine_c_terminal", { bg = almost_black } })
-  --   table.insert(custom_highlights, { "TelescopeBorder", { bg = vague_bg, fg = custom_color_light } })
-  --   table.insert(custom_highlights, { "NeoTreeWinSeparator", { bg = vague_bg, fg = custom_lines_bg_lighter } })
-  --   table.insert(custom_highlights, { "WinSeparator", { bg = vague_bg, fg = custom_lines_bg_lighter } })
-  --   table.insert(custom_highlights, { "CmpItemKindText", { link = "@function" } })
-  --   table.insert(custom_highlights, { "CmpItemKindKeyword", { link = "@constant" } })
-  --   table.insert(custom_highlights, { "CmpItemKindModule", { link = "@attribute" } })
-  --   table.insert(custom_highlights, { "CmpItemKindFunction", { link = "@character" } })
-  --   table.insert(custom_highlights, { "CmpItemKindVariable", { link = "@diff.plus" } })
-  -- end
+  if colorscheme == "vague" then
+    -- too bright I guess
+    -- vague_bg = "#241f31"
+    local vague_bg_darker = "#201b2d"
+    local vague_bg_lighter = "#2c2539"
+    local vague_bg_lightest = "#382e4b"
+    local vague_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
+    local black = "#080808"
+    local almost_black = "#1a1a1e"
+    local grey = "#9a9a9e"
+    local custom_color_dark = "#242437"
+    local custom_color_light = "#9A9AbE"
+    local custom_lines_bg = "#282830"
+    local custom_lines_bg_lighter = "#383840"
+    table.insert(custom_highlights, { "Normal", { bg = vague_bg } })
+    table.insert(custom_highlights, { "CursorLine", { bg = vague_bg_lightest } })
+    table.insert(custom_highlights, { "SignColumn", { bg = vague_bg } })
+    table.insert(custom_highlights, { "StatusLine", { bg = vague_bg_lighter, fg = grey } })
+    table.insert(custom_highlights, { "Visual", { bg = vague_bg_lightest } })
+    table.insert(custom_highlights, { "Folded", { bg = almost_black, fg = custom_lines_bg_lighter } })
+    table.insert(custom_highlights, { "lualine_c_normal", { bg = vague_bg_lighter, fg = custom_color_light } })
+    table.insert(custom_highlights, { "lualine_c_insert", { bg = vague_bg_lighter } })
+    table.insert(custom_highlights, { "lualine_c_visual", { bg = vague_bg_lighter } })
+    table.insert(custom_highlights, { "lualine_c_replace", { bg = vague_bg_lighter } })
+    table.insert(custom_highlights, { "lualine_c_command", { bg = vague_bg_lighter } })
+    table.insert(custom_highlights, { "lualine_c_inactive", { bg = vague_bg_lighter } })
+    table.insert(custom_highlights, { "lualine_c_terminal", { bg = vague_bg_lighter } })
+    table.insert(custom_highlights, { "TelescopeBorder", { bg = vague_bg, fg = custom_color_light } })
+    table.insert(custom_highlights, { "NeoTreeWinSeparator", { bg = vague_bg, fg = vague_bg_lighter } })
+    -- table.insert(custom_highlights, { "NeoTree
+    table.insert(custom_highlights, { "WinSeparator", { bg = vague_bg, fg = vague_bg_lighter } })
+    table.insert(custom_highlights, { "CmpItemKindText", { link = "@function" } })
+    table.insert(custom_highlights, { "CmpItemKindKeyword", { link = "@constant" } })
+    table.insert(custom_highlights, { "CmpItemKindModule", { link = "@attribute" } })
+    table.insert(custom_highlights, { "CmpItemKindFunction", { link = "@character" } })
+    table.insert(custom_highlights, { "CmpItemKindVariable", { link = "@diff.plus" } })
+  end
   --
   -- if background == "light" then
   --   if colorscheme == "solarized8_flat" then

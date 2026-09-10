@@ -137,28 +137,29 @@ return {
   -- Lua
   {
     "alexpasmantier/hubbamax.nvim",
-    opts = { transparent_background = false },
+    opts = { transparent_background = true },
   },
   {
     "f-person/auto-dark-mode.nvim",
+    lazy = false,
     opts = {
       set_dark_mode = function()
         vim.o.background = "dark"
         vim.cmd.colorscheme(require("options").dark_colorscheme)
-        -- if lualine is loaded, update the colorscheme
-        -- if pcall(require, "lualine") then
-        --   require("lualine").setup()
-        -- end
         require("custom_highlights").apply(vim.o.background)
+        -- if lualine is loaded, update the colorscheme
+        if pcall(require, "lualine") then
+          require("lualine").setup()
+        end
       end,
       set_light_mode = function()
         vim.o.background = "light"
         vim.cmd.colorscheme(require("options").light_colorscheme)
-        -- if lualine is loaded, update the colorscheme
-        -- if pcall(require, "lualine") then
-        --   require("lualine").setup()
-        -- end
         require("custom_highlights").apply(vim.o.background)
+        -- if lualine is loaded, update the colorscheme
+        if pcall(require, "lualine") then
+          require("lualine").setup()
+        end
       end,
       update_interval = 3000,
       fallback = "dark",

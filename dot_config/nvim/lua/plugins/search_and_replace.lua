@@ -255,8 +255,8 @@ return {
   },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   {
-    "alexpasmantier/tv.nvim",
-    -- dir = "~/code/lua/tv.nvim",
+    -- "alexpasmantier/tv.nvim",
+    dir = "~/code/lua/tv.nvim",
     config = function()
       -- built-in niceties
       local h = require("tv").handlers
@@ -264,8 +264,8 @@ return {
       require("tv").setup({
         -- global window appearance (can be overridden per channel)
         window = {
-          width = 0.8, -- 80% of editor width
-          height = 0.8, -- 80% of editor height
+          width = 0.8,
+          height = 0.8,
           border = "none",
           title = " tv.nvim ",
           title_pos = "center",
@@ -279,7 +279,6 @@ return {
             handlers = {
               ["<CR>"] = h.open_as_files, -- default: open selected files
               ["<C-q>"] = h.send_to_quickfix, -- send to quickfix list
-              ["<C-s>"] = h.open_in_split, -- open in horizontal split
               ["<C-v>"] = h.open_in_vsplit, -- open in vertical split
               ["<C-y>"] = h.copy_to_clipboard, -- copy paths to clipboard
             },
@@ -299,7 +298,7 @@ return {
 
           -- `git-log`: browse commit history
           ["git-log"] = {
-            keybinding = "<leader>gl",
+            keybinding = "<leader>tgl",
             handlers = {
               -- open commit in codediff
               ["<CR>"] = h.open_in_codediff,
@@ -334,7 +333,7 @@ return {
           },
 
           buffers = {
-            keybinding = "<leader>tb",
+            keybinding = "<leader>tvb",
             source = function()
               local entries = {}
               for _, buf in ipairs(vim.api.nvim_list_bufs()) do

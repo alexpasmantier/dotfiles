@@ -4,7 +4,7 @@ return {
     enabled = not vim.g.started_by_firenvim,
     opts = {
       options = {
-        theme = "hubbamax",
+        theme = "auto",
         component_separators = "|",
         section_separators = { left = "", right = "" },
         globalstatus = true,
@@ -62,10 +62,6 @@ return {
               end
               return msg
             end,
-            color = {
-              fg = vim.api.nvim_get_hl(0, { name = "@tag" }).fg,
-              gui = "bold",
-            },
           },
           "progress",
           "location",
