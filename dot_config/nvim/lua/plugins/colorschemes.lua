@@ -137,11 +137,18 @@ return {
   -- Lua
   {
     "alexpasmantier/hubbamax.nvim",
+    lazy = true,
     opts = { transparent_background = true },
   },
   {
     "f-person/auto-dark-mode.nvim",
     lazy = false,
+    -- apply the dark scheme upfront: without a desktop portal (e.g. over SSH)
+    -- the D-Bus query fails and auto-dark-mode never calls set_dark_mode
+    config = function(_, opts)
+      opts.set_dark_mode()
+      require("auto-dark-mode").setup(opts)
+    end,
     opts = {
       set_dark_mode = function()
         vim.o.background = "dark"

@@ -1,5 +1,3 @@
-local colorscheme = vim.g.colors_name
-
 local M = {}
 
 ---@param highlights table<table<string, table>>
@@ -12,6 +10,7 @@ local set_highlights = function(highlights)
 end
 
 local function apply_custom_highlights(background)
+  local colorscheme = vim.g.colors_name
   local custom_highlights = {}
 
   -- local cursor_line = "#755375"

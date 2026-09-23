@@ -4,8 +4,8 @@ confirm-close-surface = false
 
 window-decoration = none
 window-padding-balance = true
-window-theme = ghostty
-window-title-font-family = "JetBrainsMono"
+window-theme = auto
+window-title-font-family = "BerkeleyMono Nerd Font"
 window-save-state = always
 background-opacity = 1
 gtk-wide-tabs = false
