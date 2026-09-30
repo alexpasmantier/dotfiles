@@ -194,6 +194,10 @@ vim.keymap.set("n", "<leader>3", function()
   splits.three_way_split_blank()
 end, { desc = "Three way split", opts.args })
 
+local vcs_link = require("custom_functions.vcs_link")
+vim.keymap.set({ "n", "v" }, "<leader>gy", vcs_link.copy, { desc = "Copy VCS link", opts.args })
+vim.keymap.set({ "n", "v" }, "<leader>gY", vcs_link.open, { desc = "Open VCS link", opts.args })
+
 -----------------------------------------------
 -----------------------------------------------
 --            PLUGINS KEYMAPS                --
@@ -338,10 +342,8 @@ end
 vim.keymap.set("n", "<leader>xx", "<cmd>OverseerToggle<cr>", { desc = "OverseerToggle", opts.args })
 vim.keymap.set("n", "<leader>xr", "<cmd>OverseerRun<cr>", { desc = "OverseerRun", opts.args })
 
--- pretty hover
--- vim.keymap.set("n", "K", function()
---   require("pretty_hover").hover()
--- end, { desc = "Show hover" })
+-- gitsigns
+vim.keymap.set("n", "<leader>gs", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview hunk", opts.args })
 
 -- markdown preview
 vim.keymap.set("n", "<leader>M", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown Preview Toggle", opts.args })
