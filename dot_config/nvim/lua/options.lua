@@ -57,6 +57,9 @@ vim.o.cursorline = true
 -- no empty command line by default
 vim.o.cmdheight = 1
 
+-- Square border on all floating windows (cmp, hover, diagnostics, ...)
+vim.o.winborder = "rounded"
+
 -- Decrease update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300

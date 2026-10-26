@@ -1,5 +1,4 @@
 -- [[ Basic Keymaps ]]
-local opts = { noremap = true, silent = true }
 local telescope_functions = require("custom_functions.telescope")
 -- local plugins_config = require("plugins_configuration")
 
@@ -10,8 +9,8 @@ vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -------------------
 -- -- GENERAL -- --
 -------------------
-vim.keymap.set("n", "<leader><BS>", ":wqa<CR>", { desc = "Exit neovim", opts.args })
-vim.keymap.set("n", "<leader>Q", ":qa!<CR>", { desc = "Force Exit neovim", opts.args })
+vim.keymap.set("n", "<leader><BS>", ":wqa<CR>", { desc = "Exit neovim", silent = true })
+vim.keymap.set("n", "<leader>Q", ":qa!<CR>", { desc = "Force Exit neovim", silent = true })
 
 -- open configuration files
 local configuration_directory_path = vim.api.nvim_list_runtime_paths()[1]
@@ -32,7 +31,7 @@ vim.keymap.set("n", "<leader>;", function()
       vim.api.nvim_set_current_dir(Last_working_directory)
     end
   end
-end, { desc = "Toggle config files", opts.args })
+end, { desc = "Toggle config files", silent = true })
 
 -----------------------
 -- -- NORMAL MODE -- --
@@ -41,73 +40,73 @@ end, { desc = "Toggle config files", opts.args })
 -- WINDOWS
 -- ----------------------------------------------------------------------------------------
 -- Navigating between open windows (overriden by smart-splits)
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to window on the right", opts.args })
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to window on the left", opts.args })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to window below", opts.args })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to window above", opts.args })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to window on the right", silent = true })
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to window on the left", silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to window below", silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to window above", silent = true })
 -- Quit window, except if it is the last one (ie does not quit vim)!
-vim.keymap.set("n", "<leader>q", ":close<CR>", { desc = "Quit window", opts.args })
-vim.keymap.set("n", "<C-w>o", "<CMD>only<CR>", { desc = "Quit other windows", opts.args })
+vim.keymap.set("n", "<leader>q", ":close<CR>", { desc = "Quit window", silent = true })
+vim.keymap.set("n", "<C-w>o", "<CMD>only<CR>", { desc = "Quit other windows", silent = true })
 
 -- Resize with arrows
-vim.keymap.set("n", "<M-Up>", "<cmd>resize +2<CR>", { desc = "Resize up", opts.args })
-vim.keymap.set("n", "<M-Down>", "<cmd>resize -2<CR>", { desc = "Resize down", opts.args })
-vim.keymap.set("n", "<M-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize left", opts.args })
-vim.keymap.set("n", "<M-Right>", "<cmd>vertical resize +2<CR>", { desc = "Resize right", opts.args })
+vim.keymap.set("n", "<M-Up>", "<cmd>resize +2<CR>", { desc = "Resize up", silent = true })
+vim.keymap.set("n", "<M-Down>", "<cmd>resize -2<CR>", { desc = "Resize down", silent = true })
+vim.keymap.set("n", "<M-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize left", silent = true })
+vim.keymap.set("n", "<M-Right>", "<cmd>vertical resize +2<CR>", { desc = "Resize right", silent = true })
 
 -- BUFFERS
 -- ----------------------------------------------------------------------------------------
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>w", "<cmd>w!<CR>", { desc = "Save changes in current buffer", opts.args })
+vim.keymap.set("n", "<leader>w", "<cmd>w!<CR>", { desc = "Save changes in current buffer", silent = true })
 -- this is now handled by bufremove plugin
--- vim.keymap.set("n", "<leader>c", "<CMD>:bp<CR><CMD>:bd#<CR>", { desc = "Close buffer", opts.args })
--- vim.keymap.set("n", "<leader>c", "<cmd>BufferKill<CR>", { desc = "Close buffer", opts.args })
-vim.keymap.set("n", "<C-c>", "<cmd>BufferKill<CR>", { desc = "Close buffer", opts.args })
-vim.keymap.set("n", "<leader>C", "<CMD>:bp<CR><CMD>:bd!#<CR>", { desc = "Close buffer (force)", opts.args })
+-- vim.keymap.set("n", "<leader>c", "<CMD>:bp<CR><CMD>:bd#<CR>", { desc = "Close buffer", silent = true })
+-- vim.keymap.set("n", "<leader>c", "<cmd>BufferKill<CR>", { desc = "Close buffer", silent = true })
+vim.keymap.set("n", "<C-c>", "<cmd>BufferKill<CR>", { desc = "Close buffer", silent = true })
+vim.keymap.set("n", "<leader>C", "<CMD>:bp<CR><CMD>:bd!#<CR>", { desc = "Close buffer (force)", silent = true })
 -- yank current buffer file path
 vim.keymap.set(
   "n",
   "<leader>y",
   '<cmd>let @+ = fnamemodify(expand("%"), ":.")<cr>',
-  { desc = "Yank current file path", opts.args }
+  { desc = "Yank current file path", silent = true }
 )
 -- yank current buffer path:line
 vim.keymap.set(
   "n",
   "<leader>Y",
   '<cmd>let @+ = fnamemodify(expand("%"), ":.") . ":" . line(".")<cr>',
-  { desc = "Yank current file path with line number", opts.args }
+  { desc = "Yank current file path with line number", silent = true }
 )
 
 -- QUICKLIST NAVIGATION
 -- ----------------------------------------------------------------------------------------
 -- NOTE: this needs to be remapped since it conflicts with <leader>q
-vim.keymap.set("n", "<leader>mo", ":copen 25<CR>", { desc = "quicklist open", opts.args })
-vim.keymap.set("n", "<leader>]", ":cn<CR>", { desc = "quicklist next", opts.args })
-vim.keymap.set("n", "<leader>[", ":cp<CR>", { desc = "quicklist prev", opts.args })
--- vim.keymap.set("n", "<leader>qn", ":cn<CR>zz", { desc = "Quicklist next", opts.args })
--- vim.keymap.set("n", "<leader>qp", ":cp<CR>zz", { desc = "Quicklist prev", opts.args })
--- vim.keymap.set("n", "<leader>qo", ":copen 15<CR>", { desc = "Quicklist open", opts.args })
--- vim.keymap.set("n", "<leader>qO", ":copen<CR>", { desc = "Quicklist open (dispatched)", opts.args })
--- vim.keymap.set("n", "<leader>qc", ":cclose<CR>", { desc = "Quicklist close", opts.args })
--- vim.keymap.set("n", "<leader>qi", ":cclose<CR>", { desc = "Quicklist close", opts.args })
--- vim.keymap.set("n", "<leader>qq", ":cc<CR>zz", { desc = "Quicklist show current", opts.args })
--- vim.keymap.set("n", "<leader>qN", ":cfirst<CR>", { desc = "Quicklist first", opts.args })
--- vim.keymap.set("n", "<leader>qP", ":clast<CR>", { desc = "Quicklist last", opts.args })
+vim.keymap.set("n", "<leader>mo", ":copen 25<CR>", { desc = "quicklist open", silent = true })
+vim.keymap.set("n", "<leader>]", ":cn<CR>", { desc = "quicklist next", silent = true })
+vim.keymap.set("n", "<leader>[", ":cp<CR>", { desc = "quicklist prev", silent = true })
+-- vim.keymap.set("n", "<leader>qn", ":cn<CR>zz", { desc = "Quicklist next", silent = true })
+-- vim.keymap.set("n", "<leader>qp", ":cp<CR>zz", { desc = "Quicklist prev", silent = true })
+-- vim.keymap.set("n", "<leader>qo", ":copen 15<CR>", { desc = "Quicklist open", silent = true })
+-- vim.keymap.set("n", "<leader>qO", ":copen<CR>", { desc = "Quicklist open (dispatched)", silent = true })
+-- vim.keymap.set("n", "<leader>qc", ":cclose<CR>", { desc = "Quicklist close", silent = true })
+-- vim.keymap.set("n", "<leader>qi", ":cclose<CR>", { desc = "Quicklist close", silent = true })
+-- vim.keymap.set("n", "<leader>qq", ":cc<CR>zz", { desc = "Quicklist show current", silent = true })
+-- vim.keymap.set("n", "<leader>qN", ":cfirst<CR>", { desc = "Quicklist first", silent = true })
+-- vim.keymap.set("n", "<leader>qP", ":clast<CR>", { desc = "Quicklist last", silent = true })
 
 -- MISCELLANEOUS
 -- ----------------------------------------------------------------------------------------
 -- Wrap/unwrap (I actually never use this)
--- vim.keymap.set("n", "<leader>vw", ":setlocal wrap<CR>", { desc = "Wrap text", opts.args })
--- vim.keymap.set("n", "<leader>vW", ":setlocal nowrap<CR>", { desc = "Unwrap text", opts.args })
+-- vim.keymap.set("n", "<leader>vw", ":setlocal wrap<CR>", { desc = "Wrap text", silent = true })
+-- vim.keymap.set("n", "<leader>vW", ":setlocal nowrap<CR>", { desc = "Unwrap text", silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- hl/nohl search
 -- TODO: see hlsearch command and use the suggested autocommand to remove hls on search mode exit
-vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "No highligth search", opts.args })
+vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>", { desc = "No highligth search", silent = true })
 
 -- Launch terminal command
 -- vim.keymap.set(
@@ -140,7 +139,7 @@ vim.keymap.set(
 -- )
 
 -- Set (local) folding
-vim.keymap.set("n", "<leader>zi", ":setlocal foldmethod=indent<CR>", { desc = "Fold w.r.t indent", opts.args })
+vim.keymap.set("n", "<leader>zi", ":setlocal foldmethod=indent<CR>", { desc = "Fold w.r.t indent", silent = true })
 
 -- Toggle inlay hints
 -- vim.keymap.set("n", "<leader>ih", function()
@@ -152,28 +151,33 @@ vim.keymap.set("n", "<leader>zi", ":setlocal foldmethod=indent<CR>", { desc = "F
 -----------------------
 
 -- Better navigation in insert mode
-vim.keymap.set("i", "<C-l>", "<Right>", { desc = "right", opts.args })
-vim.keymap.set("i", "<C-h>", "<Left>", { desc = "left", opts.args })
-vim.keymap.set("i", "<C-k>", "<Up>", { desc = "up one line", opts.args })
-vim.keymap.set("i", "<C-j>", "<Down>", { desc = "down one line", opts.args })
+vim.keymap.set("i", "<C-l>", "<Right>", { desc = "right", silent = true })
+vim.keymap.set("i", "<C-h>", "<Left>", { desc = "left", silent = true })
+vim.keymap.set("i", "<C-k>", "<Up>", { desc = "up one line", silent = true })
+vim.keymap.set("i", "<C-j>", "<Down>", { desc = "down one line", silent = true })
 
 -----------------------
 -- -- VISUAL MODE -- --
 -----------------------
 -- Move lines around - visual
-vim.keymap.set("v", ">", ">gv", { desc = "Indent", opts.args })
-vim.keymap.set("v", "<", "<gv", { desc = "Unindent", opts.args })
-vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", { desc = "Move lines up", opts.args })
-vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", { desc = "Move lines down", opts.args })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent", silent = true })
+vim.keymap.set("v", "<", "<gv", { desc = "Unindent", silent = true })
+vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", { desc = "Move lines up", silent = true })
+vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", { desc = "Move lines down", silent = true })
 
 -- Keep what is in register when pasting in visual mode
-vim.keymap.set("v", "p", '"_dP', { desc = "Paste", opts.args })
+vim.keymap.set("v", "p", '"_dP', { desc = "Paste", silent = true })
 
 -------------------------
 -- -- TERMINAL MODE -- --
 -------------------------
--- local topts = { silent = true }
--- vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { desc = "Escape", topts.args })
+vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { desc = "Escape", silent = true })
+
+-- Navigating between windows from a terminal buffer
+vim.keymap.set("t", "<C-h>", "<Cmd>wincmd h<CR>", { desc = "Move to window on the left" })
+vim.keymap.set("t", "<C-j>", "<Cmd>wincmd j<CR>", { desc = "Move to window below" })
+vim.keymap.set("t", "<C-k>", "<Cmd>wincmd k<CR>", { desc = "Move to window above" })
+vim.keymap.set("t", "<C-l>", "<Cmd>wincmd l<CR>", { desc = "Move to window on the right" })
 
 -----------------------
 -- -- DIAGNOSTICS -- --
@@ -192,11 +196,13 @@ vim.keymap.set("n", "<space>k", vim.diagnostic.open_float, { desc = "Open diagno
 local splits = require("custom_functions.splits")
 vim.keymap.set("n", "<leader>3", function()
   splits.three_way_split_blank()
-end, { desc = "Three way split", opts.args })
+end, { desc = "Three way split", silent = true })
 
-local vcs_link = require("custom_functions.vcs_link")
-vim.keymap.set({ "n", "v" }, "<leader>gy", vcs_link.copy, { desc = "Copy VCS link", opts.args })
-vim.keymap.set({ "n", "v" }, "<leader>gY", vcs_link.open, { desc = "Open VCS link", opts.args })
+local has_vcs_link, vcs_link = pcall(require, "custom_functions.vcs_link")
+if has_vcs_link then
+  vim.keymap.set({ "n", "v" }, "<leader>gy", vcs_link.copy, { desc = "Copy VCS link", silent = true })
+  vim.keymap.set({ "n", "v" }, "<leader>gY", vcs_link.open, { desc = "Open VCS link", silent = true })
+end
 
 -----------------------------------------------
 -----------------------------------------------
@@ -206,44 +212,49 @@ vim.keymap.set({ "n", "v" }, "<leader>gY", vcs_link.open, { desc = "Open VCS lin
 
 if not vim.g.vscode then
   -- NEO TREE
-  vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo-tree", opts.args })
-  -- vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree float", opts.args })
+  vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle neo-tree", silent = true })
+  -- vim.keymap.set("n", "<leader>E", "<cmd>Neotree toggle float<cr>", { desc = "Toggle neo-tree float", silent = true })
 
   -- OIL
-  vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "Open Oil buffer", opts.args })
+  vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "Open Oil buffer", silent = true })
 
   -- SPECTRE
   vim.keymap.set("n", "<leader>S", function()
     require("spectre").open()
-  end, { desc = "Replace in files (Spectre)", opts.args })
+  end, { desc = "Replace in files (Spectre)", silent = true })
 
   -- FUGITIVE
-  vim.keymap.set("n", "<leader>gmc", ":Gvdiffsplit!<CR>", { desc = "resolve merge conflict", opts.args })
+  vim.keymap.set("n", "<leader>gmc", ":Gvdiffsplit!<CR>", { desc = "resolve merge conflict", silent = true })
 
   -- TELESCOPE
   local telescope_builtins = require("telescope.builtin")
-  -- vim.keymap.set("n", "<C-p>", telescope_functions.project_files, { desc = "Telescope git files", opts.args })
-  -- vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", opts.args })
-  vim.keymap.set("n", "<leader>tb", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", opts.args })
-  vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", opts.args })
+  -- vim.keymap.set("n", "<C-p>", telescope_functions.project_files, { desc = "Telescope git files", silent = true })
+  -- vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope live_grep<cr>", { desc = "Telescope grep", silent = true })
+  vim.keymap.set("n", "<leader>tb", "<cmd>Telescope buffers<cr>", { desc = "Telescope live grep", silent = true })
+  vim.keymap.set("n", "<leader>tc", "<cmd>Telescope git_commits<cr>", { desc = "Telescope git commits", silent = true })
   vim.keymap.set(
     "n",
     "<leader>tC",
     "<cmd>Telescope git_bcommits<cr>",
-    { desc = "Telescope current buffer git commits", opts.args }
+    { desc = "Telescope current buffer git commits", silent = true }
   )
-  vim.keymap.set("n", "<leader>tB", "<cmd>Telescope git_branches<cr>", { desc = "Telescope git branches", opts.args })
-  vim.keymap.set("n", "<leader>ts", "<cmd>Telescope git_status<cr>", { desc = "Telescope git status", opts.args })
-  vim.keymap.set("n", "<leader>tS", "<cmd>Telescope git_stash<cr>", { desc = "Telescope git stash", opts.args })
+  vim.keymap.set(
+    "n",
+    "<leader>tB",
+    "<cmd>Telescope git_branches<cr>",
+    { desc = "Telescope git branches", silent = true }
+  )
+  vim.keymap.set("n", "<leader>ts", "<cmd>Telescope git_status<cr>", { desc = "Telescope git status", silent = true })
+  vim.keymap.set("n", "<leader>tS", "<cmd>Telescope git_stash<cr>", { desc = "Telescope git stash", silent = true })
   vim.keymap.set(
     "n",
     "<leader>tp",
     telescope_functions.colorschemes_with_preview,
-    { desc = "Telescope colorschemes", opts.args }
+    { desc = "Telescope colorschemes", silent = true }
   )
-  vim.keymap.set("n", "<leader>tn", telescope_functions.search_notes, { desc = "Telescope note", opts.args })
-  vim.keymap.set("n", "<leader>t.", telescope_functions.search_dotfiles, { desc = "Telescope dotfiles", opts.args })
-  vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope help tags", opts.args })
+  vim.keymap.set("n", "<leader>tn", telescope_functions.search_notes, { desc = "Telescope note", silent = true })
+  vim.keymap.set("n", "<leader>t.", telescope_functions.search_dotfiles, { desc = "Telescope dotfiles", silent = true })
+  vim.keymap.set("n", "<leader>th", telescope_builtins.help_tags, { desc = "Telescope help tags", silent = true })
   vim.keymap.set({ "n", "v" }, "<leader>ss", function()
     if vim.fn.mode() == "v" then
       -- if in visual mode, search for the selected text
@@ -259,7 +270,7 @@ if not vim.g.vscode then
     end
   end, {
     desc = "Telescope grep string",
-    opts.args,
+    silent = true,
   })
 
   -- GOTO PREVIEW
@@ -295,7 +306,7 @@ vim.keymap.set("n", "<leader>lpd", function()
       },
     },
   })
-end, { desc = "disable type checking", opts.args })
+end, { desc = "disable type checking", silent = true })
 vim.keymap.set("n", "<leader>lpe", function()
   require("lspconfig").pyright.setup({
     settings = {
@@ -305,7 +316,7 @@ vim.keymap.set("n", "<leader>lpe", function()
       },
     },
   })
-end, { desc = "enable type checking", opts.args })
+end, { desc = "enable type checking", silent = true })
 
 -- COPILOT
 -- set <c-e> for accepting copilot suggestions (and <c-d> to dismiss) and unmap tab
@@ -320,41 +331,39 @@ vim.keymap.set("i", "<C-d>", 'copilot#Dismiss("\\<CR>")', {
 vim.g.copilot_no_tab_map = true
 
 -- PLENARY tests
-vim.keymap.set("n", "<leader>pt", "<cmd>PlenaryBustedFile %<cr>", { desc = "Run tests for current file", opts.args })
+vim.keymap.set(
+  "n",
+  "<leader>pt",
+  "<cmd>PlenaryBustedFile %<cr>",
+  { desc = "Run tests for current file", silent = true }
+)
 
 -- SMART SPLITS (if enabled)
-if _G["smart-splits"] then
-  vim.keymap.set("n", "<C-h>", function()
-    require("smart-splits").move_cursor_left()
-  end)
-  vim.keymap.set("n", "<C-j>", function()
-    require("smart-splits").move_cursor_down()
-  end)
-  vim.keymap.set("n", "<C-k>", function()
-    require("smart-splits").move_cursor_up()
-  end)
-  vim.keymap.set("n", "<C-l>", function()
-    require("smart-splits").move_cursor_right()
-  end)
+local has_smart_splits, smart_splits = pcall(require, "smart-splits")
+if has_smart_splits then
+  vim.keymap.set({ "n", "t" }, "<C-h>", smart_splits.move_cursor_left)
+  vim.keymap.set({ "n", "t" }, "<C-j>", smart_splits.move_cursor_down)
+  vim.keymap.set({ "n", "t" }, "<C-k>", smart_splits.move_cursor_up)
+  vim.keymap.set({ "n", "t" }, "<C-l>", smart_splits.move_cursor_right)
 end
 
 -- OVERSEER
-vim.keymap.set("n", "<leader>xx", "<cmd>OverseerToggle<cr>", { desc = "OverseerToggle", opts.args })
-vim.keymap.set("n", "<leader>xr", "<cmd>OverseerRun<cr>", { desc = "OverseerRun", opts.args })
+vim.keymap.set("n", "<leader>xx", "<cmd>OverseerToggle<cr>", { desc = "OverseerToggle", silent = true })
+vim.keymap.set("n", "<leader>xr", "<cmd>OverseerRun<cr>", { desc = "OverseerRun", silent = true })
 
 -- gitsigns
-vim.keymap.set("n", "<leader>gs", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview hunk", opts.args })
+vim.keymap.set("n", "<leader>gs", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview hunk", silent = true })
 
 -- markdown preview
-vim.keymap.set("n", "<leader>M", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown Preview Toggle", opts.args })
+vim.keymap.set("n", "<leader>M", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown Preview Toggle", silent = true })
 
 -- Diff mode
 -- when in diff mode, use <leader>gh and <leader>gl to :diffget 1 and :diffget 3 (three-way diff)
-vim.keymap.set("n", "<leader>gh", ":diffget 1<CR>", { desc = "Diff get left", opts.args })
-vim.keymap.set("n", "<leader>gl", ":diffget 3<CR>", { desc = "Diff get right", opts.args })
+vim.keymap.set("n", "<leader>gh", ":diffget 1<CR>", { desc = "Diff get left", silent = true })
+vim.keymap.set("n", "<leader>gl", ":diffget 3<CR>", { desc = "Diff get right", silent = true })
 
 -- codediff
-vim.keymap.set("n", "<leader>df", ":CodeDiff ", { desc = "Code Diff", opts.args })
+vim.keymap.set("n", "<leader>df", ":CodeDiff ", { desc = "Code Diff" })
 
 -- lualine toggle
 -- vim.keymap.set("n", "<leader>ll", function()
@@ -364,4 +373,4 @@ vim.keymap.set("n", "<leader>df", ":CodeDiff ", { desc = "Code Diff", opts.args 
 --   else
 --     vim.o.laststatus = 0
 --   end
--- end, { desc = "Toggle lualine", opts.args })
+-- end, { desc = "Toggle lualine", silent = true })

@@ -138,11 +138,13 @@ return {
       replace_engine = {
         ["sed"] = {
           cmd = "sed",
+{{- if eq .chezmoi.os "darwin" }}
           args = {
             "-i",
             "",
             "-E",
           },
+{{- end }}
           options = {
             ["ignore-case"] = {
               value = "--ignore-case",
@@ -255,8 +257,11 @@ return {
   },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   {
+{{- if stat (joinPath .chezmoi.homeDir "code/lua/tv.nvim") }}
+    dir = "~/code/lua/tv.nvim",
+{{- else }}
     "alexpasmantier/tv.nvim",
-    -- dir = "~/code/lua/tv.nvim",
+{{- end }}
     config = function()
       -- built-in niceties
       local h = require("tv").handlers

@@ -1,6 +1,6 @@
 -- autostart
 hl.on("hyprland.start", function()
-    hl.exec_cmd("waybar & hyprpaper & hypridle & albert")
+    hl.exec_cmd("qs & hyprpaper & hypridle & albert")
 end)
 
 -- https://wiki.hypr.land/Configuring/Core/Config-Options/

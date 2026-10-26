@@ -36,15 +36,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
       "n",
       "<leader>lt",
       require("telescope.builtin").lsp_type_definitions,
-      { opts.args, desc = "Go to type definition" }
+      { buffer = ev.buf, desc = "Go to type definition" }
     )
-    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { opts.args, desc = "Lsp rename" })
-    vim.keymap.set({ "n", "v" }, "<leader>lc", vim.lsp.buf.code_action, { opts.args, desc = "Lsp code action" })
+    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Lsp rename" })
+    vim.keymap.set({ "n", "v" }, "<leader>lc", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Lsp code action" })
     -- vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "<leader>lf", function()
       vim.lsp.buf.format({ async = true })
-    end, { opts.args, desc = "Lsp format file" })
+    end, { buffer = ev.buf, desc = "Lsp format file" })
   end,
 })
 

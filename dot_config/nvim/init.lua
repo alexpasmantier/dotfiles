@@ -27,8 +27,8 @@ if vim.g.vscode then
 else
   -- ordinary Neovim
   require("globals")
+  require("options") -- before plugins so their setup sees options like winborder
   require("lazy").setup("plugins")
-  require("options")
   require("keymaps")
   require("autocmds")
   require("commands")

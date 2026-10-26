@@ -138,7 +138,7 @@ return {
   {
     "alexpasmantier/hubbamax.nvim",
     lazy = true,
-    opts = { transparent_background = true },
+    opts = { transparent_background = false },
   },
   {
     "f-person/auto-dark-mode.nvim",
