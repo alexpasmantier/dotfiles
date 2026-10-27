@@ -2,7 +2,7 @@ maximize = false
 
 confirm-close-surface = false
 
-window-decoration = none
+window-decoration = server
 window-padding-balance = true
 window-theme = auto
 window-title-font-family = "BerkeleyMono Nerd Font"
@@ -11,6 +11,7 @@ background-opacity = 1
 gtk-wide-tabs = false
 gtk-toolbar-style = flat
 gtk-tabs-location = top
+gtk-titlebar-style = native
 
 font-size = 14
 font-family = BerkeleyMono Nerd Font

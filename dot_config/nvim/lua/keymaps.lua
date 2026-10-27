@@ -353,6 +353,8 @@ vim.keymap.set("n", "<leader>xr", "<cmd>OverseerRun<cr>", { desc = "OverseerRun"
 
 -- gitsigns
 vim.keymap.set("n", "<leader>gs", "<cmd>Gitsigns preview_hunk<cr>", { desc = "Preview hunk", silent = true })
+vim.keymap.set("n", "]c", "<cmd>Gitsigns next_hunk<cr>", { desc = "Next hunk", silent = true })
+vim.keymap.set("n", "[c", "<cmd>Gitsigns prev_hunk<cr>", { desc = "Previous hunk", silent = true })
 
 -- markdown preview
 vim.keymap.set("n", "<leader>M", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown Preview Toggle", silent = true })
