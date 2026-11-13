@@ -8,7 +8,7 @@ endif
 call plug#begin()
 "NOTE: path: '~/.vim/plugged'
 
-" Plug 'wadackel/vim-dogrun'
+Plug 'wadackel/vim-dogrun'
 " Plug 'lifepillar/vim-solarized8'
 " Plug 'jnz/studio98'
 " Plug 'catppuccin/vim', { 'as': 'catppuccin' }
@@ -33,7 +33,7 @@ set laststatus=2
 set noshowmode
 syntax on
 set termguicolors
-colorscheme habamax
+colorscheme dogrun
 
 " let g:lightline = {
 	      \ 'colorscheme': 'one',

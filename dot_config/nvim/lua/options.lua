@@ -92,7 +92,7 @@ vim.opt.fillchars = { eob = " ", vert = "│" }
 
 -- Set colorscheme
 M.light_colorscheme = "solarized8_flat"
-M.dark_colorscheme = "vague"
+M.dark_colorscheme = "dogrun"
 
 vim.o.termguicolors = true
 
